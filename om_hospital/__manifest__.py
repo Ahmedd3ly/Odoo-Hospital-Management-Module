@@ -1,0 +1,37 @@
+{
+    "name": "Hospital Management System",
+    "summary": "Manage hospital operations, patients, clinicians, clinics and appointments",
+    "description": "A comprehensive hospital management system to manage patients, clinicians, clinics, appointments, and medical records.",
+    "author": "Ahmed Khatib",
+    "category": "Healthcare",
+    "version": "20.0.1.4.0",
+    "sequence": -100,
+    "depends": ["base", "mail", "sale", "hr"],
+    "data": [
+        # Order: access rights, data, wizards, views, menus always last
+        "security/ir.access.csv",
+        "data/tag_data.xml",
+        "data/patient_data.xml",
+        "data/appointment_data.xml",
+        "data/contract_data.xml",
+        "data/product_data.xml",
+        "wizard/cancel_appointment_views.xml",
+        "views/patient_views.xml",
+        "views/appointment_views.xml",
+        "views/specialty_views.xml",
+        "views/product_views.xml",
+        "views/hr_employee_views.xml",
+        "views/clinic_views.xml",
+        "views/contract_views.xml",
+        "views/sale_order_views.xml",
+        "views/res_partner_views.xml",
+        "views/hospital_menus.xml",
+    ],
+    # Only loaded when the database is created with demonstration data
+    "demo": [
+        "demo/demo.xml",
+    ],
+    "application": True,
+    "installable": True,
+    "license": "LGPL-3",
+}

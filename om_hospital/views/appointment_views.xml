@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <!-- List View -->
+    <record id="view_hospital_appointment_list" model="ir.ui.view">
+        <field name="name">hospital.appointment.list</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <list string="Appointment List" decoration-info="state == 'draft'" decoration-warning="state == 'confirmed'" decoration-success="state == 'done'" decoration-danger="state == 'cancel'" sample="1" multi_edit="1">
+                <field name="name"/>
+                <field name="reference" optional="hide"/>
+                <field name="patient_id" string="Patient Name"/>
+                <field name="gender" optional="hide"/>
+                <field name="doctor_id" string="Doctor Name" widget="many2one_avatar_employee"/>
+                <field name="appointment_time"/>
+                <field name="duration" widget="float_time" optional="hide"/>
+                <field name="booking_date" optional="show"/>
+                <field name="activity_ids" widget="list_activity"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'confirmed'" decoration-success="state == 'done'" decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_hospital_appointment_form" model="ir.ui.view">
+        <field name="name">hospital.appointment.form</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Appointment Form">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" data-hotkey="i" invisible="state != 'draft'" title="Click to validate and confirm this appointment schedule."/>
+                    <button name="action_start_consultation" string="Start Consultation" type="object" class="oe_highlight" invisible="state != 'confirmed'" title="Start the consultation and record the start time."/>
+                    <button name="action_done" string="Mark As Done" type="object" class="oe_highlight" data-hotkey="v" invisible="state != 'ongoing'" title="Complete the consultation and transition the appointment status to done."/>
+                    <button name="action_create_quotation" string="Create Quotation" type="object" class="btn-secondary" invisible="state != 'done' or sale_order_count &gt; 0" title="Bill the consultation fee and the prescribed medicines (split between patient and company when a contract applies)."/>
+                    <button name="action_cancel" string="Cancel" type="object" data-hotkey="z" invisible="state not in ('draft', 'confirmed')" title="Cancel the active appointment session."/>
+                    <button name="action_draft" string="Reset to Draft" type="object" data-hotkey="r" invisible="state != 'cancel'" groups="base.group_no_one" title="Revert the cancelled appointment back to draft state for rescheduling."/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,ongoing,done"/>
+                </header>            
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="action_view_sales_orders" type="object" class="oe_stat_button" icon="receipt_long">
+                            <field name="sale_order_count" widget="statinfo" string="Sales Orders"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <div class="d-flex align-items-center">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                            <field name="priority" widget="priority" class="ms-3 fs-2"/>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="reference"/>
+                            <field name="patient_id" options="{'no_create': True}" default_focus="1"/>
+                            <field name="gender" readonly="1"/>
+                            <field name="appointment_time"/>
+                            <field name="duration" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="clinic_id" required="1" options="{'no_create': True}"/>
+                            <field name="clinic_clinician_ids" invisible="1"/>
+                            <field name="doctor_id" string="Doctor Name" options="{'no_create': True}"/>
+                            <field name="consultation_start" invisible="not consultation_start"/>
+                            <field name="consultation_end" invisible="not consultation_end"/>
+                            <field name="booking_date"/>
+                            <field name="confirmed_by" invisible="not confirmed_by"/>
+                            <field name="cancelled_by" invisible="not cancelled_by"/>
+                            <field name="cancellation_reason" invisible="not cancellation_reason"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Consultation" name="consultation">
+                            <group>
+                                <group string="Complaint &amp; Diagnosis">
+                                    <field name="chief_complaint" readonly="state in ('done', 'cancel')" placeholder="Why is the patient here?"/>
+                                    <field name="diagnosis" readonly="state in ('done', 'cancel')" placeholder="Doctor's diagnosis..."/>
+                                </group>
+                                <group string="Vitals">
+                                    <field name="weight" readonly="state in ('done', 'cancel')"/>
+                                    <field name="height" readonly="state in ('done', 'cancel')"/>
+                                    <field name="bmi"/>
+                                    <label for="systolic_bp" string="Blood Pressure (mmHg)"/>
+                                    <div class="o_row">
+                                        <field name="systolic_bp" nolabel="1" readonly="state in ('done', 'cancel')"/>
+                                        <span>/</span>
+                                        <field name="diastolic_bp" nolabel="1" readonly="state in ('done', 'cancel')"/>
+                                    </div>
+                                </group>
+                            </group>
+                            <group string="Follow-up">
+                                <field name="follow_up_date" readonly="state in ('done', 'cancel')"/>
+                                <field name="follow_up_appointment_id" invisible="not follow_up_appointment_id"/>
+                                <button name="action_schedule_follow_up" type="object" string="Schedule Follow-up"
+                                        class="btn-secondary"
+                                        invisible="not follow_up_date or follow_up_appointment_id or state not in ('ongoing', 'done')"/>
+                            </group>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note" readonly="state in ('done', 'cancel')" placeholder="Enter general consultation notes or observations..."/> 
+                        </page>
+                        <page string="Prescription" name="prescription">
+                            <field name="prescription_line_ids" readonly="state in ('done', 'cancel')">
+                                <list editable="bottom" string="Prescriptions">
+                                    <field name="medicine_id" options="{'no_create': True}"/>
+                                    <field name="quantity"/>
+                                    <field name="dose"/>
+                                    <field name="frequency"/>
+                                    <field name="duration_days"/>
+                                    <field name="instructions" optional="show"/>
+                                    <field name="to_bill"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Past Visits" name="history">
+                            <field name="previous_appointment_ids" readonly="1">
+                                <list string="Past Visits" create="0" delete="0">
+                                    <field name="appointment_time"/>
+                                    <field name="name"/>
+                                    <field name="clinic_id"/>
+                                    <field name="doctor_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+   
+    <!-- Search View -->
+    <record id="view_hospital_appointment_search" model="ir.ui.view">
+        <field name="name">hospital.appointment.search</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <search string="Appointment Search">
+                <field name="name" string="Appointment / Patient" filter_domain="['|', '|', ('name', 'ilike', self), ('patient_id.name', 'ilike', self), ('patient_id.reference', 'ilike', self)]"/>
+                <filter string="Draft" name="filter_draft" domain="[('state','=','draft')]"/>
+                <filter string="Confirmed" name="filter_confirmed" domain="[('state','=','confirmed')]"/>
+                <filter string="Ongoing" name="filter_ongoing" domain="[('state','=','ongoing')]"/>
+                <filter string="Done" name="filter_done" domain="[('state','=','done')]"/>
+                <filter string="Appointment Today" name="filter_today" domain="[('appointment_time', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')), ('appointment_time', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+                <separator/>
+                <filter string="Status" name="group_state" context="{'group_by':'state'}"/>
+                <filter string="Patient" name="group_patient" context="{'group_by':'patient_id'}"/>
+                <filter string="Clinic" name="group_clinic" context="{'group_by':'clinic_id'}"/>
+                <filter string="Doctor" name="group_doctor" context="{'group_by':'doctor_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Activity View -->
+    <record id="view_hospital_appointment_activity" model="ir.ui.view">
+        <field name="name">hospital.appointment.activity</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <activity string="Appointments">
+                <field name="patient_id"/>
+                <templates>
+                    <div t-name="activity-box">
+                        <img t-att-src="activity_image('hospital.patient', 'image_128', record.patient_id.raw_value)"
+                            role="img"
+                            t-att-title="record.patient_id.value"
+                            t-att-alt="record.patient_id.value"/>
+                        <div>
+                            <field name="patient_id" display="full"/>
+                        </div>
+                    </div>
+                </templates>
+            </activity>
+        </field>
+    </record>
+
+    <!-- Menu Action -->
+    <record id="action_hospital_appointment" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="res_model">hospital.appointment</field> 
+        <field name="view_mode">list,form,activity</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Schedule your first hospital appointment!
+            </p>
+            <p>
+                Manage patient consultations, track visit timelines, prioritize cases, and record clinical prescriptions seamlessly.
+            </p>
+        </field>
+    </record>
+ 
+</odoo>

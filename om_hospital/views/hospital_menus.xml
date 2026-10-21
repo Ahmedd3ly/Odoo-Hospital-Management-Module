@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root app menu -->
+    <menuitem id="menu_hospital_root"
+              name="Hospital"
+              web_icon="om_hospital,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Daily operations -->
+    <menuitem id="menu_hospital_patient"
+              name="Patients"
+              parent="menu_hospital_root"
+              action="action_hospital_patient"
+              sequence="10"/>
+    <menuitem id="menu_hospital_appointment"
+              name="Appointments"
+              parent="menu_hospital_root"
+              action="action_hospital_appointment"
+              sequence="20"/>
+    <menuitem id="menu_hospital_billing"
+              name="Billing"
+              parent="menu_hospital_root"
+              sequence="30"/>
+    <menuitem id="menu_sale_orders"
+              name="Sale Orders"
+              parent="menu_hospital_billing"
+              action="action_view_sale_order"
+              sequence="10"/>
+    <menuitem id="menu_hospital_contract"
+              name="Company Contracts"
+              parent="menu_hospital_billing"
+              action="action_hospital_contract"
+              sequence="20"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_hospital_configuration"
+              name="Configuration"
+              parent="menu_hospital_root"
+              sequence="90"/>
+    <menuitem id="menu_hospital_clinic"
+              name="Clinics"
+              parent="menu_hospital_configuration"
+              action="action_hospital_clinic"
+              sequence="10"/>
+    <menuitem id="menu_hospital_clinician"
+              name="Clinicians"
+              parent="menu_hospital_configuration"
+              action="action_hospital_clinician"
+              sequence="20"/>
+    <menuitem id="menu_hospital_medicine"
+              name="Medicines"
+              parent="menu_hospital_configuration"
+              action="action_hospital_medicine"
+              sequence="25"/>
+    <menuitem id="menu_hospital_specialty"
+              name="Specialties"
+              parent="menu_hospital_configuration"
+              action="action_hospital_specialty"
+              sequence="30"/>
+
+</odoo>

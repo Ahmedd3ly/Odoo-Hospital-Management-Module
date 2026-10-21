@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Hospital product categories: contract discounts are defined per category.
+             'Hospital' is a root category (Odoo 20 has no single 'All' root). -->
+        <record id="product_category_hospital" model="product.category">
+            <field name="name">Hospital</field>
+        </record>
+        <record id="product_category_consultation" model="product.category">
+            <field name="name">Consultation</field>
+            <field name="parent_id" ref="product_category_hospital"/>
+        </record>
+        <record id="product_category_medicine" model="product.category">
+            <field name="name">Medicines</field>
+            <field name="parent_id" ref="product_category_hospital"/>
+        </record>
+        <record id="product_category_laboratory" model="product.category">
+            <field name="name">Laboratory</field>
+            <field name="parent_id" ref="product_category_hospital"/>
+        </record>
+        <record id="product_category_inpatient" model="product.category">
+            <field name="name">Inpatient Stay</field>
+            <field name="parent_id" ref="product_category_hospital"/>
+        </record>
+
+        <!-- Billed on every consultation quotation; the unit price comes from the doctor's fee -->
+        <record id="product_consultation" model="product.product">
+            <field name="name">Consultation</field>
+            <field name="type">service</field>
+            <field name="categ_id" ref="product_category_consultation"/>
+            <field name="list_price">0</field>
+            <field name="sale_ok" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+        </record>
+    </data>
+</odoo>

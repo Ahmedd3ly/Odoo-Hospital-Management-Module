@@ -1,0 +1,11 @@
+id,name,model_id,group_id/id,operation,domain
+access_hospital_patient_user,Access Hospital Patient,hospital.patient,base.group_user,crud,
+access_hospital_appointment_user,Access Hospital Appointment,hospital.appointment,base.group_user,crud,
+access_hospital_prescription_line_user,Access Hospital Prescription Line,hospital.prescription.line,base.group_user,crud,
+access_hospital_tag_user,Access Hospital Tag,hospital.tag,base.group_user,crud,
+access_hospital_specialty_user,Access Hospital Specialty,hospital.specialty,base.group_user,crud,
+access_hospital_clinic_user,Access Hospital Clinic,hospital.clinic,base.group_user,crud,
+access_hospital_patient_condition_user,Access Hospital Patient Condition,hospital.patient.condition,base.group_user,crud,
+access_hospital_emergency_contact_user,Access Hospital Emergency Contact,hospital.emergency.contact,base.group_user,crud,
+access_hospital_contract_user,Access Hospital Contract,hospital.contract,base.group_user,crud,
+access_hospital_contract_line_user,Access Hospital Contract Line,hospital.contract.line,base.group_user,crud,

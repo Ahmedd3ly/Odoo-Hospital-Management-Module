@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================ Specialties ============================ -->
+        <record id="specialty_diagnostic" model="hospital.specialty">
+            <field name="name">Diagnostic Medicine</field>
+        </record>
+        <record id="specialty_neurology" model="hospital.specialty">
+            <field name="name">Neurology</field>
+        </record>
+        <record id="specialty_general_surgery" model="hospital.specialty">
+            <field name="name">General Surgery</field>
+        </record>
+        <record id="specialty_ophthalmology" model="hospital.specialty">
+            <field name="name">Ophthalmology</field>
+        </record>
+
+        <!-- ============================ Doctor users ============================ -->
+        <record id="user_doctor_house" model="res.users">
+            <field name="name">Dr. Gregory House</field>
+            <field name="login">dr.house@hospital.com</field>
+            <field name="email">dr.house@hospital.com</field>
+            <field name="image_1920" type="bytes" file="om_hospital/static/img/doctor1.png"/>
+        </record>
+        <record id="user_doctor_strange" model="res.users">
+            <field name="name">Dr. Stephen Strange</field>
+            <field name="login">dr.strange@hospital.com</field>
+            <field name="email">dr.strange@hospital.com</field>
+            <field name="image_1920" type="bytes" file="om_hospital/static/img/doctor2.png"/>
+        </record>
+        <record id="user_doctor_grey" model="res.users">
+            <field name="name">Dr. Meredith Grey</field>
+            <field name="login">dr.grey@hospital.com</field>
+            <field name="email">dr.grey@hospital.com</field>
+            <field name="image_1920" type="bytes" file="om_hospital/static/img/doctor3.png"/>
+        </record>
+
+        <!-- ============================ Clinicians (doctors) ============================ -->
+        <record id="demo_doctor_house" model="hr.employee">
+            <field name="name">Dr. Gregory House</field>
+            <field name="user_id" ref="user_doctor_house"/>
+            <field name="work_email">dr.house@hospital.com</field>
+            <field name="mobile_phone">+20 100 100 0001</field>
+            <field name="is_clinician" eval="True"/>
+            <field name="clinician_role">doctor</field>
+            <field name="hospital_specialty_id" ref="specialty_diagnostic"/>
+            <field name="hospital_license_number">EG-MED-10001</field>
+            <field name="hospital_consultation_fee">500</field>
+            <field name="image_1920" type="bytes" file="om_hospital/static/img/doctor1.png"/>
+        </record>
+        <record id="demo_doctor_strange" model="hr.employee">
+            <field name="name">Dr. Stephen Strange</field>
+            <field name="user_id" ref="user_doctor_strange"/>
+            <field name="work_email">dr.strange@hospital.com</field>
+            <field name="mobile_phone">+20 100 100 0002</field>
+            <field name="is_clinician" eval="True"/>
+            <field name="clinician_role">doctor</field>
+            <field name="hospital_specialty_id" ref="specialty_neurology"/>
+            <field name="hospital_license_number">EG-MED-10002</field>
+            <field name="hospital_consultation_fee">700</field>
+            <field name="image_1920" type="bytes" file="om_hospital/static/img/doctor2.png"/>
+        </record>
+        <record id="demo_doctor_grey" model="hr.employee">
+            <field name="name">Dr. Meredith Grey</field>
+            <field name="user_id" ref="user_doctor_grey"/>
+            <field name="work_email">dr.grey@hospital.com</field>
+            <field name="mobile_phone">+20 100 100 0003</field>
+            <field name="is_clinician" eval="True"/>
+            <field name="clinician_role">doctor</field>
+            <field name="hospital_specialty_id" ref="specialty_general_surgery"/>
+            <field name="hospital_license_number">EG-MED-10003</field>
+            <field name="hospital_consultation_fee">600</field>
+            <field name="image_1920" type="bytes" file="om_hospital/static/img/doctor3.png"/>
+        </record>
+
+        <record id="demo_doctor_layla" model="hr.employee">
+            <field name="name">Dr. Layla Mansour</field>
+            <field name="work_email">dr.layla@hospital.com</field>
+            <field name="mobile_phone">+20 100 100 0004</field>
+            <field name="is_clinician" eval="True"/>
+            <field name="clinician_role">doctor</field>
+            <field name="hospital_specialty_id" ref="specialty_ophthalmology"/>
+            <field name="hospital_license_number">EG-MED-10004</field>
+            <field name="hospital_consultation_fee">650</field>
+        </record>
+        <record id="demo_nurse_amira" model="hr.employee">
+            <field name="name">Amira Salem</field>
+            <field name="work_email">amira.salem@hospital.com</field>
+            <field name="is_clinician" eval="True"/>
+            <field name="clinician_role">nurse</field>
+        </record>
+
+        <!-- ================================ Clinics ================================ -->
+        <record id="demo_clinic_eye" model="hospital.clinic">
+            <field name="name">Eye Care Clinic</field>
+            <field name="code">EYE</field>
+            <field name="specialty_id" ref="specialty_ophthalmology"/>
+            <field name="location">Building B, 2nd floor</field>
+            <field name="clinician_ids" eval="[(6, 0, [ref('demo_doctor_layla'), ref('demo_nurse_amira')])]"/>
+            <field name="head_id" ref="demo_doctor_layla"/>
+        </record>
+        <record id="demo_clinic_diagnostic" model="hospital.clinic">
+            <field name="name">Diagnostic Medicine Clinic</field>
+            <field name="code">DIA</field>
+            <field name="specialty_id" ref="specialty_diagnostic"/>
+            <field name="location">Building A, ground floor</field>
+            <field name="clinician_ids" eval="[(6, 0, [ref('demo_doctor_house')])]"/>
+            <field name="head_id" ref="demo_doctor_house"/>
+        </record>
+        <record id="demo_clinic_neurology" model="hospital.clinic">
+            <field name="name">Neurology Clinic</field>
+            <field name="code">NEU</field>
+            <field name="specialty_id" ref="specialty_neurology"/>
+            <field name="location">Building A, 3rd floor</field>
+            <field name="clinician_ids" eval="[(6, 0, [ref('demo_doctor_strange')])]"/>
+            <field name="head_id" ref="demo_doctor_strange"/>
+        </record>
+        <record id="demo_clinic_surgery" model="hospital.clinic">
+            <field name="name">General Surgery Clinic</field>
+            <field name="code">SUR</field>
+            <field name="specialty_id" ref="specialty_general_surgery"/>
+            <field name="location">Building C, 1st floor</field>
+            <field name="clinician_ids" eval="[(6, 0, [ref('demo_doctor_grey')])]"/>
+            <field name="head_id" ref="demo_doctor_grey"/>
+        </record>
+
+        <!-- ================================ Tags ================================ -->
+        <record id="tag_vip" model="hospital.tag">
+            <field name="name">VIP Patient</field>
+            <field name="color">4</field>
+        </record>
+        <record id="tag_infectious" model="hospital.tag">
+            <field name="name">Infectious Risk</field>
+            <field name="color">2</field>
+        </record>
+        <record id="tag_pediatric" model="hospital.tag">
+            <field name="name">Pediatric</field>
+            <field name="color">5</field>
+        </record>
+        <record id="tag_critical" model="hospital.tag">
+            <field name="name">Critical Care</field>
+            <field name="color">7</field>
+        </record>
+        <record id="tag_hypertension" model="hospital.tag">
+            <field name="name">Hypertension</field>
+            <field name="color">8</field>
+        </record>
+        <record id="tag_diabetic" model="hospital.tag">
+            <field name="name">Diabetic</field>
+            <field name="color">9</field>
+        </record>
+
+        <!-- ================== Contract company, contract and category rules ================== -->
+        <record id="demo_company_delta" model="res.partner">
+            <field name="name">Delta Industries</field>
+            <field name="is_company" eval="True"/>
+            <field name="email">hr@delta-industries.example.com</field>
+        </record>
+        <record id="demo_contract_delta" model="hospital.contract">
+            <field name="partner_id" ref="demo_company_delta"/>
+            <field name="date_start" eval="(DateTime.now() - relativedelta(months=1)).strftime('%Y-%m-%d')"/>
+            <field name="date_end" eval="(DateTime.now() + relativedelta(months=11)).strftime('%Y-%m-%d')"/>
+            <field name="default_discount">10</field>
+            <field name="company_share">80</field>
+            <field name="state">active</field>
+        </record>
+        <record id="demo_contract_delta_consultation" model="hospital.contract.line">
+            <field name="contract_id" ref="demo_contract_delta"/>
+            <field name="category_id" ref="product_category_consultation"/>
+            <field name="discount">20</field>
+        </record>
+        <record id="demo_contract_delta_medicine" model="hospital.contract.line">
+            <field name="contract_id" ref="demo_contract_delta"/>
+            <field name="category_id" ref="product_category_medicine"/>
+            <field name="discount">5</field>
+        </record>
+
+        <!-- ======================= Family contacts (res.partner) ======================= -->
+        <record id="demo_partner_nour" model="res.partner">
+            <field name="name">Nour Hassan</field>
+            <field name="phone">+20 100 000 0011</field>
+        </record>
+        <record id="demo_partner_mahmoud" model="res.partner">
+            <field name="name">Mahmoud Ali</field>
+            <field name="phone">+20 100 000 0012</field>
+        </record>
+
+        <!-- ============================== Patients ============================== -->
+        <record id="demo_patient_omar" model="hospital.patient">
+            <field name="name">Omar Hassan</field>
+            <field name="date_of_birth">1988-04-12</field>
+            <field name="gender">male</field>
+            <field name="blood_group">O+</field>
+            <field name="parent_id" ref="demo_company_delta"/>
+            <field name="id_type">national_id</field>
+            <field name="id_number">28804121234567</field>
+            <field name="email">omar.hassan@example.com</field>
+            <field name="phone">+20 100 000 0001</field>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_hypertension')])]"/>
+        </record>
+        <record id="demo_patient_salma" model="hospital.patient">
+            <field name="name">Salma Ibrahim</field>
+            <field name="date_of_birth">1995-09-03</field>
+            <field name="gender">female</field>
+            <field name="blood_group">A+</field>
+            <field name="email">salma.ibrahim@example.com</field>
+            <field name="phone">+20 100 000 0002</field>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_allergic'), ref('tag_vip')])]"/>
+        </record>
+        <record id="demo_patient_youssef" model="hospital.patient">
+            <field name="name">Youssef Mahmoud</field>
+            <field name="date_of_birth">2016-01-25</field>
+            <field name="gender">male</field>
+            <field name="blood_group">B+</field>
+            <field name="guardian_id" ref="demo_partner_mahmoud"/>
+            <field name="email">youssef.mahmoud@example.com</field>
+            <field name="phone">+20 100 000 0003</field>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_pediatric')])]"/>
+        </record>
+
+        <!-- ============================== Medicines ============================== -->
+        <record id="product_paracetamol" model="product.product">
+            <field name="name">Paracetamol</field>
+            <field name="categ_id" ref="product_category_medicine"/>
+            <field name="type">consu</field>
+            <field name="is_medicine" eval="True"/>
+            <field name="list_price">15</field>
+        </record>
+        <record id="product_omeprazole" model="product.product">
+            <field name="name">Omeprazole</field>
+            <field name="categ_id" ref="product_category_medicine"/>
+            <field name="type">consu</field>
+            <field name="is_medicine" eval="True"/>
+            <field name="list_price">40</field>
+        </record>
+        <record id="product_cetirizine" model="product.product">
+            <field name="name">Cetirizine</field>
+            <field name="categ_id" ref="product_category_medicine"/>
+            <field name="type">consu</field>
+            <field name="is_medicine" eval="True"/>
+            <field name="list_price">25</field>
+        </record>
+        <record id="product_amoxicillin" model="product.product">
+            <field name="name">Amoxicillin</field>
+            <field name="categ_id" ref="product_category_medicine"/>
+            <field name="type">consu</field>
+            <field name="is_medicine" eval="True"/>
+            <field name="list_price">55</field>
+        </record>
+
+        <!-- ================== Emergency contacts and medical conditions ================== -->
+        <record id="demo_emergency_omar" model="hospital.emergency.contact">
+            <field name="patient_id" ref="demo_patient_omar"/>
+            <field name="partner_id" ref="demo_partner_nour"/>
+            <field name="relationship">spouse</field>
+            <field name="is_primary" eval="True"/>
+        </record>
+        <record id="demo_emergency_youssef" model="hospital.emergency.contact">
+            <field name="patient_id" ref="demo_patient_youssef"/>
+            <field name="partner_id" ref="demo_partner_mahmoud"/>
+            <field name="relationship">parent</field>
+            <field name="is_primary" eval="True"/>
+        </record>
+        <record id="demo_condition_omar" model="hospital.patient.condition">
+            <field name="patient_id" ref="demo_patient_omar"/>
+            <field name="condition_type">chronic</field>
+            <field name="name">Hypertension</field>
+            <field name="severity">moderate</field>
+        </record>
+        <record id="demo_condition_salma" model="hospital.patient.condition">
+            <field name="patient_id" ref="demo_patient_salma"/>
+            <field name="condition_type">allergy</field>
+            <field name="name">Penicillin</field>
+            <field name="severity">severe</field>
+            <field name="notes">Skin rash and swelling.</field>
+        </record>
+
+        <!-- ============== Appointments with their prescription lines ============== -->
+        <record id="demo_appointment_omar_past" model="hospital.appointment">
+            <field name="patient_id" ref="demo_patient_omar"/>
+            <field name="clinic_id" ref="demo_clinic_diagnostic"/>
+            <field name="doctor_id" ref="demo_doctor_house"/>
+            <field name="appointment_time" eval="(DateTime.now() - relativedelta(days=30)).strftime('%Y-%m-%d 09:00:00')"/>
+            <field name="state">done</field>
+            <field name="chief_complaint">Recurring headaches for two weeks.</field>
+            <field name="diagnosis">Tension-type headache.</field>
+            <field name="weight">82</field>
+            <field name="height">178</field>
+            <field name="systolic_bp">145</field>
+            <field name="diastolic_bp">92</field>
+            <field name="note" type="html"><p>Follow-up for recurring headaches; blood pressure monitored.</p></field>
+        </record>
+
+        <record id="demo_appointment_omar" model="hospital.appointment">
+            <field name="patient_id" ref="demo_patient_omar"/>
+            <field name="clinic_id" ref="demo_clinic_diagnostic"/>
+            <field name="doctor_id" ref="demo_doctor_house"/>
+            <field name="appointment_time" eval="(DateTime.now() + relativedelta(days=1)).strftime('%Y-%m-%d 09:00:00')"/>
+            <field name="priority">2</field>
+            <field name="prescription_line_ids" eval="[
+                (0, 0, {'medicine_id': ref('product_paracetamol'), 'dose': '500mg', 'frequency': 'Every 6 hours as needed', 'duration_days': 3}),
+                (0, 0, {'medicine_id': ref('product_omeprazole'), 'dose': '20mg', 'frequency': 'Once daily before breakfast', 'duration_days': 14}),
+            ]"/>
+        </record>
+        <record id="demo_appointment_salma" model="hospital.appointment">
+            <field name="patient_id" ref="demo_patient_salma"/>
+            <field name="clinic_id" ref="demo_clinic_neurology"/>
+            <field name="doctor_id" ref="demo_doctor_strange"/>
+            <field name="appointment_time" eval="(DateTime.now() + relativedelta(days=1)).strftime('%Y-%m-%d 10:00:00')"/>
+            <field name="prescription_line_ids" eval="[
+                (0, 0, {'medicine_id': ref('product_cetirizine'), 'dose': '10mg', 'frequency': 'Once daily at bedtime', 'duration_days': 10}),
+            ]"/>
+        </record>
+        <record id="demo_appointment_youssef" model="hospital.appointment">
+            <field name="patient_id" ref="demo_patient_youssef"/>
+            <field name="clinic_id" ref="demo_clinic_surgery"/>
+            <field name="doctor_id" ref="demo_doctor_grey"/>
+            <field name="appointment_time" eval="(DateTime.now() + relativedelta(days=2)).strftime('%Y-%m-%d 11:00:00')"/>
+            <field name="prescription_line_ids" eval="[
+                (0, 0, {'medicine_id': ref('product_amoxicillin'), 'dose': '250mg', 'frequency': 'Three times a day', 'duration_days': 7, 'instructions': 'Finish the full course.'}),
+            ]"/>
+        </record>
+
+        <record id="demo_appointment_salma_eye" model="hospital.appointment">
+            <field name="patient_id" ref="demo_patient_salma"/>
+            <field name="clinic_id" ref="demo_clinic_eye"/>
+            <field name="doctor_id" ref="demo_doctor_layla"/>
+            <field name="appointment_time" eval="(DateTime.now() + relativedelta(days=3)).strftime('%Y-%m-%d 10:00:00')"/>
+        </record>
+
+    </data>
+</odoo>

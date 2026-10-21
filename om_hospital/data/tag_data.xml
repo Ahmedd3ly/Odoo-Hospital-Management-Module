@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Tags maintained automatically from a patient's allergy / chronic condition lines -->
+        <record id="tag_allergic" model="hospital.tag">
+            <field name="name">Allergic</field>
+            <field name="color">1</field>
+        </record>
+        <record id="tag_chronic" model="hospital.tag">
+            <field name="name">Chronic Condition</field>
+            <field name="color">3</field>
+        </record>
+    </data>
+</odoo>
