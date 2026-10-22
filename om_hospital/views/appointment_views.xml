@@ -16,6 +16,8 @@
                 <field name="booking_date" optional="show"/>
                 <field name="activity_ids" widget="list_activity"/>
                 <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'confirmed'" decoration-success="state == 'done'" decoration-danger="state == 'cancel'"/>
+                <button name="action_confirm" type="object" class="btn-outline-info" icon="check" invisible="state != 'draft'" title="Click to validate and confirm this appointment schedule."/>
+                <button name="action_cancel" type="object" class="btn-outline-danger" icon="close" invisible="state not in ('draft', 'confirmed')" title="Cancel the active appointment session."/>
             </list>
         </field>
     </record>
@@ -31,12 +33,16 @@
                     <button name="action_start_consultation" string="Start Consultation" type="object" class="oe_highlight" invisible="state != 'confirmed'" title="Start the consultation and record the start time."/>
                     <button name="action_done" string="Mark As Done" type="object" class="oe_highlight" data-hotkey="v" invisible="state != 'ongoing'" title="Complete the consultation and transition the appointment status to done."/>
                     <button name="action_create_quotation" string="Create Quotation" type="object" class="btn-secondary" invisible="state != 'done' or sale_order_count &gt; 0" title="Bill the consultation fee and the prescribed medicines (split between patient and company when a contract applies)."/>
+                    <button name="action_admit_patient" string="Admit Patient" type="object" class="btn-secondary" invisible="state not in ('ongoing', 'done')" title="Admit the patient as an inpatient."/>
                     <button name="action_cancel" string="Cancel" type="object" data-hotkey="z" invisible="state not in ('draft', 'confirmed')" title="Cancel the active appointment session."/>
                     <button name="action_draft" string="Reset to Draft" type="object" data-hotkey="r" invisible="state != 'cancel'" groups="base.group_no_one" title="Revert the cancelled appointment back to draft state for rescheduling."/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,ongoing,done"/>
                 </header>            
                 <sheet>
                     <div name="button_box" class="oe_button_box">
+                        <button name="action_view_admissions" type="object" class="oe_stat_button" icon="bed" invisible="admission_count == 0">
+                            <field name="admission_count" widget="statinfo" string="Admissions"/>
+                        </button>
                         <button name="action_view_sales_orders" type="object" class="oe_stat_button" icon="receipt_long">
                             <field name="sale_order_count" widget="statinfo" string="Sales Orders"/>
                         </button>

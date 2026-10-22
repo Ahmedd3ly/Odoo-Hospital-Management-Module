@@ -276,6 +276,54 @@
             <field name="notes">Skin rash and swelling.</field>
         </record>
 
+        <!-- ================================ Wards and beds ================================ -->
+        <record id="demo_ward_general" model="hospital.ward">
+            <field name="name">General Ward</field>
+            <field name="code">GEN</field>
+            <field name="ward_type">general</field>
+            <field name="location">Building A, 4th floor</field>
+        </record>
+        <record id="demo_ward_icu" model="hospital.ward">
+            <field name="name">Intensive Care Unit</field>
+            <field name="code">ICU</field>
+            <field name="ward_type">icu</field>
+            <field name="location">Building A, 5th floor</field>
+        </record>
+        <record id="demo_ward_private" model="hospital.ward">
+            <field name="name">Private Wing</field>
+            <field name="code">PVT</field>
+            <field name="ward_type">private</field>
+            <field name="location">Building B, 3rd floor</field>
+        </record>
+        <record id="demo_bed_g101" model="hospital.bed">
+            <field name="name">G-101</field>
+            <field name="ward_id" ref="demo_ward_general"/>
+        </record>
+        <record id="demo_bed_g102" model="hospital.bed">
+            <field name="name">G-102</field>
+            <field name="ward_id" ref="demo_ward_general"/>
+        </record>
+        <record id="demo_bed_g103" model="hospital.bed">
+            <field name="name">G-103</field>
+            <field name="ward_id" ref="demo_ward_general"/>
+        </record>
+        <record id="demo_bed_icu1" model="hospital.bed">
+            <field name="name">ICU-1</field>
+            <field name="ward_id" ref="demo_ward_icu"/>
+        </record>
+        <record id="demo_bed_icu2" model="hospital.bed">
+            <field name="name">ICU-2</field>
+            <field name="ward_id" ref="demo_ward_icu"/>
+        </record>
+        <record id="demo_bed_p201" model="hospital.bed">
+            <field name="name">P-201</field>
+            <field name="ward_id" ref="demo_ward_private"/>
+        </record>
+        <record id="demo_bed_p202" model="hospital.bed">
+            <field name="name">P-202</field>
+            <field name="ward_id" ref="demo_ward_private"/>
+        </record>
+
         <!-- ============== Appointments with their prescription lines ============== -->
         <record id="demo_appointment_omar_past" model="hospital.appointment">
             <field name="patient_id" ref="demo_patient_omar"/>
@@ -327,6 +375,16 @@
             <field name="clinic_id" ref="demo_clinic_eye"/>
             <field name="doctor_id" ref="demo_doctor_layla"/>
             <field name="appointment_time" eval="(DateTime.now() + relativedelta(days=3)).strftime('%Y-%m-%d 10:00:00')"/>
+        </record>
+
+        <!-- ================================ Inpatient admission ================================ -->
+        <record id="demo_admission_salma" model="hospital.admission">
+            <field name="patient_id" ref="demo_patient_salma"/>
+            <field name="admitting_doctor_id" ref="demo_doctor_strange"/>
+            <field name="bed_id" ref="demo_bed_g101"/>
+            <field name="admission_date" eval="(DateTime.now() - relativedelta(days=2)).strftime('%Y-%m-%d %H:%M:%S')"/>
+            <field name="reason">Observation after severe migraine episode.</field>
+            <field name="state">admitted</field>
         </record>
 
     </data>

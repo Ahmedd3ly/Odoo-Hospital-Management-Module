@@ -1,5 +1,6 @@
 from odoo import fields, models
 from odoo.exceptions import UserError
+from datetime import timedelta
 
 
 class CancelAppointmentWizard(models.TransientModel):
@@ -20,17 +21,34 @@ class CancelAppointmentWizard(models.TransientModel):
 
     def action_cancel_appointment(self):
         self.ensure_one()
+
+        icp = self.env["ir.config_parameter"].sudo()
+        cancel_allowed = icp.get_str("om_hospital.cancel_appointment", default="True")
+
+        if str(cancel_allowed).lower() in ("false", "0", "no", "f", "none"):
+            raise UserError(
+                self.env._(
+                    "Appointment cancellations have been disabled in the settings."
+                )
+            )
+
         appointment = self.appointment_id
-        # Compare calendar days in the user's timezone, not in UTC.
         appointment_day = fields.Datetime.context_timestamp(
             self, appointment.appointment_time
         ).date()
-        if appointment_day <= fields.Date.context_today(self):
+
+        cancel_days = icp.get_int("om_hospital.cancel_days", default=0)
+        allowed_latest_date = fields.Date.context_today(self) + timedelta(
+            days=cancel_days
+        )
+
+        if appointment_day <= allowed_latest_date:
             raise UserError(
                 self.env._(
-                    "You cannot cancel an appointment scheduled for today "
-                    "or a date that has already passed."
+                    "Appointments must be cancelled at least %(days)d day(s) in advance.",
+                    days=cancel_days,
                 )
             )
+
         appointment._cancel_with_reason(self.reason)
         return {"type": "ir.actions.client", "tag": "reload"}

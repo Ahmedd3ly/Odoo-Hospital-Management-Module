@@ -1,5 +1,7 @@
 from datetime import timedelta
 
+from markupsafe import Markup
+
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
@@ -248,6 +250,16 @@ class HospitalAppointment(models.Model):
         string="Sales Orders",
         help="Sales orders linked to this appointment for billing and procedures.",
     )
+    admission_ids = fields.One2many(
+        "hospital.admission",
+        "appointment_id",
+        string="Admissions",
+        help="Inpatient admissions that started from this appointment.",
+    )
+    admission_count = fields.Integer(
+        string="Admission Count",
+        compute="_compute_admission_count",
+    )
     sale_order_count = fields.Integer(
         string="Sales Order Count",
         compute="_compute_sale_order_count",
@@ -314,6 +326,19 @@ class HospitalAppointment(models.Model):
                 order="appointment_time desc",
                 limit=PAST_VISITS_LIMIT,
             )
+
+    @api.depends("admission_ids")
+    def _compute_admission_count(self):
+        counts = {
+            appointment.id: count
+            for appointment, count in self.env["hospital.admission"]._read_group(
+                [("appointment_id", "in", self.ids)],
+                groupby=["appointment_id"],
+                aggregates=["__count"],
+            )
+        }
+        for rec in self:
+            rec.admission_count = counts.get(rec.id, 0)
 
     @api.depends("sale_order_ids")
     def _compute_sale_order_count(self):
@@ -623,12 +648,15 @@ class HospitalAppointment(models.Model):
                 }
             )
             rec.message_post(
-                body=self.env._(
-                    "Appointment for %(patient)s was cancelled by %(user)s.<br/>"
-                    "Reason: %(reason)s",
-                    patient=rec.patient_id.name,
-                    user=self.env.user.name,
-                    reason=reason,
+                body=Markup("<br/>").join(
+                    [
+                        self.env._(
+                            "Appointment for %(patient)s was cancelled by %(user)s.",
+                            patient=rec.patient_id.name,
+                            user=self.env.user.name,
+                        ),
+                        self.env._("Reason: %(reason)s", reason=reason),
+                    ]
                 )
             )
 
@@ -660,6 +688,31 @@ class HospitalAppointment(models.Model):
     # ------------------------------------------------------------------
     # Smart button actions
     # ------------------------------------------------------------------
+
+    def action_admit_patient(self):
+        """Open a new admission pre-filled from this appointment."""
+        self.ensure_one()
+        return {
+            "name": self.env._("Admit Patient"),
+            "type": "ir.actions.act_window",
+            "res_model": "hospital.admission",
+            "view_mode": "form",
+            "context": {
+                "default_patient_id": self.patient_id.id,
+                "default_appointment_id": self.id,
+                "default_admitting_doctor_id": self.doctor_id.id,
+            },
+        }
+
+    def action_view_admissions(self):
+        self.ensure_one()
+        return {
+            "name": self.env._("Admissions"),
+            "type": "ir.actions.act_window",
+            "res_model": "hospital.admission",
+            "view_mode": "list,form",
+            "domain": [("appointment_id", "=", self.id)],
+        }
 
     def action_view_sales_orders(self):
         self.ensure_one()

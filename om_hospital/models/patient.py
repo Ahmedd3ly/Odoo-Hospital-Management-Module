@@ -13,6 +13,7 @@ class HospitalPatient(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
     # Name, email, phone, photo and address live on the linked contact (res.partner).
     _inherits = {"res.partner": "partner_id"}
+    _order = "id desc"
     _rec_names_search = ["name", "reference", "id_number"]
 
     # ------------------------------------------------------------------
@@ -323,8 +324,12 @@ class HospitalPatient(models.Model):
     def _sync_condition_tags(self):
         """Tick the Allergic / Chronic quick-filter tags from the structured lines."""
         tag_by_type = {
-            "allergy": self.env.ref("om_hospital.tag_allergic", raise_if_not_found=False),
-            "chronic": self.env.ref("om_hospital.tag_chronic", raise_if_not_found=False),
+            "allergy": self.env.ref(
+                "om_hospital.tag_allergic", raise_if_not_found=False
+            ),
+            "chronic": self.env.ref(
+                "om_hospital.tag_chronic", raise_if_not_found=False
+            ),
         }
         for patient in self:
             for condition_type, tag in tag_by_type.items():

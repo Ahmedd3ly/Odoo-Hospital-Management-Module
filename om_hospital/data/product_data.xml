@@ -14,10 +14,6 @@
             <field name="name">Medicines</field>
             <field name="parent_id" ref="product_category_hospital"/>
         </record>
-        <record id="product_category_laboratory" model="product.category">
-            <field name="name">Laboratory</field>
-            <field name="parent_id" ref="product_category_hospital"/>
-        </record>
         <record id="product_category_inpatient" model="product.category">
             <field name="name">Inpatient Stay</field>
             <field name="parent_id" ref="product_category_hospital"/>
@@ -29,6 +25,16 @@
             <field name="type">service</field>
             <field name="categ_id" ref="product_category_consultation"/>
             <field name="list_price">0</field>
+            <field name="sale_ok" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+        </record>
+
+        <!-- Inpatient bed charge: one standard daily rate for every bed (list price) -->
+        <record id="product_bed_day" model="product.product">
+            <field name="name">Bed Day</field>
+            <field name="type">service</field>
+            <field name="categ_id" ref="product_category_inpatient"/>
+            <field name="list_price">800</field>
             <field name="sale_ok" eval="True"/>
             <field name="purchase_ok" eval="False"/>
         </record>
