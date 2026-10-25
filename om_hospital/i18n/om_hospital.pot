@@ -1,0 +1,4467 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* om_hospital
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-22 08:15+0000\n"
+"PO-Revision-Date: 2026-10-22 08:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__supplier_invoice_count
+msgid "# Vendor Bills"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/clinic.py:0
+msgid "%(clinic)s still has open appointments and cannot be archived."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/contract.py:0
+msgid ""
+"%(company)s already has an active contract (%(other)s) overlapping these "
+"dates."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "%(doctor)s already has an appointment overlapping %(time)s."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "%(doctor)s does not work in %(clinic)s."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/clinic.py:0
+msgid "%(head)s must be one of the clinicians of %(clinic)s to head it."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/hr_employee.py:0
+msgid "%(name)s still has appointments and cannot stop being a clinician."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "%(patient)s admitted to %(bed)s."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid ""
+"%(patient)s already has the same name and date of birth. Make sure this is a"
+" different person before saving."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "%(patient)s discharged after %(nights)s night(s)."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "%(patient)s is already admitted."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "%(patient)s is marked as deceased and cannot be admitted."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "%(patient)s is marked as deceased and cannot be given an appointment."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid "%(patient)s is under 18 and needs a guardian."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/ward.py:0
+msgid "%(ward)s still has admitted patients and cannot be archived."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.report,print_report_name:om_hospital.action_report_appointment_slip
+msgid "'Appointment - %s' % (object.name or '').replace('/', '-')"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.report,print_report_name:om_hospital.action_report_discharge_summary
+msgid "'Discharge - %s' % (object.name or '').replace('/', '-')"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.report,print_report_name:om_hospital.action_report_prescription
+msgid "'Prescription - %s' % (object.name or '').replace('/', '-')"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid ""
+"<br/>\n"
+"                                <strong>Age:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid ""
+"<br/>\n"
+"                                <strong>Date:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid ""
+"<br/>\n"
+"                                <strong>Discharged:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid ""
+"<br/>\n"
+"                                <strong>Doctor:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid ""
+"<br/>\n"
+"                                <strong>Nights:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid ""
+"<br/>\n"
+"                                <strong>Patient Reference:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid ""
+"<br/>\n"
+"                            <strong>Admitting Doctor:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_employee_form_inherit_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "<span class=\"o_stat_text\">Appointments</span>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_form
+msgid "<span class=\"o_stat_text\">Beds Available</span>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_partner_form_inherit_hospital
+msgid "<span class=\"o_stat_text\">Create Patient Record</span>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "<span class=\"o_stat_text\">Orders</span>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_partner_form_inherit_hospital
+msgid "<span class=\"o_stat_text\">Patient Record</span>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "<span class=\"o_stat_text\">Patients</span>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "<span>/</span>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "<strong>Admitted:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "<strong>Appointment:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "<strong>Patient:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "<strong>Ward / Bed:</strong>"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_clinic
+msgid ""
+"A clinic groups clinicians around one specialty, for example an Eye Care Clinic.\n"
+"                Appointments are booked in a clinic with one of its doctors."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_clinic_code_uniq
+msgid "A clinic with this code already exists."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_clinic_name_uniq
+msgid "A clinic with this name already exists."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.module.module,description:base.module_om_hospital
+msgid ""
+"A comprehensive hospital management system to manage patients, clinicians, "
+"clinics, appointments, and medical records."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_contract
+msgid ""
+"A contract gives the patients of a company a discount per service category\n"
+"                and splits the bill between the company and the patient."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "A discharged or cancelled admission can no longer be changed."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "A follow-up appointment already exists."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/emergency_contact.py:0
+msgid "A patient can only have one primary emergency contact."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/emergency_contact.py:0
+msgid "A patient cannot be their own emergency contact."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid "A patient cannot be their own guardian."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_patient_id_uniq
+msgid "A patient with this ID already exists."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_ward_code_uniq
+msgid "A ward with this code already exists."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_ward_name_uniq
+msgid "A ward with this name already exists."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__blood_group__a+
+msgid "A+"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__blood_group__a-
+msgid "A-"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__blood_group__ab+
+msgid "AB+"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__blood_group__ab-
+msgid "AB-"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__account_move_count
+msgid "Account Move Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_account_payable_id
+msgid "Account Payable"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_account_payable_active
+msgid "Account Payable Active"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_account_receivable_id
+msgid "Account Receivable"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_account_receivable_active
+msgid "Account Receivable Active"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_needaction
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_needaction
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_needaction
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_needaction
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_needaction
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "Activate"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__active
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__active
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__active
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__active
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_contract__state__active
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_search
+msgid "Active"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__active_lang_count
+msgid "Active Lang Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__contract_id
+msgid "Active contract of the company this patient belongs to, if any."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_exception_decoration
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_exception_decoration
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_exception_decoration
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_exception_decoration
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_plans_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_plans_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_plans_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_plans_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_plans_ids
+msgid "Activity Plans"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_state
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_state
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_state
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_state
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_type_icon
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_type_icon
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_type_icon
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_type_icon
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_bed
+msgid "Add your first bed!"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_specialty
+msgid "Add your first medical specialty!"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_medicine
+msgid "Add your first medicine!"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__additional_identifiers
+msgid "Additional Identifiers"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__address
+msgid "Address (without name)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__type
+msgid "Address Type"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__type_address_label
+msgid "Address Type Description"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__address_inline
+msgid "Address inline (without name)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__admission_id
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order__admission_id
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__admission_id
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid "Admission"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_search
+msgid "Admission / Patient"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_admission_transfer
+msgid "Admission Bed Transfer"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__admission_count
+msgid "Admission Count"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_search
+msgid "Admission Search"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_admission
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__admission_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__admission_ids
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_admission
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_list
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Admissions"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid "Admit"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Admit Patient"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Admit the patient as an inpatient."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_admission
+msgid "Admit your first patient!"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_admission__state__admitted
+msgid "Admitted"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__admission_date
+msgid "Admitted On"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__admitting_doctor_id
+msgid "Admitting Doctor"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__age
+msgid "Age"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__lang
+msgid ""
+"All the emails and documents sent to this contact will be translated in this"
+" language."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__condition_ids
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Allergies & Chronic Conditions"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient_condition__condition_type
+msgid ""
+"Allergies and chronic conditions are shown as quick-filter tags on the "
+"patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient_condition__condition_type__allergy
+msgid "Allergy"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_admission
+msgid ""
+"An admission places a patient in a bed. When the patient is discharged, the\n"
+"                stay is billed per night at the standard bed-day price."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid "An email address is required for every patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract_line__category_id
+msgid ""
+"Applies to products in this category and its sub-categories unless a more "
+"specific rule exists."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_cancel_appointment_wizard__appointment_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__appointment_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__appointment_id
+msgid "Appointment"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Appointment / Patient"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__appointment_count
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__appointment_count
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__hospital_appointment_count
+msgid "Appointment Count"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Appointment Form"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_list
+msgid "Appointment List"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__name
+msgid "Appointment Reference"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Appointment Search"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.report,name:om_hospital.action_report_appointment_slip
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_appointment_slip
+msgid "Appointment Slip"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__appointment_time
+msgid "Appointment Time"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Appointment Today"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__follow_up_appointment_id
+msgid "Appointment created from this visit's follow-up date."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__appointment_id
+msgid "Appointment during which this medication was prescribed."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Appointment for %(patient)s has been confirmed."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Appointment for %(patient)s has been marked as done."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Appointment for %(patient)s has been reset to draft."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Appointment for %(patient)s was cancelled by %(user)s."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__appointment_end
+msgid "Appointment time plus duration."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/clinic.py:0
+#: code:addons/om_hospital/models/hr_employee.py:0
+#: code:addons/om_hospital/models/patient.py:0
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_appointment
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__appointment_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__appointment_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__hospital_appointment_ids
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_appointment
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_activity
+msgid "Appointments"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__hospital_appointment_ids
+msgid "Appointments assigned to this clinician."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__appointment_ids
+msgid "Appointments booked in this clinic."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_search
+msgid "Archived"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Assign a clinic to %(appointment)s before confirming it."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Assign a doctor to %(appointment)s before confirming it."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__specific_property_product_pricelist
+msgid "Assigned Pricelist"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_attachment_count
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_attachment_count
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_attachment_count
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_attachment_count
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_attachment_count
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__autopost_bills
+msgid "Auto-post bills"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__autopost_bills
+msgid "Automatically post bills for this trusted partner"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__available_count
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_search
+msgid "Available"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__available_additional_identifiers_metadata
+msgid "Available Additional Identifiers Metadata"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__available_invoice_template_pdf_report_ids
+msgid "Available Invoice Template Pdf Report"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__available_routing_schemes
+msgid "Available Routing Schemes"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__avatar_1920
+msgid "Avatar"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__avatar_1024
+msgid "Avatar 1024"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__avatar_128
+msgid "Avatar 128"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__avatar_256
+msgid "Avatar 256"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__avatar_512
+msgid "Avatar 512"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__blood_group__b+
+msgid "B+"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__blood_group__b-
+msgid "B-"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__bmi
+msgid "BMI"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__bank_account_count
+msgid "Bank"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__bank_ids
+msgid "Banks"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__barcode
+msgid "Barcode"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__bed_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__name
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_form
+msgid "Bed"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "Bed %(bed)s is already occupied."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/bed.py:0
+msgid "Bed %(bed)s is occupied and cannot be archived."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_search
+msgid "Bed / Ward"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__bed_count
+msgid "Bed Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:product.template,name:om_hospital.product_bed_day_product_template
+msgid "Bed Day"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_search
+msgid "Bed Search"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__transfer_ids
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid "Bed Transfers"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_bed__name
+msgid "Bed label inside its ward, for example G-101."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/ward.py:0
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_bed
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__bed_ids
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_bed
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_list
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_form
+msgid "Beds"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__to_bill
+msgid "Bill"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid ""
+"Bill the consultation fee and the prescribed medicines (split between "
+"patient and company when a contract applies)."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid ""
+"Bill the stay (split between patient and company when a contract applies)."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__nights
+msgid "Billable Nights"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order__hospital_payer
+msgid "Billed To"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_billing
+msgid "Billing"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__gender
+msgid "Biological gender of the associated patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__gender
+msgid "Biological gender of the patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__is_blacklisted
+msgid "Blacklist"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__phone_blacklisted
+msgid "Blacklisted Phone is Phone"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__blood_group
+msgid "Blood Group"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Blood Pressure (mmHg)"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_list
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_search
+msgid "Blood Type"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__bmi
+msgid "Body mass index: weight (kg) divided by height (m) squared."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__booking_date
+msgid "Booking Date"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_bounce
+msgid "Bounce"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "Cancel"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_cancel_appointment_form
+msgid "Cancel Appointment"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_cancel_appointment_wizard
+msgid "Cancel Appointment Wizard"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/contract.py:0
+msgid "Cancel an active contract instead of deleting it."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Cancel the active appointment session."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__cancellation_reason
+msgid "Cancellation Reason"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_admission__state__cancel
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__state__cancel
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_contract__state__cancel
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "Cancelled"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__cancelled_by
+msgid "Cancelled By"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__cancellation_date
+msgid "Cancelled On"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__line_ids
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "Category Discounts"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__channel_member_ids
+msgid "Channel Member"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__channel_ids
+msgid "Channels"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__is_company
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__country_enforce_cities
+msgid ""
+"Check this box to ensure every address created in that country has a 'City' "
+"chosen in the list of the country's cities."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__chief_complaint
+msgid "Chief Complaint"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_emergency_contact__relationship__child
+msgid "Child"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "Choose a bed for %(admission)s first."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient_condition__condition_type__chronic
+msgid "Chronic Condition"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__city
+msgid "City"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__city_id
+msgid "City ID"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Click to validate and confirm this appointment schedule."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__clinic_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__name
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_appointment_slip
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Clinic"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__clinic_clinician_ids
+msgid "Clinic Clinicians"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_form
+msgid "Clinic Details"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_form
+msgid "Clinic Form"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_search
+msgid "Clinic Search"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__clinic_id
+msgid "Clinic where the consultation takes place."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid "Clinical"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_employee_form_inherit_hospital
+msgid "Clinical Profile"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__clinician_role
+msgid "Clinical Role"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__clinician_role
+msgid ""
+"Clinical function of this employee. Only doctors can be assigned to "
+"appointments."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__head_id
+msgid "Clinician responsible for this clinic. Must be one of its clinicians."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_clinician
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__clinician_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_specialty__clinician_ids
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_clinician
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinician_list
+msgid "Clinicians"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_clinician
+msgid ""
+"Clinicians are employees flagged for clinical work. They are assigned to\n"
+"                appointments and carry their specialty, license and consultation fee."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__clinic_clinician_ids
+msgid "Clinicians of the selected clinic, used to limit the doctor choices."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_specialty__clinician_ids
+msgid "Clinicians practising this specialty."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__clinician_ids
+msgid ""
+"Clinicians who work in this clinic. Appointments here can only be given to "
+"them."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_clinic
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__hospital_clinic_ids
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_clinic
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_list
+msgid "Clinics"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__hospital_clinic_ids
+msgid "Clinics where this clinician works."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__code
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__code
+msgid "Code"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__color
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_tag__color
+msgid "Color Index"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__commercial_partner_id
+msgid "Commercial Entity"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__ref_company_ids
+msgid "Companies that refers to partner"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__partner_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__company_id
+#: model:ir.model.fields.selection,name:om_hospital.selection__sale_order__hospital_payer__company
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_search
+msgid "Company"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Company / Insurer"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_contract
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__contract_id
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order__hospital_contract_id
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "Company Contract"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_contract
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_contract
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_list
+msgid "Company Contracts"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__commercial_company_name
+msgid "Company Name Entity"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__company_share
+msgid "Company Pays (%)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__partner_id
+msgid ""
+"Company or insurer. Patients whose contact belongs to this company are "
+"covered."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Complaint & Diagnosis"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__contact_address
+msgid "Complete Address"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__contact_address_inline
+msgid "Complete Address inline"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__complete_name
+msgid "Complete Name"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Complete the appointment before creating a quotation."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid ""
+"Complete the consultation and transition the appointment status to done."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__age
+msgid "Computed age of the patient calculated from their date of birth."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__name
+msgid "Condition / Allergen"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid "Condition at discharge, follow-up instructions..."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_configuration
+msgid "Configuration"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Confirm"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__state__confirmed
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Confirmed"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__confirmed_by
+msgid "Confirmed By"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__confirmation_date
+msgid "Confirmed On"
+msgstr ""
+
+#. module: om_hospital
+#: model:product.category,name:om_hospital.product_category_consultation
+#: model:product.template,name:om_hospital.product_consultation_product_template
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Consultation"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__consultation_end
+msgid "Consultation Ended"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__hospital_consultation_fee
+msgid "Consultation Fee"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__consultation_start
+msgid "Consultation Started"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Consultation for %(patient)s has started."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__appointment_id
+msgid "Consultation that led to this admission, if any."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_res_partner
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__partner_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__partner_id
+msgid "Contact"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Contact & Details"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__contract_id
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "Contract"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_search
+msgid "Contract / Company"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_contract_line
+msgid "Contract Category Discount"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_search
+msgid "Contract Search"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/contract.py:0
+msgid "Contract activated."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_sale_order__hospital_contract_id
+msgid ""
+"Contract whose discount and coverage split apply to this order. Found from "
+"the patient's company; clear it to bill at full price."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__message_bounce
+msgid "Counter of the number of bounced emails for this contact"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__country_id
+msgid "Country"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__country_code
+msgid "Country Code"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Create Quotation"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_clinic
+msgid "Create your first clinic!"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_contract
+msgid "Create your first company contract!"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_ward
+msgid "Create your first ward!"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_cancel_appointment_wizard__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_specialty__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_tag__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__create_uid
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_cancel_appointment_wizard__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_specialty__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_tag__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__create_date
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__credit_limit
+msgid "Credit Limit"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__credit_to_invoice
+msgid "Credit To Invoice"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__credit_limit
+msgid "Credit limit specific to this partner."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__hospital_currency_id
+msgid "Currency used for the consultation fee."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__current_admission_id
+msgid "Current Admission"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__current_bed_id
+msgid "Current Bed"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__bed_id
+#: model:ir.model.fields,help:om_hospital.field_transfer_bed_wizard__current_bed_id
+msgid "Current bed. Change it during the stay with Transfer Bed."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__state
+msgid "Current workflow phase of the appointment."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_search
+msgid "Currently Admitted"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_tag__color
+msgid "Custom color selector for the tag badge in Odoo."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_payment_term_id
+msgid "Customer Payment Terms"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__customer_rank
+msgid "Customer Rank"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__transfer_date
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "Date"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_appointment_slip
+msgid "Date &amp; Time"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__cancellation_date
+msgid "Date and time the appointment was cancelled."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__confirmation_date
+msgid "Date and time the appointment was confirmed."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__consultation_end
+msgid "Date and time the consultation was completed."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__consultation_start
+msgid "Date and time the doctor started the consultation."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__date_of_birth
+msgid "Date of Birth"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid "Date of Birth cannot be today or in the future."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__follow_up_date
+msgid "Date on which the doctor wants to see the patient again."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient_condition__since
+msgid "Date the condition was first diagnosed or noticed, if known."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__booking_date
+msgid "Date when the appointment booking was registered."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "Days"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__days_sales_outstanding
+msgid "Days Sales Outstanding (DSO)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__deceased
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Deceased"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__default_discount
+msgid "Default Discount (%)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__hospital_consultation_fee
+msgid "Default fee charged for one consultation with this clinician."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__trust
+msgid "Degree of trust you have in this debtor"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__diagnosis
+msgid "Diagnosis"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__diastolic_bp
+msgid "Diastolic BP"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__diastolic_bp
+msgid "Diastolic blood pressure in mmHg (the lower number)."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_cancel_appointment_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_transfer_bed_form
+msgid "Discard"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid "Discharge"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__discharge_notes
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "Discharge Notes"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.report,name:om_hospital.action_report_discharge_summary
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "Discharge Summary"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid "Discharge the patient and close the stay."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "Discharge the patient before creating the quotation."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_admission__state__discharged
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_search
+msgid "Discharged"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__discharge_date
+msgid "Discharged On"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__discount
+msgid "Discount (%)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__default_discount
+msgid ""
+"Discount applied to services whose category has no specific rule below."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__display_invoice_edi_format
+msgid "Display Invoice Edi Format"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__display_invoice_template_pdf_report_id
+msgid "Display Invoice Template Pdf Report"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_cancel_appointment_wizard__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_specialty__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_tag__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_product_template__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_res_partner__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order_line__display_name
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__doctor_id
+#: model:ir.model.fields.selection,name:om_hospital.selection__hr_employee__clinician_role__doctor
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_appointment_slip
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Doctor"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_list
+msgid "Doctor Name"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__doctor_id
+msgid ""
+"Doctor assigned to this appointment. Choose the clinic first: only its "
+"doctors are offered."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__diagnosis
+msgid "Doctor's diagnosis. Required before the consultation can be completed."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Doctor's diagnosis..."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "Doctor's signature: ______________________________"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__state__done
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Done"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__user_id
+msgid "Done By"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__street_number2
+msgid "Door"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__dose
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "Dosage"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_admission__state__draft
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__state__draft
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_contract__state__draft
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_search
+msgid "Draft"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__duplicate_bank_partner_ids
+msgid "Duplicate Bank Partner"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__duration
+msgid "Duration"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__duration_days
+msgid "Duration (Days)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__routing_identifier
+msgid "EDI Routing Address"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__partner_share
+msgid ""
+"Either customer (not a user), either shared user. Indicated the current "
+"partner is a customer without access or with a limited access created for "
+"sharing data."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__email
+msgid "Email"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__emergency_contact_ids
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Emergency Contacts"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hr_employee
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__employee
+msgid "Employee"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__employee_ids
+msgid "Employees"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__employees_count
+msgid "Employees Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__date_end
+msgid "End Date"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__country_enforce_cities
+msgid "Enforce Cities"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Enter a diagnosis for %(appointment)s before completing it."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Enter general consultation notes or observations..."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_cancel_appointment_form
+msgid "Enter the reason for cancelling this appointment..."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__appointment_end
+msgid "Expected End"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__duration
+msgid ""
+"Expected length of the consultation in hours (0.5 = 30 minutes). Used to "
+"prevent overlapping bookings for the same doctor."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__instructions
+msgid "Extra directions for the patient, for example take with food."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_employee_form_inherit_hospital
+msgid "Fees"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__gender__female
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_search
+msgid "Female"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__phone_sanitized
+msgid ""
+"Field used to store sanitized phone number. Helps speeding up searches and "
+"comparisons."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__fiscal_country_codes
+msgid "Fiscal Country Codes"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__fiscal_country_group_codes
+msgid "Fiscal Country Group Codes"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_account_position_id
+msgid "Fiscal Position"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Follow-up"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__follow_up_appointment_id
+msgid "Follow-up Appointment"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__follow_up_date
+msgid "Follow-up Date"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Follow-up appointment %(reference)s scheduled for %(date)s."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Follow-ups can only be scheduled during or after the consultation."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_follower_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_follower_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_follower_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_follower_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_follower_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_partner_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_partner_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_partner_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_partner_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_partner_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__location
+msgid "For example Building A, 4th floor."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient_condition__name
+msgid "For example Penicillin (allergy) or Hypertension (chronic condition)."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__email_formatted
+msgid "Format email address \"Name <email@domain>\""
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__email_formatted
+msgid "Formatted Email"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__frequency
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "Frequency"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_emergency_contact__relationship__friend
+msgid "Friend"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "From"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__from_bed_id
+msgid "From Bed"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__global_location_number
+msgid "GLN"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__gender
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__gender
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_search
+msgid "Gender"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_ward__ward_type__general
+msgid "General"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__global_location_number
+msgid "Global Location Number"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__guardian_id
+msgid "Guardian"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__has_message
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__has_message
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__has_message
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__has_message
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__has_message
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__has_vat
+msgid "Has Tax ID"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__head_id
+msgid "Head of Clinic"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__height
+msgid "Height (cm)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__priority__2
+msgid "High"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_root
+#: model:product.category,name:om_hospital.product_category_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_employee_form_inherit_hospital
+msgid "Hospital"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_appointment
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order__appointment_id
+msgid "Hospital Appointment"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_bed
+msgid "Hospital Bed"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_clinic
+msgid "Hospital Clinic"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__hospital_currency_id
+msgid "Hospital Currency"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.module.module,shortdesc:base.module_om_hospital
+msgid "Hospital Management System"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_patient
+msgid "Hospital Patient"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_prescription_line
+msgid "Hospital Prescription Line"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_tag
+msgid "Hospital Tag"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_ward
+msgid "Hospital Ward"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__hospital_patient_ids
+#: model:ir.model.fields,help:om_hospital.field_res_partner__hospital_patient_ids
+#: model:ir.model.fields,help:om_hospital.field_res_users__hospital_patient_ids
+msgid "Hospital patient records linked to this contact."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__street_number
+msgid "House"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__frequency
+msgid "How often the medication should be taken (e.g., Twice a day)."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_cancel_appointment_wizard__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_specialty__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_tag__id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__id
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__id
+#: model:ir.model.fields,field_description:om_hospital.field_product_template__id
+#: model:ir.model.fields,field_description:om_hospital.field_res_partner__id
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order__id
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order_line__id
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__id_number
+msgid "ID Number"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__id_type
+msgid "ID Type"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_exception_icon
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_exception_icon
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_exception_icon
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_exception_icon
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__activity_exception_icon
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__activity_exception_icon
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__activity_exception_icon
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__activity_exception_icon
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__message_needaction
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__message_needaction
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__message_needaction
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__message_needaction
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__message_needaction
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__message_has_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__message_has_sms_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__message_has_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__message_has_sms_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__message_has_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__message_has_sms_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__message_has_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__message_has_sms_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__message_has_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__message_has_sms_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__message_has_error
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__is_blacklisted
+msgid ""
+"If the email address is on the blacklist, the contact won't receive mass "
+"mailing anymore, from any list"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__phone_sanitized_blacklisted
+msgid ""
+"If the sanitized phone number is on the blacklist, the contact won't receive"
+" mass mailing sms anymore, from any list"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__ignore_abnormal_invoice_amount
+msgid "Ignore Abnormal Invoice Amount"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__ignore_abnormal_invoice_date
+msgid "Ignore Abnormal Invoice Date"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__image_1920
+msgid "Image"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__image_1024
+msgid "Image 1024"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__image_128
+msgid "Image 128"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__image_256
+msgid "Image 256"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__image_512
+msgid "Image 512"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__incoterm_id
+msgid "Incoterm"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__incoterm_location
+msgid "Incoterm Location"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__phone_blacklisted
+msgid ""
+"Indicates if a blacklisted sanitized phone number is a phone number. Helps "
+"distinguish which number is blacklisted             when there is both a "
+"mobile and phone field in a model."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__deceased
+msgid "Indicates if the patient is deceased."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__priority
+msgid "Indicates the clinical priority level or urgency of the case."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__industry_id
+msgid "Industry"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_admission
+msgid "Inpatient Admission"
+msgstr ""
+
+#. module: om_hospital
+#: model:product.category,name:om_hospital.product_category_inpatient
+msgid "Inpatient Stay"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_sale_order__admission_id
+msgid "Inpatient admission billed by this order."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__admission_ids
+msgid "Inpatient admissions that started from this appointment."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__instructions
+msgid "Instructions"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_ward__ward_type__icu
+msgid "Intensive Care"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__incoterm_id
+msgid ""
+"International Commercial Terms are a series of predefined commercial terms "
+"used in international transactions."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__invoice_edi_format_store
+msgid "Invoice Edi Format Store"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__invoice_template_pdf_report_id
+msgid "Invoice report"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__invoice_sending_method
+msgid "Invoice sending"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__invoice_ids
+msgid "Invoices"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__is_clinician
+msgid "Is Clinician"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_is_follower
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_is_follower
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_is_follower
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_is_follower
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_is_follower
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__is_in_call
+msgid "Is In Call"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_product_product__is_medicine
+#: model:ir.model.fields,field_description:om_hospital.field_product_template__is_medicine
+msgid "Is Medicine"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__is_minor
+msgid "Is Minor"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__is_patient
+#: model:ir.model.fields,field_description:om_hospital.field_res_partner__is_patient
+#: model:ir.model.fields,field_description:om_hospital.field_res_users__is_patient
+msgid "Is Patient"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__is_pricelist_manually_set
+msgid "Is Pricelist Manually Set"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__is_public
+msgid "Is Public"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__is_ubl_format
+msgid "Is Ubl Format"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__is_company
+msgid "Is a Company"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__function
+msgid "Job Position"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__id_type
+msgid "Kind of identity document recorded for the patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hr_employee__clinician_role__technician
+msgid "Lab / Radiology Technician"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__lang
+msgid "Language"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_cancel_appointment_wizard__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_specialty__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_tag__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__write_uid
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_cancel_appointment_wizard__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_specialty__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_tag__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__write_date
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__partner_latitude
+msgid "Latitude"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__date_end
+msgid "Leave empty for an open-ended contract."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Leave empty to create a new contact"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "License No."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__hospital_license_number
+msgid "License Number"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_sale_order__appointment_id
+msgid "Linked medical appointment for billing and tracking."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__appointment_ids
+msgid ""
+"List of all scheduled or completed appointments linked to this patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__location
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__location
+msgid "Location"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__partner_longitude
+msgid "Longitude"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__priority__0
+msgid "Low"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__main_user_id
+msgid "Main User"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__chief_complaint
+msgid "Main reason the patient came in, in the patient's own words."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_patient
+msgid ""
+"Maintain patient records, track medical history, monitor appointment counts,"
+" and manage demographic details."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__gender__male
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_search
+msgid "Male"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.module.module,summary:base.module_om_hospital
+msgid ""
+"Manage hospital operations, patients, clinicians, clinics and appointments"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_appointment
+msgid ""
+"Manage patient consultations, track visit timelines, prioritize cases, and "
+"record clinical prescriptions seamlessly."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_form
+msgid "Management"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Mark As Done"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__activity_type_icon
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__activity_type_icon
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__activity_type_icon
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__activity_type_icon
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__activity_type_icon
+msgid "Material Symbols icon e.g. checklist"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_ward__ward_type__maternity
+msgid "Maternity"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Medical Conditions"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__note
+msgid "Medical Notes"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_specialty
+msgid "Medical Specialty"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__tag_ids
+msgid "Medical Tags"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__tag_ids
+msgid ""
+"Medical conditions, allergies, or status tags associated with this patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__hospital_specialty_id
+msgid "Medical specialty practised by this clinician."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__specialty_id
+msgid "Medical specialty practised in this clinic."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__prescription_line_ids
+msgid "Medications prescribed during this appointment."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__medicine_id
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "Medicine"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__medicine_id
+msgid "Medicine from the product catalog (products flagged as medicines)."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_medicine
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_medicine
+#: model:product.category,name:om_hospital.product_category_medicine
+msgid "Medicines"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_medicine
+msgid ""
+"Medicines are regular products flagged as prescribable, so prescriptions\n"
+"                can later be billed and dispensed through Sales."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_has_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_has_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_has_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_has_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_has_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__sale_warn_msg
+msgid "Message for Sales Order"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__nights
+msgid ""
+"Midnights spent in hospital (a same-day stay counts as 1). While admitted it"
+" counts up to today."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient_condition__severity__mild
+msgid "Mild"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient_condition__severity__moderate
+msgid "Moderate"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__my_activity_date_deadline
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__my_activity_date_deadline
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__my_activity_date_deadline
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__my_activity_date_deadline
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__name
+msgid "Name"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__name
+msgid "Name of the clinic, for example Eye Care Clinic."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_specialty__name
+msgid "Name of the medical specialty, for example Cardiology."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_tag__name
+msgid "Name of the tag."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__name
+msgid "Name of the ward, for example General Ward or ICU."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__id_type__national_id
+msgid "National ID"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__new_bed_id
+msgid "New Bed"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/res_partner.py:0
+msgid "New Patient"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_date_deadline
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_date_deadline
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_date_deadline
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_date_deadline
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_summary
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_summary
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_summary
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_summary
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_type_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_type_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_type_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_type_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "No medicines were prescribed."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__priority__1
+msgid "Normal"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__email_normalized
+msgid "Normalized Email"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__comment
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__notes
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Notes"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_needaction_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_needaction_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_needaction_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_needaction_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_needaction_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__duration_days
+msgid ""
+"Number of days the medication should be taken. Leave 0 if not specified."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_has_error_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_has_error_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_has_error_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_has_error_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_has_error_counter
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__message_needaction_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__message_needaction_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__message_needaction_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__message_needaction_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__message_needaction_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__message_has_error_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__message_has_error_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__message_has_error_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__message_has_error_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__message_has_error_counter
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__id_number
+msgid "Number of the identity document. Sensitive personal data."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hr_employee__clinician_role__nurse
+msgid "Nurse"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__blood_group__o+
+msgid "O+"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__blood_group__o-
+msgid "O-"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__is_occupied
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__occupied_count
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_search
+msgid "Occupied"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__partner_id
+msgid ""
+"Odoo contact holding this patient's name, phone, email, photo and billing "
+"details."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__hospital_license_number
+msgid ""
+"Official medical registration or syndicate number. Must be unique when set."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__state__ongoing
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Ongoing"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "Only admitted patients can be discharged."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+#: code:addons/om_hospital/wizard/transfer_bed.py:0
+msgid "Only admitted patients can be transferred."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Only cancelled appointments can be reset to draft."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Only confirmed appointments can start a consultation."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "Only draft admissions can be admitted."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "Only draft admissions can be cancelled. Discharge the patient instead."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Only draft appointments can be confirmed."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/contract.py:0
+msgid "Only draft contracts can be activated."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "Only draft or cancelled admissions can be deleted."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Only draft or cancelled appointments can be deleted."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Only draft or confirmed appointments can be cancelled."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__order_count
+msgid "Order Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_emergency_contact__relationship__other
+msgid "Other"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hr_employee__clinician_role__other
+msgid "Other Clinical Staff"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_emergency_contact__relationship__parent
+msgid "Parent"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__parent_name
+msgid "Parent name"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__guardian_id
+msgid "Parent or legal guardian. Required while the patient is under 18."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__contract_ids
+msgid "Partner Contracts"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__use_partner_credit_limit
+msgid "Partner Limit"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__partner_vat_placeholder
+msgid "Partner Vat Placeholder"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__same_vat_partner_id
+msgid "Partner with same Tax ID"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__id_type__passport
+msgid "Passport"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__previous_appointment_ids
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Past Visits"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__patient_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__patient_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__patient_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__patient_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__patient_id
+#: model:ir.model.fields,field_description:om_hospital.field_sale_order__patient_id
+#: model:ir.model.fields.selection,name:om_hospital.selection__sale_order__hospital_payer__patient
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_appointment_slip
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+msgid "Patient"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_patient_condition
+msgid "Patient Allergy or Chronic Condition"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__patient_count
+msgid "Patient Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_hospital_emergency_contact
+msgid "Patient Emergency Contact"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Patient Form"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_list
+msgid "Patient List"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_list
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_list
+msgid "Patient Name"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/res_partner.py:0
+msgid "Patient Record"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__hospital_patient_ids
+#: model:ir.model.fields,field_description:om_hospital.field_res_partner__hospital_patient_ids
+#: model:ir.model.fields,field_description:om_hospital.field_res_users__hospital_patient_ids
+msgid "Patient Records"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__reference
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__reference
+msgid "Patient Reference"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_search
+msgid "Patient Search"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__height
+msgid "Patient height in centimetres, measured during this visit."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_sale_order__patient_id
+msgid "Patient of the linked appointment or admission."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__patient_id
+msgid "Patient receiving this medication, taken from the appointment."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__weight
+msgid "Patient weight in kilograms, measured during this visit."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__blood_group
+msgid "Patient's blood group and Rhesus factor classification."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__date_of_birth
+msgid "Patient's date of birth used to compute their age automatically."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/contract.py:0
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_patient
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_patient
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_partner_search_inherit_hospital
+msgid "Patients"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__patient_count
+msgid "Patients whose contact belongs to the contract company."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__qr_code_method
+msgid "Payment QR-code"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__payment_token_count
+msgid "Payment Token Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__payment_token_ids
+msgid "Payment Tokens"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_ward__ward_type__pediatric
+msgid "Pediatric"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__emergency_contact_ids
+msgid ""
+"People to call in an emergency, with their relationship to the patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_emergency_contact__partner_id
+msgid "Person to call in an emergency. Created as a regular Odoo contact."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Personal Information"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__phone
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__phone
+msgid "Phone"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__phone_sanitized_blacklisted
+msgid "Phone Blacklisted"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__phone_mobile_search
+msgid "Phone Number"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_appointment_slip
+msgid ""
+"Please arrive 15 minutes before your appointment and bring this slip and "
+"your ID."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid "Possible duplicate patient"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Prescription"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.report,name:om_hospital.action_report_prescription
+msgid "Prescription Slip"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__prescription_line_ids
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Prescriptions"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_product_pricelist
+msgid "Pricelist"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__is_primary
+msgid "Primary"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__priority
+msgid "Priority"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_ward__ward_type__private
+msgid "Private"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract_line__category_id
+msgid "Product Category"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__properties
+msgid "Properties"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__properties_base_definition_id
+msgid "Properties Base Definition"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_inbound_payment_method_line_id
+msgid "Property Inbound Payment Method Line"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_outbound_payment_method_line_id
+msgid "Property Outbound Payment Method Line"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_prescription_line__quantity
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_prescription
+msgid "Quantity"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Quotation(s) created: %(orders)s."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__order_count
+msgid "Quotations and sales orders billed under this contract."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient_condition__notes
+msgid "Reaction details or management notes."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__reason
+#: model:ir.model.fields,field_description:om_hospital.field_transfer_bed_wizard__reason
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "Reason"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__reason
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "Reason for Admission"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_cancel_appointment_wizard__reason
+msgid "Reason for Cancellation"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__cancellation_reason
+msgid "Reason given when the appointment was cancelled."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Reason: %(reason)s"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__note
+msgid ""
+"Record clinical observations, diagnoses, or comments during the "
+"consultation."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__name
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__ref
+msgid "Reference"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__reference
+msgid "Reference code of the associated patient."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_clinician
+msgid "Register your first clinician!"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_patient
+msgid "Register your first hospital patient!"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_view_sale_order
+msgid "Register your first sale order!"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__parent_id
+msgid "Related Company"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__child_ids
+msgid "Related Contacts"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__employee_ids
+msgid "Related employees based on their private address"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_emergency_contact__relationship
+msgid "Relationship"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "Reset to Draft"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient__id_type__residence
+msgid "Residence Permit"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__activity_user_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__activity_user_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__activity_user_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__activity_user_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Revert the cancelled appointment back to draft state for rescheduling."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__routing_endpoint
+msgid "Routing Endpoint"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__routing_scheme
+msgid "Routing ID"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__rtc_session_ids
+msgid "Rtc Session"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__message_has_sms_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__message_has_sms_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__message_has_sms_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__message_has_sms_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__message_has_sms_error
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__sale_order_count
+msgid "Sale Order Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.act_window,name:om_hospital.action_view_sale_order
+#: model:ir.ui.menu,name:om_hospital.menu_sale_orders
+msgid "Sale Orders"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_sale_order
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__sale_order_ids
+msgid "Sales Order"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__sale_order_count
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__sale_order_count
+msgid "Sales Order Count"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+#: code:addons/om_hospital/models/appointment.py:0
+#: code:addons/om_hospital/models/contract.py:0
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__sale_order_ids
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__sale_order_ids
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Sales Orders"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__sale_order_ids
+msgid "Sales orders linked to this appointment for billing and procedures."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__user_id
+msgid "Salesperson"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__phone_sanitized
+msgid "Sanitized Number"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Schedule Follow-up"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_appointment
+msgid "Schedule your first hospital appointment!"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__appointment_time
+msgid "Scheduled date and time for the doctor consultation."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_patient_form
+msgid "Select medical tags..."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__patient_id
+msgid ""
+"Select the registered patient receiving medical care during this visit."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__self
+msgid "Self"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Set a follow-up date first."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__use_partner_credit_limit
+msgid "Set a value greater than 0.0 to activate a credit limit check"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_patient_id_pair_check
+msgid "Set both the ID type and the ID number, or neither."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_patient_condition__severity__severe
+msgid "Severe"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__severity
+msgid "Severity"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__partner_share
+msgid "Share Partner"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__company_share
+msgid ""
+"Share of the discounted amount invoiced to the company. The patient is "
+"invoiced the remainder."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__code
+msgid "Short uppercase code of the clinic, for example EYE. Must be unique."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__code
+msgid "Short uppercase code, for example GEN. Must be unique."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__show_credit_limit
+msgid "Show Credit Limit"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_emergency_contact__relationship__sibling
+msgid "Sibling"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__signup_type
+msgid "Signup Token Type"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__since
+msgid "Since"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_specialty
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_specialty
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_specialty_list
+msgid "Specialties"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_clinic__specialty_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_specialty__name
+#: model:ir.model.fields,field_description:om_hospital.field_hr_employee__hospital_specialty_id
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_search
+msgid "Specialty"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__dose
+msgid "Specific dosage instructions (e.g., 500mg, 1 tablet)."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_cancel_appointment_wizard__reason
+msgid "Specify why this appointment is being cancelled."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_emergency_contact__relationship__spouse
+msgid "Spouse"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Start Consultation"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__date_start
+msgid "Start Date"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Start the consultation and record the start time."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Start the consultation before marking it as done."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__state_id
+msgid "State"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__application_statistics
+msgid "Stats"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__state
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__state
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_contract__state
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_appointment_slip
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_search
+msgid "Status"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__activity_state
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__activity_state
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__activity_state
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__activity_state
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__street
+msgid "Street"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__street_name
+msgid "Street Name"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__street2
+msgid "Street2"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__condition_ids
+msgid ""
+"Structured medical conditions. Quick-filter tags are kept in sync "
+"automatically."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__supplier_rank
+msgid "Supplier Rank"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__systolic_bp
+msgid "Systolic BP"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__systolic_bp
+msgid "Systolic blood pressure in mmHg (the upper number)."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "Systolic pressure must be higher than diastolic pressure."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_tag__name
+msgid "Tag Name"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__category_id
+msgid "Tags"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__vat
+msgid "Tax ID"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__vat_label
+msgid "Tax ID Label"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__has_vat
+msgid ""
+"Technical field indicating whether the Tax ID is not a placeholder.Returns "
+"False for placeholder values such as '/', 'NA', 'na', or an empty string."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_contract_form
+msgid "Terms"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient_condition.py:0
+msgid "The 'Since' date cannot be in the future."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_patient_id_number_not_blank
+msgid "The ID number cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_admission_name_uniq
+msgid "The admission reference must be unique."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "The appointment belongs to a different patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_appointment_duration_positive
+msgid "The appointment duration must be greater than zero."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_appointment_name_uniq
+msgid "The appointment reference must be unique."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_bed_name_not_blank
+msgid "The bed name cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_clinic_code_not_blank
+msgid "The clinic code cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_clinic_name_not_blank
+msgid "The clinic name cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_contract_share_range
+msgid "The company share must be between 0 and 100."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_patient_condition_name_not_blank
+msgid "The condition name cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_appointment_consultation_dates_check
+msgid "The consultation cannot end before it starts."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hr_employee_hospital_fee_not_negative
+msgid "The consultation fee cannot be negative."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_contract_name_uniq
+msgid "The contract reference must be unique."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_patient_date_of_birth_min
+msgid "The date of birth cannot be earlier than 1900-01-01."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_contract_discount_range
+msgid "The default discount must be between 0 and 100."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_admission_dates_check
+msgid "The discharge cannot be before the admission."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_contract_line_discount_range
+msgid "The discount must be between 0 and 100."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_prescription_line_duration_not_negative
+msgid "The duration cannot be negative."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_contract_dates_check
+msgid "The end date cannot be before the start date."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_emergency_contact__is_primary
+msgid "The first person to call. Only one primary contact per patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__property_account_position_id
+msgid ""
+"The fiscal position determines the taxes/accounts used for this contact."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "The follow-up date must be after the appointment date."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__user_id
+msgid "The internal user in charge of this contact."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "The medical record of a completed appointment is locked."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/wizard/transfer_bed.py:0
+msgid "The patient is already in this bed."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid "The patient name cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_patient_reference_uniq
+msgid "The patient reference must be unique."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__previous_appointment_ids
+msgid "The patient's most recent completed appointments before this one."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid ""
+"The phone number may only contain digits, spaces, brackets, dashes and an "
+"optional leading + (6 to 20 characters)."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/prescription_line.py:0
+msgid "The prescription of a completed appointment is locked."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_prescription_line_quantity_positive
+msgid "The quantity must be greater than zero."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_specialty_name_not_blank
+msgid "The specialty name cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_ward_code_not_blank
+msgid "The ward code cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_ward_name_not_blank
+msgid "The ward name cannot be blank."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__main_user_id
+msgid ""
+"There can be several users related to the same partner. When a single user "
+"is needed, this field attempts to find the most appropriate one."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "This admission already has a quotation or sales order."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "This appointment already has a quotation or sales order."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_bed_ward_name_uniq
+msgid "This bed already exists in the ward."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_contract_line_category_uniq
+msgid "This category already has a rule in the contract."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_patient_condition_patient_condition_uniq
+msgid "This condition is already recorded for the patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_patient_partner_uniq
+msgid "This contact is already linked to another patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_emergency_contact_patient_partner_uniq
+msgid "This contact is already listed for the patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__email_normalized
+msgid ""
+"This field is used to search on email address as the primary email field can"
+" contain more than strictly an email address."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hr_employee_hospital_license_uniq
+msgid "This license number is already registered to another employee."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_specialty_name_uniq
+msgid "This specialty already exists."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_tag_name_uniq
+msgid "This tag already exists."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__is_clinician
+msgid "Tick for employees who provide clinical care in the hospital."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_product_product__is_medicine
+#: model:ir.model.fields,help:om_hospital.field_product_template__is_medicine
+msgid ""
+"Tick for products that doctors can prescribe. Only these appear on "
+"prescriptions."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__tz
+msgid "Timezone"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__tz_offset
+msgid "Timezone offset"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.report_discharge_summary
+msgid "To"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission_transfer__to_bed_id
+msgid "To Bed"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__total_invoiced
+msgid "Total Invoiced"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__debit
+msgid "Total Payable"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__credit
+msgid "Total Receivable"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__credit
+msgid "Total amount this customer owes you."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__debit
+msgid "Total amount you have to pay to this vendor."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hr_employee__hospital_appointment_count
+msgid "Total number of appointments assigned to this clinician."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__appointment_count
+msgid "Total number of appointments booked in this clinic."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__appointment_count
+msgid "Total number of appointments recorded for this patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__sale_order_count
+msgid "Total number of sales orders generated for this appointment."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_transfer_bed_form
+msgid "Transfer"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_transfer_bed_form
+msgid "Transfer Bed"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model,name:om_hospital.model_transfer_bed_wizard
+msgid "Transfer Bed Wizard"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/wizard/transfer_bed.py:0
+msgid "Transferred from %(old)s to %(new)s."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__is_patient
+#: model:ir.model.fields,help:om_hospital.field_res_partner__is_patient
+#: model:ir.model.fields,help:om_hospital.field_res_users__is_patient
+msgid "True when this contact has a hospital patient record."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_bed__is_occupied
+msgid ""
+"True while a patient is admitted to this bed. Never typed in: it follows the"
+" admissions."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__is_minor
+msgid "True while the patient is under 18."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient_condition__condition_type
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__ward_type
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_search
+msgid "Type"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_admission__activity_exception_decoration
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__activity_exception_decoration
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__activity_exception_decoration
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__activity_exception_decoration
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_ward__active
+msgid ""
+"Uncheck to archive the ward. A ward with patients in it cannot be archived."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__active
+msgid "Uncheck to archive this clinic without deleting past appointments."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__active
+msgid ""
+"Uncheck to archive this patient record without deleting historical data."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_bed__active
+msgid ""
+"Uncheck to take the bed out of service. An occupied bed cannot be archived."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__name
+msgid "Unique reference code generated automatically for this consultation."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_contract__name
+msgid "Unique reference generated automatically."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__reference
+msgid "Unique sequential reference code assigned to each registered patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__quantity
+msgid ""
+"Units or packs to dispense. This is the quantity billed on the quotation."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_prescription_line__to_bill
+msgid ""
+"Untick when the patient will buy this medicine elsewhere: it stays on the "
+"prescription but is left off the quotation."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "Use Transfer Bed to move an admitted patient."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__barcode
+msgid "Use a barcode to identify this contact."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__property_product_pricelist
+msgid "Used for sales to the current partner"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__cancelled_by
+msgid "User who cancelled this appointment."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_appointment__confirmed_by
+msgid "User who confirmed this appointment."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__user_ids
+msgid "Users"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__property_supplier_payment_term_id
+msgid "Vendor Payment Terms"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields.selection,name:om_hospital.selection__hospital_appointment__priority__3
+msgid "Very High"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Vitals"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.constraint,message:om_hospital.constraint_hospital_appointment_vitals_not_negative
+msgid "Vitals cannot be negative."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_admission__ward_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_bed__ward_id
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_ward__name
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_bed_search
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_form
+msgid "Ward"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_search
+msgid "Ward / Code"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_form
+msgid "Ward Details"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_search
+msgid "Ward Search"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.actions.act_window,name:om_hospital.action_hospital_ward
+#: model:ir.ui.menu,name:om_hospital.menu_hospital_ward
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_list
+msgid "Wards"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.actions.act_window,help:om_hospital.action_hospital_ward
+msgid ""
+"Wards group beds for inpatient admissions, for example a General Ward or an "
+"ICU."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__website
+msgid "Website Link"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_appointment__weight
+msgid "Weight (kg)"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__tz
+msgid ""
+"When printing documents and exporting/importing data, time values are computed according to this timezone.\n"
+"If the timezone is not set, UTC (Coordinated Universal Time) is used.\n"
+"Anywhere else, time values are computed according to the time offset of your web client."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_clinic__location
+msgid ""
+"Where the clinic is found inside the hospital, for example Building B, 2nd "
+"floor."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__employee
+msgid "Whether this contact is an Employee."
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_admission_form
+msgid "Why is the patient being admitted?"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_transfer_bed_form
+msgid "Why is the patient being moved?"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_appointment_form
+msgid "Why is the patient here?"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_sale_order__hospital_payer
+msgid ""
+"With a contract, each order carries one payer's share of the discounted "
+"amount."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__vat
+msgid "You can use '/' to indicate that the customer has no Tax ID."
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/wizard/cancel_appointment.py:0
+msgid ""
+"You cannot cancel an appointment scheduled for today or a date that has "
+"already passed."
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__zip
+msgid "Zip"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,help:om_hospital.field_hospital_patient__days_sales_outstanding
+msgid ""
+"[(Total Receivable/Total Revenue) * number of days since the first invoice] "
+"for this customer"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/admission.py:0
+msgid "admission_id"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/appointment.py:0
+msgid "appointment_id"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/clinic.py:0
+msgid "clinic_id"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/hr_employee.py:0
+msgid "doctor_id"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_form
+msgid "e.g. EYE"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_clinic_form
+msgid "e.g. Eye Care Clinic"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_form
+msgid "e.g. GEN"
+msgstr ""
+
+#. module: om_hospital
+#: model_terms:ir.ui.view,arch_db:om_hospital.view_hospital_ward_form
+msgid "e.g. General Ward"
+msgstr ""
+
+#. module: om_hospital
+#: model:ir.model.fields,field_description:om_hospital.field_hospital_patient__invoice_edi_format
+msgid "eInvoice format"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/contract.py:0
+msgid "hospital_contract_id"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/res_partner.py:0
+msgid "partner_id"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/contract.py:0
+msgid "partner_id.parent_id"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/patient.py:0
+msgid "patient_id"
+msgstr ""
+
+#. module: om_hospital
+#. odoo-python
+#: code:addons/om_hospital/models/ward.py:0
+msgid "ward_id"
+msgstr ""

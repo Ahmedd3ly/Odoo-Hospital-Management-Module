@@ -18,6 +18,7 @@ class HospitalAdmission(models.Model):
         copy=False,
         readonly=True,
         default="New",
+        index="trigram",
     )
     patient_id = fields.Many2one(
         "hospital.patient",
@@ -100,6 +101,8 @@ class HospitalAdmission(models.Model):
     )
 
     _name_uniq = models.Constraint("UNIQUE(name)", "The admission reference must be unique.")
+    _admitted_bed_idx = models.Index("(bed_id) WHERE state = 'admitted'")
+    _admitted_patient_idx = models.Index("(patient_id) WHERE state = 'admitted'")
     _dates_check = models.Constraint(
         "CHECK(discharge_date IS NULL OR discharge_date >= admission_date)",
         "The discharge cannot be before the admission.",

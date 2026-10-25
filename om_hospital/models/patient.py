@@ -31,8 +31,9 @@ class HospitalPatient(models.Model):
         help="Odoo contact holding this patient's name, phone, email, photo and billing details.",
     )
     reference = fields.Char(
-        string="Reference",
+        string="Patient Reference",
         required=True,
+        index="trigram",
         copy=False,
         readonly=True,
         default="New",
@@ -92,6 +93,7 @@ class HospitalPatient(models.Model):
     id_number = fields.Char(
         string="ID Number",
         copy=False,
+        index="trigram",
         help="Number of the identity document. Sensitive personal data.",
     )
     guardian_id = fields.Many2one(
@@ -107,6 +109,11 @@ class HospitalPatient(models.Model):
         compute="_compute_contract_id",
         help="Active contract of the company this patient belongs to, if any.",
     )
+    is_birthday = fields.Boolean(
+        string="Is Birthday",
+        compute="_compute_is_birthday",
+        help="True on the patient's birthday, used to show a greeting banner on the form.",
+    )
     is_minor = fields.Boolean(
         string="Is Minor",
         compute="_compute_is_minor",
@@ -119,7 +126,7 @@ class HospitalPatient(models.Model):
         "patient_tag_rel",
         "patient_id",
         "tag_id",
-        string="Tags",
+        string="Medical Tags",
         help="Medical conditions, allergies, or status tags associated with this patient.",
     )
     emergency_contact_ids = fields.One2many(
@@ -200,6 +207,16 @@ class HospitalPatient(models.Model):
                 rec.age = today.year - dob.year - (0 if had_birthday else 1)
             else:
                 rec.age = 0
+
+    @api.depends("date_of_birth")
+    def _compute_is_birthday(self):
+        today = fields.Date.context_today(self)
+        for rec in self:
+            dob = rec.date_of_birth
+            rec.is_birthday = bool(dob) and (dob.month, dob.day) == (
+                today.month,
+                today.day,
+            )
 
     @api.depends("partner_id.parent_id")
     def _compute_contract_id(self):

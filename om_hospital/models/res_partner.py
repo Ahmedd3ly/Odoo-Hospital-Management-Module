@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 
+from .search_utils import boolean_search_domain
+
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
@@ -23,8 +25,12 @@ class ResPartner(models.Model):
             rec.is_patient = bool(rec.hospital_patient_ids)
 
     def _search_is_patient(self, operator, value):
-        positive = (operator == "=" and value) or (operator == "!=" and not value)
-        return [("hospital_patient_ids", "!=" if positive else "=", False)]
+        return boolean_search_domain(
+            operator,
+            value,
+            positive_domain=[("hospital_patient_ids", "!=", False)],
+            negative_domain=[("hospital_patient_ids", "=", False)],
+        )
 
     def action_open_patient_record(self):
         self.ensure_one()

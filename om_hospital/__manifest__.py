@@ -4,7 +4,7 @@
     "description": "A comprehensive hospital management system to manage patients, clinicians, clinics, appointments, and medical records.",
     "author": "Ahmed Khatib",
     "category": "Healthcare",
-    "version": "20.0.1.7.0",
+    "version": "20.0.1.8.0",
     "sequence": -100,
     "depends": ["base", "mail", "sale", "hr"],
     "data": [
@@ -31,6 +31,8 @@
         "views/sale_order_views.xml",
         "views/res_partner_views.xml",
         "views/res_config_settings_views.xml",
+        "report/hospital_reports.xml",
+        "report/hospital_report_templates.xml",
         "views/hospital_menus.xml",
     ],
     # Only loaded when the database is created with demonstration data

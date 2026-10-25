@@ -35,7 +35,7 @@ class HospitalWard(models.Model):
     )
     location = fields.Char(string="Location", help="For example Building A, 4th floor.")
     bed_ids = fields.One2many("hospital.bed", "ward_id", string="Beds")
-    bed_count = fields.Integer(string="Beds", compute="_compute_bed_counts")
+    bed_count = fields.Integer(string="Bed Count", compute="_compute_bed_counts")
     occupied_count = fields.Integer(string="Occupied", compute="_compute_bed_counts")
     available_count = fields.Integer(string="Available", compute="_compute_bed_counts")
     active = fields.Boolean(

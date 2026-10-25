@@ -1,6 +1,8 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
+from .search_utils import boolean_search_domain
+
 
 class HospitalBed(models.Model):
     _name = "hospital.bed"
@@ -19,6 +21,11 @@ class HospitalBed(models.Model):
         required=True,
         index=True,
         ondelete="restrict",
+    )
+    admission_ids = fields.One2many(
+        "hospital.admission",
+        "bed_id",
+        string="Admissions",
     )
     is_occupied = fields.Boolean(
         string="Occupied",
@@ -50,6 +57,7 @@ class HospitalBed(models.Model):
         for rec in self:
             rec.display_name = f"{rec.ward_id.name} / {rec.name}" if rec.ward_id else rec.name or ""
 
+    @api.depends("admission_ids.state")
     def _compute_occupancy(self):
         admissions = self.env["hospital.admission"].search(
             [("bed_id", "in", self.ids), ("state", "=", "admitted")]
@@ -61,9 +69,13 @@ class HospitalBed(models.Model):
             rec.is_occupied = bool(admission)
 
     def _search_is_occupied(self, operator, value):
-        occupied_beds = self.env["hospital.admission"].search([("state", "=", "admitted")]).bed_id
-        positive = (operator == "=" and value) or (operator == "!=" and not value)
-        return [("id", "in" if positive else "not in", occupied_beds.ids)]
+        occupied_ids = self.env["hospital.admission"].search([("state", "=", "admitted")]).bed_id.ids
+        return boolean_search_domain(
+            operator,
+            value,
+            positive_domain=[("id", "in", occupied_ids)],
+            negative_domain=[("id", "not in", occupied_ids)],
+        )
 
     @api.constrains("active")
     def _check_not_occupied_when_archiving(self):

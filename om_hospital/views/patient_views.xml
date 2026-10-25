@@ -29,6 +29,16 @@
         <field name="arch" type="xml">
             <form string="Patient Form">
                 <sheet>
+                    <!-- Birthday alert -->
+                    <div class="alert alert-info alert-dismissible fade show text-center o_form_header position-relative" role="alert" invisible="not is_birthday">
+                        <button type="button" class="btn-close position-absolute t-0 r-0 p-2" data-bs-dismiss="alert" aria-label="Close" style="top: 0; right: 0;"/>
+                        <div class="mb-1">
+                            <strong>Today is Their Birthday!🎂</strong>
+                        </div>
+                        <div>
+                            Wish <field name="name" readonly="1"/> a happy birthday!🎉
+                        </div>
+                    </div>
                     <!-- Stat buttons -->
                     <div class="oe_button_box" name="button_box">
                         <button name="action_open_appointments" type="object"
@@ -84,8 +94,8 @@
                                    options="{'no_create': True}"/>
                             <field name="contract_id" invisible="not contract_id"/>
                             <field name="blood_group" string="Blood Type"/>
-                            <field name="phone" required="1"/>
-                            <field name="email" required="1"/>
+                            <field name="phone" data-icon="phone" required="1" widget="phone"/>
+                            <field name="email" data-icon="mail" required="1" widget="email"/>
                             <field name="tag_ids" widget="many2many_tags"
                                    options="{'color_field': 'color', 'no_create_edit': True}"
                                    placeholder="Select medical tags..."/>

@@ -77,5 +77,6 @@
               name="Settings"
               parent="menu_hospital_configuration"
               action="hospital_config_settings_action"
+              groups="base.group_system"
               sequence="70"/>
 </odoo>

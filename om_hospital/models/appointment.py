@@ -34,6 +34,7 @@ class HospitalAppointment(models.Model):
     name = fields.Char(
         string="Appointment Reference",
         required=True,
+        index="trigram",
         copy=False,
         readonly=True,
         default="New",
@@ -267,12 +268,15 @@ class HospitalAppointment(models.Model):
     )
 
     # ------------------------------------------------------------------
-    # SQL constraints (Odoo 19+ syntax: models.Constraint)
+    # SQL constraints
     # ------------------------------------------------------------------
 
     _name_uniq = models.Constraint(
         "UNIQUE(name)",
         "The appointment reference must be unique.",
+    )
+    _doctor_window_idx = models.Index(
+        "(doctor_id, appointment_time, appointment_end) WHERE state != 'cancel'"
     )
     _vitals_not_negative = models.Constraint(
         "CHECK(weight >= 0 AND height >= 0 AND systolic_bp >= 0 AND diastolic_bp >= 0)",

@@ -21,34 +21,25 @@ class CancelAppointmentWizard(models.TransientModel):
 
     def action_cancel_appointment(self):
         self.ensure_one()
-
-        icp = self.env["ir.config_parameter"].sudo()
-        cancel_allowed = icp.get_str("om_hospital.cancel_appointment", default="True")
-
-        if str(cancel_allowed).lower() in ("false", "0", "no", "f", "none"):
+        params = self.env["ir.config_parameter"].sudo()
+        if not params.get_bool("om_hospital.cancel_appointment", True):
             raise UserError(
-                self.env._(
-                    "Appointment cancellations have been disabled in the settings."
-                )
+                self.env._("Appointment cancellation is turned off in the settings.")
             )
-
+        notice_days = params.get_int("om_hospital.cancel_days", 1)
         appointment = self.appointment_id
+        # Compare calendar days in the user's timezone, not in UTC.
         appointment_day = fields.Datetime.context_timestamp(
             self, appointment.appointment_time
         ).date()
-
-        cancel_days = icp.get_int("om_hospital.cancel_days", default=0)
-        allowed_latest_date = fields.Date.context_today(self) + timedelta(
-            days=cancel_days
-        )
-
-        if appointment_day <= allowed_latest_date:
+        if appointment_day < fields.Date.context_today(self) + timedelta(
+            days=notice_days
+        ):
             raise UserError(
                 self.env._(
-                    "Appointments must be cancelled at least %(days)d day(s) in advance.",
-                    days=cancel_days,
+                    "An appointment can only be cancelled at least %(days)s day(s) in advance.",
+                    days=notice_days,
                 )
             )
-
         appointment._cancel_with_reason(self.reason)
         return {"type": "ir.actions.client", "tag": "reload"}

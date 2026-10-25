@@ -150,7 +150,7 @@ class HospitalContract(models.Model):
     @api.model
     def _get_contract_for_partner(self, partner, on_date=None):
         """Return the active contract of the company a patient contact belongs to."""
-        company = partner.parent_id if partner.parent_id.is_company else partner.browse()
+        company = partner.parent_id
         if not company:
             return self.browse()
         on_date = on_date or fields.Date.context_today(self)

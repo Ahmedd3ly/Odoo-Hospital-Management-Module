@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="res_config_settings_view_form" model="ir.ui.view">
-            <field name="name">res.config.settings.view.hospital</field>
-            <field name="model">res.config.settings</field>
-            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//form" position="inside">
-                    <app id="om_hospital" string="Hospital" name="om_hospital">
-                        <block title="Hospital Management" id="hospital_setting">
-                            <setting string="Cancellation Before">
-                                <div class="text-muted content-group mt16">
-                                    <field name="cancel_days" class="text-center" style="width: 10%; min-width: 4rem;" />
-                                    <span> days </span>
-                                </div>
-                            </setting>
-                            <setting string="Appointment Deletion" help="Allow doctors to cancel appointment records.">
-                                <field name="cancel_appointment"/>
-                            </setting>
-                        </block>
-                    </app>
-                </xpath>
-            </field>
-        </record>
 
-        <record id="hospital_config_settings_action" model="ir.actions.act_window">
-            <field name="name">Settings</field>
-            <field name="res_model">res.config.settings</field>
-            <field name="view_mode">form</field>
-            <field name="context">{'module': 'om_hospital', 'bin_size': False}</field>
-        </record>
-    </data>
+    <record id="res_config_settings_view_form_hospital" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hospital</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="Hospital" name="om_hospital" groups="base.group_system">
+                    <block title="Appointments" name="hospital_appointment_settings">
+                        <setting string="Appointment Cancellation" id="hospital_allow_cancellation_setting"
+                                 help="Turn the Cancel wizard on or off for all appointments.">
+                            <field name="hospital_allow_cancellation"/>
+                        </setting>
+                        <setting string="Cancellation Notice" id="hospital_cancel_days_setting"
+                                 help="How many days before the appointment it can still be cancelled."
+                                 invisible="not hospital_allow_cancellation">
+                            <div class="content-group">
+                                <div class="mt16 d-flex align-items-center gap-2">
+                                    <field name="hospital_cancel_days" class="text-center" style="width: 4rem;"/>
+                                    <span>days</span>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hospital_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'module': 'om_hospital'}</field>
+    </record>
+
 </odoo>
