@@ -10,7 +10,7 @@
                 <field name="reference" optional="hide"/>
                 <field name="patient_id" string="Patient Name"/>
                 <field name="gender" optional="hide"/>
-                <field name="doctor_id" string="Doctor Name" widget="many2one_avatar_employee"/>
+                <field name="doctor_id" string="Doctor Name" decoration-bf="1" widget="many2one_avatar_employee"/>
                 <field name="appointment_time"/>
                 <field name="duration" widget="float_time" optional="hide"/>
                 <field name="booking_date" optional="show"/>
@@ -38,6 +38,19 @@
                     <button name="action_draft" string="Reset to Draft" type="object" data-hotkey="r" invisible="state != 'cancel'" groups="base.group_no_one" title="Revert the cancelled appointment back to draft state for rescheduling."/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,ongoing,done"/>
                 </header>            
+                <div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">  
+                    <button name="action_send_via_whatsapp"  
+                            type="object"  
+                            class="btn btn-success rounded-circle shadow-lg d-flex align-items-center justify-content-center p-0"  
+                            style="width: 56px; height: 56px; background-color: #25D366; border-color: #25D366; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;"  
+                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 1rem 3rem rgba(0,0,0,.25)';" 
+                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='';"
+                            title="Chat with Patient on WhatsApp">  
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFFFFF" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.58 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.348.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34l-.38-.007c-.133 0-.348.05-.53.247-.183.198-.703.687-.703 1.676 0 .99.722 1.948.822 2.081.1.134 1.417 2.16 3.439 3.031.483.237.86.379 1.155.485.486.173.928.149 1.278.09.39-.065 1.17-.478 1.338-.94.168-.46.168-.854.117-.942-.05-.098-.182-.149-.38-.249z"/>
+                        </svg>
+                    </button>  
+                </div>
                 <sheet>
                     <div name="button_box" class="oe_button_box">
                         <button name="action_view_admissions" type="object" class="oe_stat_button" icon="bed" invisible="admission_count == 0">
@@ -156,6 +169,30 @@
         </field>
     </record>
 
+    <!-- Calendar View -->
+    <record id="view_hospital_appointment_calendar" model="ir.ui.view">
+        <field name="name">hospital.appointment.calendar</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Appointments" 
+                      create="1" 
+                      mode="month" 
+                      date_start="appointment_time" 
+                      date_stop="appointment_end" 
+                      color="doctor_id" 
+                      event_limit="5" 
+                      event_open_popup="True"
+                      quick_create="0">
+                <field name="state" invisible="1" filters="1"/>
+                <field name="doctor_id" 
+                       filters="1" 
+                       avatar_field="avatar_128" 
+                       options="{'icon': 'user'}"/>
+                <field name="patient_id" options="{'icon': 'group', 'icon_class': 'oi-filled'}"/>
+            </calendar>
+        </field>
+    </record>
+
     <!-- Activity View -->
     <record id="view_hospital_appointment_activity" model="ir.ui.view">
         <field name="name">hospital.appointment.activity</field>
@@ -182,7 +219,7 @@
     <record id="action_hospital_appointment" model="ir.actions.act_window">
         <field name="name">Appointments</field>
         <field name="res_model">hospital.appointment</field> 
-        <field name="view_mode">list,form,activity</field>
+    <field name="view_mode">list,form,calendar,activity</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Schedule your first hospital appointment!

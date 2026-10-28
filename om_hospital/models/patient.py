@@ -370,3 +370,21 @@ class HospitalPatient(models.Model):
             "domain": [("patient_id", "=", self.id)],
             "context": {"default_patient_id": self.id},
         }
+
+    def action_send_via_whatsapp(self):
+        self.ensure_one()
+        phone = self.partner_id.phone or self.partner_id.mobile
+        if not phone:
+            raise UserError(
+                _("This patient does not have a phone/mobile number configured.")
+            )
+
+        # Clean non-digit characters for WhatsApp URL
+        clean_phone = re.sub(r"\D", "", phone)
+
+        whatsapp_url = f"https://api.whatsapp.com/send?phone={clean_phone}"
+        return {
+            "type": "ir.actions.act_url",
+            "url": whatsapp_url,
+            "target": "new",
+        }

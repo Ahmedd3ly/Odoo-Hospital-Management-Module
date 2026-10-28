@@ -10,6 +10,8 @@ It is built on standard Odoo (Contacts, Employees, Sales, Products) instead of r
 
 > **Status:** feature-complete for a demo or a foundation to build on. Role-based security and record rules are intentionally **not implemented yet**; see [Security and privacy status](#security-and-privacy-status) before using real patient data.
 
+> **Watch the quick walkthrough:**
+> [![Hospital Management System Demo](static/description/demo.gif)](https://www.youtube.com/watch?v=ZU7Lrl-BBTk)
 ---
 
 ## Table of contents

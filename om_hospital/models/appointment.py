@@ -1,3 +1,5 @@
+import re
+from urllib.parse import quote
 from datetime import timedelta
 
 from markupsafe import Markup
@@ -392,9 +394,15 @@ class HospitalAppointment(models.Model):
     @api.constrains("systolic_bp", "diastolic_bp")
     def _check_blood_pressure(self):
         for rec in self:
-            if rec.systolic_bp and rec.diastolic_bp and rec.systolic_bp <= rec.diastolic_bp:
+            if (
+                rec.systolic_bp
+                and rec.diastolic_bp
+                and rec.systolic_bp <= rec.diastolic_bp
+            ):
                 raise ValidationError(
-                    self.env._("Systolic pressure must be higher than diastolic pressure.")
+                    self.env._(
+                        "Systolic pressure must be higher than diastolic pressure."
+                    )
                 )
 
     @api.constrains("follow_up_date", "appointment_time")
@@ -402,7 +410,9 @@ class HospitalAppointment(models.Model):
         for rec in self:
             if not (rec.follow_up_date and rec.appointment_time):
                 continue
-            visit_day = fields.Datetime.context_timestamp(rec, rec.appointment_time).date()
+            visit_day = fields.Datetime.context_timestamp(
+                rec, rec.appointment_time
+            ).date()
             if rec.follow_up_date <= visit_day:
                 raise ValidationError(
                     self.env._("The follow-up date must be after the appointment date.")
@@ -574,18 +584,71 @@ class HospitalAppointment(models.Model):
             "context": {"default_appointment_id": self.id},
         }
 
+    def action_send_via_whatsapp(self):
+        self.ensure_one()
+        phone = self.patient_id.partner_id.phone or self.patient_id.partner_id.mobile
+        if not phone:
+            raise UserError(
+                _("This patient does not have a phone/mobile number configured.")
+            )
+
+        clean_phone = re.sub(r"\D", "", phone)
+
+        patient_name = self.patient_id.name or "Patient"
+        appt_num = self.name or "No. "
+        doctor_name = (
+            getattr(self, "doctor_id", False) and self.doctor_id.name or "our doctor"
+        )
+
+        if self.appointment_time:
+            local_time = fields.Datetime.context_timestamp(self, self.appointment_time)
+
+            # Day with ordinal suffix (st, nd, rd, th)
+            day = local_time.day
+            suffix = (
+                "th"
+                if 11 <= day <= 13
+                else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+            )
+
+            month_name = local_time.strftime("%B")
+
+            # Format time (e.g., "2 PM" if on the hour, or "2:30 PM" if minutes exist)
+            time_format = "%I:%M %p" if local_time.minute != 0 else "%I %p"
+            formatted_time = local_time.strftime(time_format).lstrip("0")
+
+            appointment_time_str = f"{day}{suffix} of {month_name} at {formatted_time}"
+        else:
+            appointment_time_str = "your scheduled time"
+
+        message = f"Hello *{patient_name}*, this is a confirmation for your appointment with *{doctor_name}* on *{appointment_time_str}*.\nYour Appointment Number is: *{appt_num}*."
+        encoded_message = quote(message)
+        whatsapp_url = (
+            f"https://api.whatsapp.com/send?phone={clean_phone}&text={encoded_message}"
+        )
+
+        return {
+            "type": "ir.actions.act_url",
+            "url": whatsapp_url,
+            "target": "new",
+        }
+
     def action_schedule_follow_up(self):
         """Create a draft appointment on the follow-up date, same patient, clinic and doctor."""
         self.ensure_one()
         if self.state not in ("ongoing", "done"):
             raise UserError(
-                self.env._("Follow-ups can only be scheduled during or after the consultation.")
+                self.env._(
+                    "Follow-ups can only be scheduled during or after the consultation."
+                )
             )
         if not self.follow_up_date:
             raise UserError(self.env._("Set a follow-up date first."))
         if self.follow_up_appointment_id:
             raise UserError(self.env._("A follow-up appointment already exists."))
-        visit_day = fields.Datetime.context_timestamp(self, self.appointment_time).date()
+        visit_day = fields.Datetime.context_timestamp(
+            self, self.appointment_time
+        ).date()
         follow_up = self.create(
             {
                 "patient_id": self.patient_id.id,

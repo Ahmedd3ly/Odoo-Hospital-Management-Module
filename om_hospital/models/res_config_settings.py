@@ -5,8 +5,6 @@ from odoo.exceptions import ValidationError
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
-    # Field names are prefixed because res.config.settings is shared by every module.
-    # The config_parameter keys are unchanged, so values already saved keep working.
     hospital_allow_cancellation = fields.Boolean(
         string="Allow Appointment Cancellation",
         default=True,
