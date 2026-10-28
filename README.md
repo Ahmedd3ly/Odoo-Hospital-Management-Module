@@ -12,7 +12,7 @@ It is built on standard Odoo (Contacts, Employees, Sales, Products) instead of r
 
 ## Watch the quick walkthrough
 
-[![Hospital Management System Demo](om_hospital/static/description/demo.gif)](https://www.youtube.com/watch?v=ZU7Lrl-BBTk)
+[![Hospital Management System Demo](om_hospital/static/description/demo.gif)](https://www.youtube.com/watch?v=UE2Z8P8Xl44&t=16s)
 ---
 
 ## Table of contents
