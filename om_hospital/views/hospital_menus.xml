@@ -8,6 +8,11 @@
               sequence="10"/>
 
     <!-- Daily operations -->
+    <menuitem id="menu_hospital_dashboard"
+              name="Dashboard"
+              parent="menu_hospital_root"
+              action="action_hospital_appointment_dashboard"
+              sequence="5"/>
     <menuitem id="menu_hospital_patient"
               name="Patients"
               parent="menu_hospital_root"

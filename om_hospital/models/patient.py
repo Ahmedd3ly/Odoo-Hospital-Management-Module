@@ -1,7 +1,7 @@
 import re
 
 from odoo import Command, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 PHONE_PATTERN = re.compile(r"^\+?[0-9 ()-]{6,20}$")
 ADULT_AGE = 18
@@ -376,7 +376,9 @@ class HospitalPatient(models.Model):
         phone = self.partner_id.phone or self.partner_id.mobile
         if not phone:
             raise UserError(
-                _("This patient does not have a phone/mobile number configured.")
+                self.env._(
+                    "This patient does not have a phone/mobile number configured."
+                )
             )
 
         # Clean non-digit characters for WhatsApp URL

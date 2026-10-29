@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="om_hospital.AppointmentDashboard">
+        <div class="o_hospital_dashboard o_action overflow-auto p-3">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+                <h2 class="m-0">Appointments</h2>
+                <div class="btn-group" role="group">
+                    <t t-foreach="this.periods" t-as="period" t-key="period.key">
+                        <button type="button" class="btn"
+                                t-att-class="this.state.period === period.key ? 'btn-primary' : 'btn-outline-primary'"
+                                t-on-click="() => this.setPeriod(period.key)">
+                            <t t-out="period.label"/>
+                        </button>
+                    </t>
+                </div>
+            </div>
+
+            <t t-if="this.state.data">
+                <div class="row g-3 mb-4" t-att-class="this.state.loading ? 'opacity-50' : ''">
+                    <t t-foreach="this.cards" t-as="card" t-key="card.key">
+                        <div class="col-6 col-md-4 col-xl">
+                            <div class="card h-100 text-center" role="button"
+                                 t-on-click="() => this.openAppointments(card.label, card.domain)">
+                                <div class="card-body">
+                                    <div class="display-6 fw-bold" t-att-class="'text-' + card.variant"
+                                         t-out="card.value"/>
+                                    <div class="text-muted" t-out="card.label"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+                <p t-if="!this.state.data.total" class="text-muted text-center my-5">
+                    No appointments in this period.
+                </p>
+
+                <div class="row g-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="card h-100">
+                            <div class="card-header fw-bold">Busiest Clinics</div>
+                            <div class="card-body">
+                                <t t-foreach="this.state.data.by_clinic" t-as="clinic" t-key="clinic.id">
+                                    <div class="mb-3" role="button"
+                                         t-on-click="() => this.openAppointments(clinic.name, [['clinic_id', '=', clinic.id]])">
+                                        <div class="d-flex justify-content-between">
+                                            <span t-out="clinic.name"/>
+                                            <span class="fw-bold" t-out="clinic.count"/>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar" t-att-style="'width: ' + this.percent(clinic.count, this.state.data.by_clinic) + '%'"/>
+                                        </div>
+                                    </div>
+                                </t>
+                                <p t-if="!this.state.data.by_clinic.length" class="text-muted m-0">No data.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="card h-100">
+                            <div class="card-header fw-bold">Busiest Doctors</div>
+                            <div class="card-body">
+                                <t t-foreach="this.state.data.by_doctor" t-as="doctor" t-key="doctor.id">
+                                    <div class="mb-3" role="button"
+                                         t-on-click="() => this.openAppointments(doctor.name, [['doctor_id', '=', doctor.id]])">
+                                        <div class="d-flex justify-content-between">
+                                            <span t-out="doctor.name"/>
+                                            <span class="fw-bold" t-out="doctor.count"/>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-success" t-att-style="'width: ' + this.percent(doctor.count, this.state.data.by_doctor) + '%'"/>
+                                        </div>
+                                    </div>
+                                </t>
+                                <p t-if="!this.state.data.by_doctor.length" class="text-muted m-0">No data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>

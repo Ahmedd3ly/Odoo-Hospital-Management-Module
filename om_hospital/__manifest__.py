@@ -31,10 +31,16 @@
         "views/sale_order_views.xml",
         "views/res_partner_views.xml",
         "views/res_config_settings_views.xml",
+        "views/appointment_dashboard_views.xml",
         "report/hospital_reports.xml",
         "report/hospital_report_templates.xml",
         "views/hospital_menus.xml",
     ],
+    "assets": {
+        "web.assets_web": [
+            "om_hospital/static/src/dashboard/**/*",
+        ],
+    },
     # Only loaded when the database is created with demonstration data
     "demo": [
         "demo/demo.xml",

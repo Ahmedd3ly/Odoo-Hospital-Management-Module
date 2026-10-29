@@ -1,13 +1,18 @@
 import re
 from urllib.parse import quote
-from datetime import timedelta
+from datetime import datetime, time, timedelta
 
+import pytz
 from markupsafe import Markup
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 PAST_VISITS_LIMIT = 20
+DASHBOARD_PERIODS = ("today", "week", "month")
+DASHBOARD_TOP_LIMIT = 5
+OPEN_STATES = ["draft", "confirmed", "ongoing"]
+URGENT_PRIORITIES = ["2", "3"]
 # Medical record fields that are frozen once the appointment is done.
 LOCKED_WHEN_DONE = {
     "chief_complaint",
@@ -490,6 +495,70 @@ class HospitalAppointment(models.Model):
         if any(rec.state not in allowed_states for rec in self):
             raise UserError(error_message)
 
+    def _get_formatted_appointment_time(self):
+        """Formats appointment_time into a friendly string including the weekday and ordinal suffixes."""
+        self.ensure_one()
+        if not self.appointment_time:
+            return self.env._("your scheduled time")
+
+        local_time = fields.Datetime.context_timestamp(self, self.appointment_time)
+
+        weekday_name = local_time.strftime("%A")
+        day = local_time.day
+        suffix = (
+            "th" if 11 <= day <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+        )
+        month_name = local_time.strftime("%B")
+
+        # Format time (e.g., "12 PM" if on the hour, or "12:30 PM" if minutes exist)
+        time_format = "%I:%M %p" if local_time.minute != 0 else "%I %p"
+        formatted_time = local_time.strftime(time_format).lstrip("0")
+
+        return f"{weekday_name}, {day}{suffix} of {month_name} at {formatted_time}"
+
+    def _get_confirmation_message(self):
+        """Generates the raw confirmation text payload for communications."""
+        self.ensure_one()
+        patient_name = self.patient_id.name or self.env._("Patient")
+        appt_num = self.name or "No."
+        doctor_name = (
+            getattr(self, "doctor_id", False)
+            and self.doctor_id.name
+            or self.env._("our doctor")
+        )
+        appointment_time_str = self._get_formatted_appointment_time()
+
+        return (
+            f"Hello *{patient_name}*, this is a confirmation for your appointment with "
+            f"*{doctor_name}* on *{appointment_time_str}*.\n"
+            f"Your Appointment Number is: *{appt_num}*."
+        )
+
+    def _send_confirmation_email(self):
+        """Posts a message to the chatter and sends email notification to the patient."""
+        self.ensure_one()
+        patient_partner = self.patient_id.partner_id
+        if not patient_partner or not patient_partner.email:
+            return
+
+        subject = self.env._("Appointment Confirmation - %s") % (self.name or "")
+
+        # Clean plain text message formatting for the email body
+        raw_msg = self._get_confirmation_message().replace("*", "")
+        body_html = Markup(
+            f"<p>Dear <strong>{patient_partner.name}</strong>,</p>"
+            f"<p>{raw_msg.replace(chr(10), '<br/>')}</p>"
+            f"<p>Thank you for choosing our clinic!</p>"
+        )
+
+        self.message_post(
+            body=body_html,
+            subject=subject,
+            partner_ids=[patient_partner.id],
+            message_type="comment",
+            subtype_xmlid="mail.mt_comment",
+        )
+
     def action_confirm(self):
         self._ensure_state(
             ("draft",), self.env._("Only draft appointments can be confirmed.")
@@ -522,6 +591,8 @@ class HospitalAppointment(models.Model):
                     patient=rec.patient_id.name,
                 )
             )
+            # Send Email Confirmation
+            rec._send_confirmation_email()
 
     def action_start_consultation(self):
         self._ensure_state(
@@ -589,39 +660,13 @@ class HospitalAppointment(models.Model):
         phone = self.patient_id.partner_id.phone or self.patient_id.partner_id.mobile
         if not phone:
             raise UserError(
-                _("This patient does not have a phone/mobile number configured.")
+                self.env._(
+                    "This patient does not have a phone/mobile number configured."
+                )
             )
 
         clean_phone = re.sub(r"\D", "", phone)
-
-        patient_name = self.patient_id.name or "Patient"
-        appt_num = self.name or "No. "
-        doctor_name = (
-            getattr(self, "doctor_id", False) and self.doctor_id.name or "our doctor"
-        )
-
-        if self.appointment_time:
-            local_time = fields.Datetime.context_timestamp(self, self.appointment_time)
-
-            # Day with ordinal suffix (st, nd, rd, th)
-            day = local_time.day
-            suffix = (
-                "th"
-                if 11 <= day <= 13
-                else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
-            )
-
-            month_name = local_time.strftime("%B")
-
-            # Format time (e.g., "2 PM" if on the hour, or "2:30 PM" if minutes exist)
-            time_format = "%I:%M %p" if local_time.minute != 0 else "%I %p"
-            formatted_time = local_time.strftime(time_format).lstrip("0")
-
-            appointment_time_str = f"{day}{suffix} of {month_name} at {formatted_time}"
-        else:
-            appointment_time_str = "your scheduled time"
-
-        message = f"Hello *{patient_name}*, this is a confirmation for your appointment with *{doctor_name}* on *{appointment_time_str}*.\nYour Appointment Number is: *{appt_num}*."
+        message = self._get_confirmation_message()
         encoded_message = quote(message)
         whatsapp_url = (
             f"https://api.whatsapp.com/send?phone={clean_phone}&text={encoded_message}"
@@ -751,6 +796,77 @@ class HospitalAppointment(models.Model):
                     patient=rec.patient_id.name,
                 )
             )
+
+    # ------------------------------------------------------------------
+    # Dashboard (aggregates only: no patient data leaves the server)
+    # ------------------------------------------------------------------
+
+    @api.model
+    def _get_dashboard_period_bounds(self, period):
+        """Return the [start, end) UTC datetimes of a period, aligned on the user's calendar days."""
+        today = fields.Date.context_today(self)
+        if period == "week":
+            start = today - timedelta(days=today.weekday())
+            end = start + timedelta(days=7)
+        elif period == "month":
+            start = today.replace(day=1)
+            end = (start + timedelta(days=32)).replace(day=1)
+        else:
+            start, end = today, today + timedelta(days=1)
+        tz = pytz.timezone(self.env.context.get("tz") or self.env.user.tz or "UTC")
+
+        def to_utc(day):
+            local_midnight = tz.localize(datetime.combine(day, time.min))
+            return local_midnight.astimezone(pytz.utc).replace(tzinfo=None)
+
+        return to_utc(start), to_utc(end)
+
+    @api.model
+    def _get_dashboard_top(self, domain, field_name):
+        """Busiest records (clinic or doctor) of a period, cancelled visits excluded."""
+        rows = self._read_group(
+            domain + [(field_name, "!=", False), ("state", "!=", "cancel")],
+            groupby=[field_name],
+            aggregates=["__count"],
+            order="__count desc",
+            limit=DASHBOARD_TOP_LIMIT,
+        )
+        return [
+            {"id": record.id, "name": record.display_name, "count": count}
+            for record, count in rows
+        ]
+
+    @api.model
+    def get_dashboard_data(self, period="today"):
+        """Counters for the appointment dashboard, restricted to what the user may read."""
+        if period not in DASHBOARD_PERIODS:
+            raise UserError(self.env._("Unknown dashboard period."))
+        start, end = self._get_dashboard_period_bounds(period)
+        domain = [("appointment_time", ">=", start), ("appointment_time", "<", end)]
+        urgent_domain = [
+            ("state", "in", OPEN_STATES),
+            ("priority", "in", URGENT_PRIORITIES),
+        ]
+        by_state = dict(
+            self._read_group(domain, groupby=["state"], aggregates=["__count"])
+        )
+        counts = {
+            state: by_state.get(state, 0)
+            for state, _label in self._fields["state"].selection
+        }
+        return {
+            "period": period,
+            "domain": [
+                ["appointment_time", ">=", fields.Datetime.to_string(start)],
+                ["appointment_time", "<", fields.Datetime.to_string(end)],
+            ],
+            "urgent_domain": [list(leaf) for leaf in urgent_domain],
+            "total": sum(counts.values()),
+            "counts": counts,
+            "urgent": self.search_count(domain + urgent_domain),
+            "by_clinic": self._get_dashboard_top(domain, "clinic_id"),
+            "by_doctor": self._get_dashboard_top(domain, "doctor_id"),
+        }
 
     # ------------------------------------------------------------------
     # Smart button actions
