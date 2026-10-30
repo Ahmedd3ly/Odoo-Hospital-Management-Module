@@ -4,15 +4,16 @@
 ![License](https://img.shields.io/badge/license-LGPL--3-blue)
 ![Languages](https://img.shields.io/badge/languages-English%20%7C%20Arabic-green)
 
-A hospital management module for **Odoo 20 Community** that covers the patient journey end to end: registration, clinic appointments, consultations and prescriptions, company-contract billing, and inpatient admissions with bed management.
+A hospital management module for **Odoo 20 Community** that covers the patient journey end to end: registration, clinic appointments, consultations and prescriptions, company-contract billing, inpatient admissions with bed management, and a live appointment dashboard.
 
 It is built on standard Odoo (Contacts, Employees, Sales, Products) instead of replacing it, so patients are real contacts, doctors are real employees, and every bill is a regular quotation that flows into Odoo Sales and Invoicing.
 
-> **Status:** feature-complete for a demo or a foundation to build on. Role-based security and record rules are intentionally **not implemented yet**; see [Security and privacy status](#security-and-privacy-status) before using real patient data.
+> **Status:** feature-complete for a demo or a foundation to build on, including a live appointment dashboard. Role-based security and record rules are intentionally **not implemented yet**; see [Security and privacy status](#security-and-privacy-status) before using real patient data.
 
 ## Watch the quick walkthrough
 
 [![Hospital Management System Demo](om_hospital/static/description/demo.gif)](https://www.youtube.com/watch?v=UE2Z8P8Xl44&t=16s)
+
 ---
 
 ## Table of contents
@@ -41,6 +42,7 @@ It is built on standard Odoo (Contacts, Employees, Sales, Products) instead of r
 - **Patients are Odoo contacts.** The patient model delegates to `res.partner` (`_inherits`), so name, phone, email and photo live on the contact and the contact stays the single source of truth.
 - **Doctors are Odoo employees.** Clinicians extend `hr.employee`, so nurses and technicians fit the same model and HR features come for free.
 - **Clinics are data, not code.** Add a clinic, a ward, a bed or a specialty from the UI with no code change.
+- **Live appointment dashboard** (OWL client action): appointment counts by status, urgent cases, and the busiest clinics and doctors for today, this week or this month, with one-click drill-down into the matching list.
 - **Double-booking protection** based on time windows, not just identical start times.
 - **Structured clinical record:** complaint, diagnosis, vitals with computed BMI, prescriptions, follow-up scheduling, and a record that locks once the consultation is done.
 - **Company contracts with split billing.** A contract gives a company's patients a discount per product category and splits each bill between the company and the patient.
@@ -76,6 +78,14 @@ It is built on standard Odoo (Contacts, Employees, Sales, Products) instead of r
 - **Follow-up:** set a date and create the follow-up appointment with one click.
 - **Past visits** are computed from the patient's earlier completed appointments instead of being typed in.
 - **Cancel wizard** with a mandatory reason, stored on the appointment and posted to the chatter.
+- **WhatsApp shortcut:** a button on the patient and appointment forms opens a WhatsApp chat with the patient's number, pre-filled with an appointment confirmation message on the appointment form.
+
+### Appointment dashboard
+- **Hospital → Dashboard** opens an OWL client action with a period filter (**Today**, **This Week**, **This Month**), aligned on the *user's* calendar days and timezone rather than UTC.
+- One card per appointment status, a total card, and an **Urgent** card (high or very high priority and still open: draft, confirmed or ongoing).
+- **Busiest clinics** and **busiest doctors** (top 5, cancelled visits excluded) as proportional bars.
+- Every card and bar opens the matching filtered appointment list.
+- **Aggregates only:** the browser receives counts and clinic or doctor names, never patient names, diagnoses or vitals.
 
 ### Billing and company contracts
 - A **contract** links a company to a validity period, a default discount, discounts per product category, and the percentage of the bill the company pays.
@@ -107,9 +117,13 @@ It is built on standard Odoo (Contacts, Employees, Sales, Products) instead of r
 | Consultation, medicines and bed days are **products** in hospital categories | Pricing, pricelists, taxes and invoicing all use standard Odoo; contract discounts are matched by product category |
 | Occupancy, counts and past visits are **computed**, not stored by hand | Data cannot drift out of sync with the records it summarises |
 | Counters use **`_read_group`** | One grouped query instead of loading whole record sets |
+| Dashboard data comes from **one `@api.model` method** using `_read_group` | A constant number of grouped queries however many appointments exist; the browser never loads records |
+| Dashboard runs **without `sudo`** and returns **aggregates only** | It respects access rights and the future record rules (a doctor would see only their own numbers), and no patient data reaches the client |
+| Dashboard statuses are read from the field's selection, not hardcoded | A new status appears on the dashboard without touching the query |
+| Dashboard is **dependency-free** (Bootstrap cards and bars, no chart library) | Fewer assets to maintain and no external library to track across Odoo upgrades |
 | Shared helper `models/search_utils.py` for computed-boolean search | Odoo may pass `('flag', '=', True)` or the normalised `('flag', 'in', [True])`; one helper handles every spelling |
 | Medical record and billing inputs lock after completion | Billing stays consistent with what was actually delivered |
-| Odoo 20 conventions: `models.Constraint`, `models.Index`, `self.env._()`, `list` views, `ir.access.csv` | Follows current framework standards |
+| Odoo 20 conventions: `models.Constraint`, `models.Index`, `self.env._()`, `list` views, `ir.access.csv`, Owl 3 frontend | Follows current framework standards |
 
 ---
 
@@ -124,7 +138,7 @@ It is built on standard Odoo (Contacts, Employees, Sales, Products) instead of r
 | `hospital.specialty` | Medical specialties |
 | `hospital.clinic` | Clinics |
 | `hr.employee` *(extended)* | Clinician fields |
-| `hospital.appointment` | Appointment and clinical record |
+| `hospital.appointment` | Appointment, clinical record and dashboard counters (`get_dashboard_data`) |
 | `hospital.prescription.line` | Prescribed medicine |
 | `hospital.contract` / `hospital.contract.line` | Company contract and category discounts |
 | `hospital.ward` / `hospital.bed` | Wards and beds |
@@ -150,9 +164,13 @@ om_hospital/
 ├── models/          # business logic, one file per model
 ├── report/          # QWeb PDF reports (actions and templates)
 ├── security/        # ir.access.csv
-├── static/          # module icon and demo images
+├── static/
+│   ├── description/ # module icon and demo images
+│   ├── img/         # demo doctor photos
+│   └── src/
+│       └── dashboard/   # OWL appointment dashboard (JS component and QWeb template)
 ├── tests/           # TransactionCase test suite
-├── views/           # views, actions and menus
+├── views/           # views, actions and menus (including the dashboard client action)
 └── wizard/          # cancel appointment and transfer bed wizards
 ```
 
@@ -189,6 +207,8 @@ om_hospital/
 
 > The demo data refers to doctor images in `static/img/` and the app icon in `static/description/`. Keep those files in the repository.
 
+> After pulling changes that touch `static/src`, upgrade the module and hard-refresh the browser (Ctrl+Shift+R) so the new asset bundle is loaded.
+
 ---
 
 ## Configuration
@@ -208,6 +228,7 @@ om_hospital/
 4. **Bill it:** Create Quotation. A patient covered by a company contract gets two quotations.
 5. **Admit a patient:** Admit Patient → choose a bed → Transfer Bed if needed → Discharge → Create Quotation.
 6. **Print:** use the **Print** menu on an appointment or admission to generate the PDFs.
+7. **Monitor:** open **Hospital → Dashboard**, switch between Today, This Week and This Month, and click any card or bar to jump to the matching appointments.
 
 With demo data you can follow this using the sample patients, the **Delta Industries** contract and the pre-admitted inpatient.
 
@@ -229,7 +250,7 @@ Reports are QWeb templates (`report/`) and are translated into Arabic.
 
 - `i18n/om_hospital.pot` is the template; `i18n/ar.po` is the Arabic translation.
 - Translated: menus, field labels, selection values, buttons, tabs, error and chatter messages, and the three reports.
-- Not translated: field help tooltips, and the labels of fields inherited from Odoo's own contact model (Odoo's own Arabic translation covers those).
+- Not translated: field help tooltips, the labels of fields inherited from Odoo's own contact model (Odoo's own Arabic translation covers those), and the dashboard strings until the template is regenerated.
 
 To use it, enable Arabic under **Settings → Languages**, then switch your user's language. To regenerate the template after changing code:
 
@@ -250,10 +271,12 @@ The test suite lives in `tests/` and uses Odoo's `TransactionCase`. It is **not 
 Coverage includes:
 
 - Patients: guardians, ID rules, tag synchronisation, emergency contacts, contact filters.
-- Appointments: reference sequence, overlap guard, workflow, record lock, BMI and blood pressure, cancellation (including the chatter text), follow-ups, past visits.
+- Appointments: reference sequence, overlap guard, workflow, record lock, BMI and blood pressure, cancellation (including the chatter text), follow-ups, past visits, dashboard counters by period and status.
 - Billing: single and split quotations with exact amounts, medicine lines, the *Bill* flag, contract expiry, category rule precedence, no re-pricing of existing orders.
 - Admissions: occupancy, one patient per bed, nights counting, transfers, archiving guards, bed-day billing.
 - Reports: the three templates render with the expected content.
+
+The dashboard's frontend (the OWL component) is not covered by automated tests; only its server method is.
 
 ---
 
@@ -263,6 +286,7 @@ Coverage includes:
 - A composite partial index serving the double-booking check.
 - Partial indexes on current admissions, used by the occupancy lookups.
 - Grouped counters (`_read_group`) instead of loading whole record sets.
+- The dashboard loads with a single server call built on grouped queries (`_read_group`) and a count query for urgent cases, so its cost stays flat as appointment volume grows.
 
 ---
 
@@ -273,6 +297,7 @@ Please read this before using the module with real data.
 - **Roles and record rules are not implemented yet.** Every internal user currently has the same access to the hospital models (`security/ir.access.csv` grants the internal-user group full access). There is no separation between receptionist, doctor and manager.
 - **No field-level protection** for sensitive data such as diagnoses, ID numbers or vitals.
 - Patients are regular Odoo contacts, so they are visible to any user who can open Contacts. Restricting that is part of the planned security work.
+- The appointment dashboard returns **aggregate counts and clinic or doctor names only**, runs with the current user's access rights (no `sudo`), and will respect record rules once they are added. Drilling down opens the standard appointment list, so clinical fields stay exactly as protected as that list is, which is currently not at all (see the points above).
 - The module is designed with data minimisation in mind (for example, the medical record locks after completion and clinical values are kept out of chatter tracking), but it is **not** a certified or compliant system. It is not suitable for production patient data until the security layer is added and reviewed against the data-protection rules that apply to you (for example, Egypt's Personal Data Protection Law, Law 151 of 2020).
 
 ---
@@ -284,11 +309,13 @@ Please read this before using the module with real data.
 - Inpatient medication charts and nursing notes; medicines are prescribed through appointments only.
 - Insurance claims, copay ceilings and pricing per ward type (a single bed-day rate is used).
 - A uniqueness guarantee at database level for simultaneous bed admissions (enforced in Python only).
+- Dashboard charts (a doughnut or trend line); the current view uses cards and bars. The dashboard covers appointments only, not admissions or bed occupancy.
 - PDF output was verified by rendering the report templates; always check the generated PDF in your environment (it needs `wkhtmltopdf`).
 
 **Planned**
 - Security groups (receptionist, doctor, manager), record rules and field-level restrictions.
 - Restricting patient contacts to hospital staff.
+- Dashboard extensions: occupancy and admissions cards, a doughnut chart, and per-role views once security groups exist.
 - Lab module.
 - Full translation of help texts.
 
@@ -300,8 +327,9 @@ Issues and pull requests are welcome.
 
 1. Fork the repository and create a feature branch.
 2. Follow the existing conventions: Odoo 20 ORM patterns, one model per file, `self.env._()` for user-facing strings, constraints and indexes declared with `models.Constraint` and `models.Index`.
-3. Add or update tests in `tests/` and make sure the whole suite passes.
-4. Open a pull request describing the change.
+3. For frontend code, follow **Odoo 20 / Owl 3**: reactive state with `proxy(...)` imported from `@odoo/owl` (not `useState`), no `static props` on components, and a `this.` prefix on every component property or method used in QWeb templates. Register JS and XML assets under the `web.assets_web` bundle in the manifest.
+4. Add or update tests in `tests/` and make sure the whole suite passes.
+5. Open a pull request describing the change.
 
 ---
 
