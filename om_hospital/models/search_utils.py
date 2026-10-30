@@ -12,7 +12,9 @@ def boolean_search_domain(operator, value, positive_domain, negative_domain):
     reduced to "which values of the flag are wanted" before choosing the domain.
     """
     if operator not in ("=", "!=", "in", "not in"):
-        raise NotImplementedError(f"Unsupported operator {operator!r} for a boolean search.")
+        raise NotImplementedError(
+            f"Unsupported operator {operator!r} for a boolean search.",
+        )
     values = value if isinstance(value, (list, tuple, set, frozenset)) else [value]
     asked = {bool(item) for item in values}
     wanted = asked if operator in ("=", "in") else {True, False} - asked

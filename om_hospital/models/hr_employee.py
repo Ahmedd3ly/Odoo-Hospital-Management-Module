@@ -11,7 +11,6 @@ class HrEmployee(models.Model):
 
     # Clinical profile
     is_clinician = fields.Boolean(
-        string="Is Clinician",
         tracking=True,
         help="Tick for employees who provide clinical care in the hospital.",
     )
@@ -120,7 +119,7 @@ class HrEmployee(models.Model):
                     self.env._(
                         "%(name)s still has appointments and cannot stop being a clinician.",
                         name=rec.name,
-                    )
+                    ),
                 )
 
     # ------------------------------------------------------------------

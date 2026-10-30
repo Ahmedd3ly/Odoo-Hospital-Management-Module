@@ -10,7 +10,6 @@ class HospitalAdmissionTransfer(models.Model):
 
     admission_id = fields.Many2one(
         "hospital.admission",
-        string="Admission",
         required=True,
         index=True,
         ondelete="cascade",
@@ -20,9 +19,9 @@ class HospitalAdmissionTransfer(models.Model):
         required=True,
         default=fields.Datetime.now,
     )
-    from_bed_id = fields.Many2one("hospital.bed", string="From Bed", ondelete="restrict")
-    to_bed_id = fields.Many2one("hospital.bed", string="To Bed", required=True, ondelete="restrict")
-    reason = fields.Char(string="Reason")
+    from_bed_id = fields.Many2one("hospital.bed", ondelete="restrict")
+    to_bed_id = fields.Many2one("hospital.bed", required=True, ondelete="restrict")
+    reason = fields.Char()
     user_id = fields.Many2one(
         "res.users",
         string="Done By",

@@ -1,188 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- List View -->
-    <record id="view_hospital_patient_list" model="ir.ui.view">
-        <field name="name">hospital.patient.list</field>
-        <field name="model">hospital.patient</field>
-        <field name="arch" type="xml">
-            <list string="Patient List" decoration-danger="deceased" sample="1">
-                <field name="reference" readonly="1"/>
-                <field name="name" string="Patient Name"/>
-                <field name="date_of_birth"/>
-                <field name="age" optional="hide"/>
-                <field name="gender"/>
-                <field name="blood_group" string="Blood Type"/>
-                <field name="phone"/>
-                <field name="email"/>
-                <field name="deceased" widget="boolean_toggle" optional="hide"/>
-                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                <field name="active" column_invisible="True"/>
-            </list>
-        </field>
-    </record>
+  <!-- List View -->
+  <record id="view_hospital_patient_list" model="ir.ui.view">
+    <field name="name">hospital.patient.list</field>
+    <field name="model">hospital.patient</field>
+    <field name="arch" type="xml">
+      <list string="Patient List" decoration-danger="deceased" sample="1">
+        <field name="reference" readonly="1" />
+        <field name="name" string="Patient Name" />
+        <field name="date_of_birth" />
+        <field name="age" optional="hide" />
+        <field name="gender" />
+        <field name="blood_group" string="Blood Type" />
+        <field name="phone" />
+        <field name="email" />
+        <field name="deceased" widget="boolean_toggle" optional="hide" />
+        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+        <field name="active" column_invisible="True" />
+      </list>
+    </field>
+  </record>
 
-    <!-- Form View -->
-    <record id="view_hospital_patient_form" model="ir.ui.view">
-        <field name="name">hospital.patient.form</field>
-        <field name="model">hospital.patient</field>
-        <field name="arch" type="xml">
-            <form string="Patient Form">
-                <div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">  
-                    <button name="action_send_via_whatsapp"  
-                            type="object"  
-                            class="btn btn-success rounded-circle shadow-lg d-flex align-items-center justify-content-center p-0"  
-                            style="width: 56px; height: 56px; background-color: #25D366; border-color: #25D366; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;"  
-                            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 1rem 3rem rgba(0,0,0,.25)';" 
-                            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='';"
-                            title="Chat with Patient on WhatsApp">  
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFFFFF" class="bi bi-whatsapp" viewBox="0 0 16 16">
-                            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.58 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.348.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34l-.38-.007c-.133 0-.348.05-.53.247-.183.198-.703.687-.703 1.676 0 .99.722 1.948.822 2.081.1.134 1.417 2.16 3.439 3.031.483.237.86.379 1.155.485.486.173.928.149 1.278.09.39-.065 1.17-.478 1.338-.94.168-.46.168-.854.117-.942-.05-.098-.182-.149-.38-.249z"/>
-                        </svg>
-                    </button>  
-                </div>
-                <sheet>
-                    <!-- Birthday alert -->
-                    <div class="alert alert-info alert-dismissible fade show text-center o_form_header position-relative" role="alert" invisible="not is_birthday">
-                        <button type="button" class="btn-close position-absolute t-0 r-0 p-2" data-bs-dismiss="alert" aria-label="Close" style="top: 0; right: 0;"/>
-                        <div class="mb-1">
-                            <strong>Today is Their Birthday!🎂</strong>
-                        </div>
-                        <div>
-                            Wish <field name="name" readonly="1"/> a happy birthday!🎉
-                        </div>
-                    </div>
-                    <!-- Stat buttons -->
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_open_appointments" type="object"
-                                class="oe_stat_button" icon="calendar_today">
-                            <div class="o_field_widget o_stat_info">
-                                <span class="o_stat_value">
-                                    <field name="appointment_count"/>
-                                </span>
-                                <span class="o_stat_text">Appointments</span>
-                            </div>
-                        </button>
-                    </div>
+  <!-- Form View -->
+  <record id="view_hospital_patient_form" model="ir.ui.view">
+    <field name="name">hospital.patient.form</field>
+    <field name="model">hospital.patient</field>
+    <field name="arch" type="xml">
+      <form string="Patient Form">
+        <div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
+          <button name="action_send_via_whatsapp"
+            type="object"
+            class="btn btn-success rounded-circle shadow-lg d-flex align-items-center justify-content-center p-0"
+            style="width: 56px; height: 56px; background-color: #25D366; border-color: #25D366; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;"
+            onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 1rem 3rem rgba(0,0,0,.25)';"
+            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='';"
+            title="Chat with Patient on WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFFFFF"
+              class="bi bi-whatsapp" viewBox="0 0 16 16">
+              <path
+                d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.58 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.348.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34l-.38-.007c-.133 0-.348.05-.53.247-.183.198-.703.687-.703 1.676 0 .99.722 1.948.822 2.081.1.134 1.417 2.16 3.439 3.031.483.237.86.379 1.155.485.486.173.928.149 1.278.09.39-.065 1.17-.478 1.338-.94.168-.46.168-.854.117-.942-.05-.098-.182-.149-.38-.249z" />
+            </svg>
+          </button>
+        </div>
+        <sheet>
+          <!-- Birthday alert -->
+          <div
+            class="alert alert-info alert-dismissible fade show text-center o_form_header position-relative"
+            role="alert" invisible="not is_birthday">
+            <button type="button" class="btn-close position-absolute t-0 r-0 p-2"
+              data-bs-dismiss="alert" aria-label="Close" style="top: 0; right: 0;" />
+            <div class="mb-1">
+              <strong>Today is Their Birthday!🎂</strong>
+            </div>
+            <div> Wish <field name="name" readonly="1" /> a happy birthday!🎉 </div>
+          </div>
+          <!-- Stat buttons -->
+          <div class="oe_button_box" name="button_box">
+            <button name="action_open_appointments" type="object"
+              class="oe_stat_button" icon="calendar_today">
+              <div class="o_field_widget o_stat_info">
+                <span class="o_stat_value">
+                  <field name="appointment_count" />
+                </span>
+                <span class="o_stat_text">Appointments</span>
+              </div>
+            </button>
+          </div>
 
-                    <!-- Ribbon and avatar -->
-                    <widget name="web_ribbon" title="Deceased" bg_color="bg-danger"
-                            invisible="not deceased"/>
-                    <field name="image_1920" widget="image" class="oe_avatar"/>
+          <!-- Ribbon and avatar -->
+          <widget name="web_ribbon" title="Deceased" bg_color="bg-danger"
+            invisible="not deceased" />
+          <field name="image_1920" widget="image" class="oe_avatar" />
 
-                    <!-- Title: reference + deceased toggle -->
-                    <div class="oe_title">
-                        <h4>
-                            <field name="reference" readonly="1"/>
-                        </h4>
-                        <label for="name" string="Name" invisible="id != False"/>
-                        <h2>
-                            <field name="name" required="1"/>
-                        </h2>
-                        <div class="d-flex align-items-center gap-2">
-                            <label for="deceased"/>
-                            <field name="deceased" widget="boolean_toggle"/>
-                        </div>
-                    </div>
+          <!-- Title: reference + deceased toggle -->
+          <div class="oe_title">
+            <h4>
+              <field name="reference" readonly="1" />
+            </h4>
+            <label for="name" string="Name" invisible="id != False" />
+            <h2>
+              <field name="name" required="1" />
+            </h2>
+            <div class="d-flex align-items-center gap-2">
+              <label for="deceased" />
+              <field name="deceased" widget="boolean_toggle" />
+            </div>
+          </div>
 
-                    <group>
-                        <group string="Personal Information">
-                            <field name="date_of_birth"/>
-                            <field name="age"/>
-                            <field name="is_minor" invisible="1"/>
-                            <field name="guardian_id" invisible="not is_minor" required="is_minor"
-                                   options="{'no_create_edit': True}"/>
-                            <field name="gender" widget="radio" options="{'horizontal': true}"/>
-                            <field name="id_type"/>
-                            <field name="id_number" invisible="not id_type" required="id_type"/>
-                        </group>
-                        <group string="Contact &amp; Details">
-                            <field name="partner_id" required="0" readonly="id"
-                                   domain="[('is_company', '=', False), ('is_patient', '=', False)]"
-                                   options="{'no_create': True}"
-                                   placeholder="Leave empty to create a new contact"/>
-                            <field name="active" invisible="1"/>
-                            <field name="parent_id" string="Company / Insurer"
-                                   domain="[('is_company', '=', True)]"
-                                   options="{'no_create': True}"/>
-                            <field name="contract_id" invisible="not contract_id"/>
-                            <field name="blood_group" string="Blood Type"/>
-                            <field name="phone" data-icon="phone" required="1" widget="phone"/>
-                            <field name="email" data-icon="mail" required="1" widget="email"/>
-                            <field name="tag_ids" widget="many2many_tags"
-                                   options="{'color_field': 'color', 'no_create_edit': True}"
-                                   placeholder="Select medical tags..."/>
-                        </group>
-                    </group>
+          <group>
+            <group string="Personal Information">
+              <field name="date_of_birth" />
+              <field name="age" />
+              <field name="is_minor" invisible="1" />
+              <field name="guardian_id" invisible="not is_minor" required="is_minor"
+                options="{'no_create_edit': True}" />
+              <field name="gender" widget="radio" options="{'horizontal': true}" />
+              <field name="id_type" />
+              <field name="id_number" invisible="not id_type" required="id_type" />
+            </group>
+            <group string="Contact &amp; Details">
+              <field name="partner_id" required="0" readonly="id"
+                domain="[('is_company', '=', False), ('is_patient', '=', False)]"
+                options="{'no_create': True}"
+                placeholder="Leave empty to create a new contact" />
+              <field name="active" invisible="1" />
+              <field name="parent_id" string="Company / Insurer"
+                domain="[('is_company', '=', True)]"
+                options="{'no_create': True}" />
+              <field name="contract_id" invisible="not contract_id" />
+              <field name="blood_group" string="Blood Type" />
+              <field name="phone" data-icon="phone" required="1" widget="phone" />
+              <field name="email" data-icon="mail" required="1" widget="email" />
+              <field name="tag_ids" widget="many2many_tags"
+                options="{'color_field': 'color', 'no_create_edit': True}"
+                placeholder="Select medical tags..." />
+            </group>
+          </group>
 
-                    <notebook>
-                        <page string="Medical Conditions" name="medical_conditions">
-                            <field name="condition_ids">
-                                <list editable="bottom" string="Allergies &amp; Chronic Conditions"
-                                      decoration-danger="severity == 'severe'">
-                                    <field name="condition_type"/>
-                                    <field name="name"/>
-                                    <field name="severity"/>
-                                    <field name="since" optional="show"/>
-                                    <field name="notes" optional="show"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Emergency Contacts" name="emergency_contacts">
-                            <field name="emergency_contact_ids">
-                                <list editable="bottom" string="Emergency Contacts">
-                                    <field name="partner_id"/>
-                                    <field name="relationship"/>
-                                    <field name="phone"/>
-                                    <field name="is_primary"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-                <chatter/>
-            </form>
-        </field>
-    </record>
+          <notebook>
+            <page string="Medical Conditions" name="medical_conditions">
+              <field name="condition_ids">
+                <list editable="bottom" string="Allergies &amp; Chronic Conditions"
+                  decoration-danger="severity == 'severe'">
+                  <field name="condition_type" />
+                  <field name="name" />
+                  <field name="severity" />
+                  <field name="since" optional="show" />
+                  <field name="notes" optional="show" />
+                </list>
+              </field>
+            </page>
+            <page string="Emergency Contacts" name="emergency_contacts">
+              <field name="emergency_contact_ids">
+                <list editable="bottom" string="Emergency Contacts">
+                  <field name="partner_id" />
+                  <field name="relationship" />
+                  <field name="phone" />
+                  <field name="is_primary" />
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <chatter />
+      </form>
+    </field>
+  </record>
 
-    <!-- Search View -->
-    <record id="view_hospital_patient_search" model="ir.ui.view">
-        <field name="name">hospital.patient.search</field>
-        <field name="model">hospital.patient</field>
-        <field name="arch" type="xml">
-            <search string="Patient Search">
-                <field name="reference"/>
-                <field name="name"/>
-                <field name="email"/>
-                <field name="phone"/>
-                <field name="id_number"/>
-                <filter string="Male" name="filter_male" domain="[('gender', '=', 'male')]"/>
-                <filter string="Female" name="filter_female" domain="[('gender', '=', 'female')]"/>
-                <separator/>
-                <filter string="Archived" name="filter_archived" domain="[('active', '=', False)]"/>
-                <separator/>
-                <filter string="Gender" name="group_gender" context="{'group_by': 'gender'}"/>
-                <filter string="Blood Type" name="group_blood_group" context="{'group_by': 'blood_group'}"/>
-                <searchpanel>
-                    <field name="gender" enable_counters="1"/>
-                </searchpanel>
-            </search>
-        </field>
-    </record>
+  <!-- Search View -->
+  <record id="view_hospital_patient_search" model="ir.ui.view">
+    <field name="name">hospital.patient.search</field>
+    <field name="model">hospital.patient</field>
+    <field name="arch" type="xml">
+      <search string="Patient Search">
+        <field name="reference" />
+        <field name="name" />
+        <field name="email" />
+        <field name="phone" />
+        <field name="id_number" />
+        <filter string="Male" name="filter_male" domain="[('gender', '=', 'male')]" />
+        <filter string="Female" name="filter_female" domain="[('gender', '=', 'female')]" />
+        <separator />
+        <filter string="Archived" name="filter_archived" domain="[('active', '=', False)]" />
+        <separator />
+        <filter string="Gender" name="group_gender" context="{'group_by': 'gender'}" />
+        <filter string="Blood Type" name="group_blood_group" context="{'group_by': 'blood_group'}" />
+        <searchpanel>
+          <field name="gender" enable_counters="1" />
+        </searchpanel>
+      </search>
+    </field>
+  </record>
 
-    <!-- Window Action -->
-    <record id="action_hospital_patient" model="ir.actions.act_window">
-        <field name="name">Patients</field>
-        <field name="res_model">hospital.patient</field>
-        <field name="view_mode">list,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Register your first hospital patient!
-            </p>
-            <p>
-                Maintain patient records, track medical history, monitor appointment counts, and manage demographic details.
-            </p>
-        </field>
-    </record>
+  <!-- Window Action -->
+  <record id="action_hospital_patient" model="ir.actions.act_window">
+    <field name="name">Patients</field>
+    <field name="res_model">hospital.patient</field>
+    <field name="view_mode">list,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Register your first hospital patient!
+      </p>
+      <p>
+        Maintain patient records, track medical history, monitor appointment counts, and manage
+        demographic details.
+      </p>
+    </field>
+  </record>
 
 </odoo>

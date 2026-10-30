@@ -13,7 +13,6 @@ class ResPartner(models.Model):
         help="Hospital patient records linked to this contact.",
     )
     is_patient = fields.Boolean(
-        string="Is Patient",
         compute="_compute_is_patient",
         search="_search_is_patient",
         help="True when this contact has a hospital patient record.",

@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Contact form: link to the patient record, or create one -->
-    <record id="view_partner_form_inherit_hospital" model="ir.ui.view">
-        <field name="name">res.partner.form.inherit.hospital</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <field name="is_patient" invisible="1"/>
-                <button name="action_open_patient_record" type="object"
-                        class="oe_stat_button" invisible="not is_patient">
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_text">Patient Record</span>
-                    </div>
-                </button>
-                <button name="action_create_patient_record" type="object"
-                        class="oe_stat_button" invisible="is_patient or is_company">
-                    <div class="o_field_widget o_stat_info">
-                        <span class="o_stat_text">Create Patient Record</span>
-                    </div>
-                </button>
-            </xpath>
-        </field>
-    </record>
+  <!-- Contact form: link to the patient record, or create one -->
+  <record id="view_partner_form_inherit_hospital" model="ir.ui.view">
+    <field name="name">res.partner.form.inherit.hospital</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <field name="is_patient" invisible="1" />
+        <button name="action_open_patient_record" type="object"
+          class="oe_stat_button" invisible="not is_patient">
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Patient Record</span>
+          </div>
+        </button>
+        <button name="action_create_patient_record" type="object"
+          class="oe_stat_button" invisible="is_patient or is_company">
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Create Patient Record</span>
+          </div>
+        </button>
+      </xpath>
+    </field>
+  </record>
 
-    <!-- Contacts search: Patients filter -->
-    <record id="view_partner_search_inherit_hospital" model="ir.ui.view">
-        <field name="name">res.partner.search.inherit.hospital</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_res_partner_filter"/>
-        <field name="arch" type="xml">
-            <xpath expr="//search" position="inside">
-                <filter string="Patients" name="filter_patients"
-                        domain="[('is_patient', '=', True)]"/>
-            </xpath>
-        </field>
-    </record>
+  <!-- Contacts search: Patients filter -->
+  <record id="view_partner_search_inherit_hospital" model="ir.ui.view">
+    <field name="name">res.partner.search.inherit.hospital</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+      <xpath expr="//search" position="inside">
+        <filter string="Patients" name="filter_patients"
+          domain="[('is_patient', '=', True)]" />
+      </xpath>
+    </field>
+  </record>
 
 </odoo>

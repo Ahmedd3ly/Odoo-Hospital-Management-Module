@@ -9,7 +9,6 @@ class HospitalPatientCondition(models.Model):
 
     patient_id = fields.Many2one(
         "hospital.patient",
-        string="Patient",
         required=True,
         index=True,
         ondelete="cascade",
@@ -28,14 +27,12 @@ class HospitalPatientCondition(models.Model):
     )
     severity = fields.Selection(
         [("mild", "Mild"), ("moderate", "Moderate"), ("severe", "Severe")],
-        string="Severity",
         default="moderate",
     )
     since = fields.Date(
-        string="Since",
         help="Date the condition was first diagnosed or noticed, if known.",
     )
-    notes = fields.Char(string="Notes", help="Reaction details or management notes.")
+    notes = fields.Char(help="Reaction details or management notes.")
 
     _name_not_blank = models.Constraint(
         "CHECK(TRIM(name) <> '')",
@@ -51,7 +48,9 @@ class HospitalPatientCondition(models.Model):
         today = fields.Date.context_today(self)
         for rec in self:
             if rec.since and rec.since > today:
-                raise ValidationError(self.env._("The 'Since' date cannot be in the future."))
+                raise ValidationError(
+                    self.env._("The 'Since' date cannot be in the future."),
+                )
 
     # Keep the patient's quick-filter tags in step with the structured lines.
     @api.model_create_multi

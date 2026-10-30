@@ -65,17 +65,18 @@ class HospitalContract(models.Model):
         copy=True,
     )
     patient_count = fields.Integer(
-        string="Patient Count",
         compute="_compute_counts",
         help="Patients whose contact belongs to the contract company.",
     )
     order_count = fields.Integer(
-        string="Order Count",
         compute="_compute_counts",
         help="Quotations and sales orders billed under this contract.",
     )
 
-    _name_uniq = models.Constraint("UNIQUE(name)", "The contract reference must be unique.")
+    _name_uniq = models.Constraint(
+        "UNIQUE(name)",
+        "The contract reference must be unique.",
+    )
     _discount_range = models.Constraint(
         "CHECK(default_discount >= 0 AND default_discount <= 100)",
         "The default discount must be between 0 and 100.",
@@ -128,10 +129,12 @@ class HospitalContract(models.Model):
                     ("id", "!=", rec.id),
                     ("partner_id", "=", rec.partner_id.id),
                     ("state", "=", "active"),
-                ]
+                ],
             )
             for other in others:
-                other_ends_after_start = not other.date_end or other.date_end >= rec.date_start
+                other_ends_after_start = (
+                    not other.date_end or other.date_end >= rec.date_start
+                )
                 starts_before_end = not rec.date_end or other.date_start <= rec.date_end
                 if other_ends_after_start and starts_before_end:
                     raise ValidationError(
@@ -140,7 +143,7 @@ class HospitalContract(models.Model):
                             "overlapping these dates.",
                             company=rec.partner_id.name,
                             other=other.name,
-                        )
+                        ),
                     )
 
     # ------------------------------------------------------------------
@@ -197,13 +200,17 @@ class HospitalContract(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get("name", "New") == "New":
-                vals["name"] = self.env["ir.sequence"].next_by_code("hospital.contract") or "New"
+                vals["name"] = (
+                    self.env["ir.sequence"].next_by_code("hospital.contract") or "New"
+                )
         return super().create(vals_list)
 
     @api.ondelete(at_uninstall=False)
     def _unlink_except_active(self):
         if any(rec.state == "active" for rec in self):
-            raise UserError(self.env._("Cancel an active contract instead of deleting it."))
+            raise UserError(
+                self.env._("Cancel an active contract instead of deleting it."),
+            )
 
     # ------------------------------------------------------------------
     # Actions

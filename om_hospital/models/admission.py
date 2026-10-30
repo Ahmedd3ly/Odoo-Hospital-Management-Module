@@ -22,7 +22,6 @@ class HospitalAdmission(models.Model):
     )
     patient_id = fields.Many2one(
         "hospital.patient",
-        string="Patient",
         required=True,
         index=True,
         ondelete="restrict",
@@ -30,7 +29,6 @@ class HospitalAdmission(models.Model):
     )
     appointment_id = fields.Many2one(
         "hospital.appointment",
-        string="Appointment",
         index=True,
         ondelete="restrict",
         domain="[('patient_id', '=', patient_id)]",
@@ -38,14 +36,12 @@ class HospitalAdmission(models.Model):
     )
     admitting_doctor_id = fields.Many2one(
         "hr.employee",
-        string="Admitting Doctor",
         ondelete="restrict",
         tracking=True,
         domain="[('is_clinician', '=', True), ('clinician_role', '=', 'doctor')]",
     )
     bed_id = fields.Many2one(
         "hospital.bed",
-        string="Bed",
         ondelete="restrict",
         index=True,
         tracking=True,
@@ -84,7 +80,7 @@ class HospitalAdmission(models.Model):
         tracking=True,
     )
     reason = fields.Text(string="Reason for Admission")
-    discharge_notes = fields.Text(string="Discharge Notes")
+    discharge_notes = fields.Text()
     transfer_ids = fields.One2many(
         "hospital.admission.transfer",
         "admission_id",
@@ -100,7 +96,10 @@ class HospitalAdmission(models.Model):
         compute="_compute_sale_order_count",
     )
 
-    _name_uniq = models.Constraint("UNIQUE(name)", "The admission reference must be unique.")
+    _name_uniq = models.Constraint(
+        "UNIQUE(name)",
+        "The admission reference must be unique.",
+    )
     _admitted_bed_idx = models.Index("(bed_id) WHERE state = 'admitted'")
     _admitted_patient_idx = models.Index("(patient_id) WHERE state = 'admitted'")
     _dates_check = models.Constraint(
@@ -119,7 +118,10 @@ class HospitalAdmission(models.Model):
                 rec.nights = 0
                 continue
             end = rec.discharge_date or fields.Datetime.now()
-            first_day = fields.Datetime.context_timestamp(rec, rec.admission_date).date()
+            first_day = fields.Datetime.context_timestamp(
+                rec,
+                rec.admission_date,
+            ).date()
             last_day = fields.Datetime.context_timestamp(rec, end).date()
             rec.nights = max((last_day - first_day).days, 1)
 
@@ -148,12 +150,13 @@ class HospitalAdmission(models.Model):
                     ("id", "!=", rec.id),
                     ("bed_id", "=", rec.bed_id.id),
                     ("state", "=", "admitted"),
-                ]
+                ],
             ):
                 raise ValidationError(
                     self.env._(
-                        "Bed %(bed)s is already occupied.", bed=rec.bed_id.display_name
-                    )
+                        "Bed %(bed)s is already occupied.",
+                        bed=rec.bed_id.display_name,
+                    ),
                 )
 
     @api.constrains("patient_id", "state")
@@ -164,12 +167,13 @@ class HospitalAdmission(models.Model):
                     ("id", "!=", rec.id),
                     ("patient_id", "=", rec.patient_id.id),
                     ("state", "=", "admitted"),
-                ]
+                ],
             ):
                 raise ValidationError(
                     self.env._(
-                        "%(patient)s is already admitted.", patient=rec.patient_id.display_name
-                    )
+                        "%(patient)s is already admitted.",
+                        patient=rec.patient_id.display_name,
+                    ),
                 )
 
     @api.constrains("patient_id")
@@ -180,7 +184,7 @@ class HospitalAdmission(models.Model):
                     self.env._(
                         "%(patient)s is marked as deceased and cannot be admitted.",
                         patient=rec.patient_id.display_name,
-                    )
+                    ),
                 )
 
     @api.constrains("patient_id", "appointment_id")
@@ -188,7 +192,7 @@ class HospitalAdmission(models.Model):
         for rec in self:
             if rec.appointment_id and rec.appointment_id.patient_id != rec.patient_id:
                 raise ValidationError(
-                    self.env._("The appointment belongs to a different patient.")
+                    self.env._("The appointment belongs to a different patient."),
                 )
 
     @api.onchange("appointment_id")
@@ -205,7 +209,9 @@ class HospitalAdmission(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get("name", "New") == "New":
-                vals["name"] = self.env["ir.sequence"].next_by_code("hospital.admission") or "New"
+                vals["name"] = (
+                    self.env["ir.sequence"].next_by_code("hospital.admission") or "New"
+                )
         return super().create(vals_list)
 
     def write(self, vals):
@@ -213,7 +219,9 @@ class HospitalAdmission(models.Model):
             rec.state in ("discharged", "cancel") for rec in self
         ):
             raise UserError(
-                self.env._("A discharged or cancelled admission can no longer be changed.")
+                self.env._(
+                    "A discharged or cancelled admission can no longer be changed.",
+                ),
             )
         if (
             "bed_id" in vals
@@ -226,7 +234,9 @@ class HospitalAdmission(models.Model):
     @api.ondelete(at_uninstall=False)
     def _unlink_except_processed(self):
         if any(rec.state not in ("draft", "cancel") for rec in self):
-            raise UserError(self.env._("Only draft or cancelled admissions can be deleted."))
+            raise UserError(
+                self.env._("Only draft or cancelled admissions can be deleted."),
+            )
 
     # ------------------------------------------------------------------
     # Workflow: draft -> admitted -> discharged (cancel from draft)
@@ -237,11 +247,17 @@ class HospitalAdmission(models.Model):
             raise UserError(error_message)
 
     def action_admit(self):
-        self._ensure_state(("draft",), self.env._("Only draft admissions can be admitted."))
+        self._ensure_state(
+            ("draft",),
+            self.env._("Only draft admissions can be admitted."),
+        )
         for rec in self:
             if not rec.bed_id:
                 raise UserError(
-                    self.env._("Choose a bed for %(admission)s first.", admission=rec.name)
+                    self.env._(
+                        "Choose a bed for %(admission)s first.",
+                        admission=rec.name,
+                    ),
                 )
             rec.state = "admitted"
             rec.message_post(
@@ -249,12 +265,13 @@ class HospitalAdmission(models.Model):
                     "%(patient)s admitted to %(bed)s.",
                     patient=rec.patient_id.name,
                     bed=rec.bed_id.display_name,
-                )
+                ),
             )
 
     def action_discharge(self):
         self._ensure_state(
-            ("admitted",), self.env._("Only admitted patients can be discharged.")
+            ("admitted",),
+            self.env._("Only admitted patients can be discharged."),
         )
         for rec in self:
             rec.write({"state": "discharged", "discharge_date": fields.Datetime.now()})
@@ -263,18 +280,24 @@ class HospitalAdmission(models.Model):
                     "%(patient)s discharged after %(nights)s night(s).",
                     patient=rec.patient_id.name,
                     nights=rec.nights,
-                )
+                ),
             )
 
     def action_cancel(self):
         self._ensure_state(
-            ("draft",), self.env._("Only draft admissions can be cancelled. Discharge the patient instead.")
+            ("draft",),
+            self.env._(
+                "Only draft admissions can be cancelled. Discharge the patient instead.",
+            ),
         )
         self.write({"state": "cancel"})
 
     def action_transfer_bed(self):
         self.ensure_one()
-        self._ensure_state(("admitted",), self.env._("Only admitted patients can be transferred."))
+        self._ensure_state(
+            ("admitted",),
+            self.env._("Only admitted patients can be transferred."),
+        )
         return {
             "name": self.env._("Transfer Bed"),
             "type": "ir.actions.act_window",
@@ -292,14 +315,19 @@ class HospitalAdmission(models.Model):
         """Bill the whole stay: bed days at the standard bed-day price."""
         self.ensure_one()
         if self.state != "discharged":
-            raise UserError(self.env._("Discharge the patient before creating the quotation."))
+            raise UserError(
+                self.env._("Discharge the patient before creating the quotation."),
+            )
         if self.sale_order_ids.filtered(lambda order: order.state != "cancel"):
-            raise UserError(self.env._("This admission already has a quotation or sales order."))
+            raise UserError(
+                self.env._("This admission already has a quotation or sales order."),
+            )
         orders = self.env["sale.order"]._create_admission_quotations(self)
         self.message_post(
             body=self.env._(
-                "Quotation(s) created: %(orders)s.", orders=", ".join(orders.mapped("name"))
-            )
+                "Quotation(s) created: %(orders)s.",
+                orders=", ".join(orders.mapped("name")),
+            ),
         )
         return self.action_view_sales_orders()
 

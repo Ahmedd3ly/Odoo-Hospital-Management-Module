@@ -9,14 +9,12 @@ class HospitalEmergencyContact(models.Model):
 
     patient_id = fields.Many2one(
         "hospital.patient",
-        string="Patient",
         required=True,
         index=True,
         ondelete="cascade",
     )
     partner_id = fields.Many2one(
         "res.partner",
-        string="Contact",
         required=True,
         ondelete="restrict",
         domain="[('is_company', '=', False)]",
@@ -31,7 +29,6 @@ class HospitalEmergencyContact(models.Model):
             ("friend", "Friend"),
             ("other", "Other"),
         ],
-        string="Relationship",
         required=True,
     )
     is_primary = fields.Boolean(
@@ -53,11 +50,13 @@ class HospitalEmergencyContact(models.Model):
                     ("patient_id", "=", rec.patient_id.id),
                     ("is_primary", "=", True),
                     ("id", "!=", rec.id),
-                ]
+                ],
             )
             if others:
                 raise ValidationError(
-                    self.env._("A patient can only have one primary emergency contact.")
+                    self.env._(
+                        "A patient can only have one primary emergency contact.",
+                    ),
                 )
 
     @api.constrains("partner_id", "patient_id")
@@ -65,5 +64,5 @@ class HospitalEmergencyContact(models.Model):
         for rec in self:
             if rec.partner_id == rec.patient_id.partner_id:
                 raise ValidationError(
-                    self.env._("A patient cannot be their own emergency contact.")
+                    self.env._("A patient cannot be their own emergency contact."),
                 )

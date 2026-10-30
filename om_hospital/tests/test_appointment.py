@@ -19,7 +19,7 @@ class TestAppointment(HospitalCommon):
 
     def test_doctor_must_work_in_clinic(self):
         outsider_doctor = self.env["hr.employee"].create(
-            {"name": "Dr. Elsewhere", "is_clinician": True, "clinician_role": "doctor"}
+            {"name": "Dr. Elsewhere", "is_clinician": True, "clinician_role": "doctor"},
         )
         with self.assertRaises(ValidationError):
             self._make_appointment(doctor_id=outsider_doctor.id)
@@ -39,7 +39,8 @@ class TestAppointment(HospitalCommon):
         self._make_appointment(appointment_time=start)
         other_patient = self._make_patient("Second", "second@example.com")
         self._make_appointment(
-            patient_id=other_patient.id, appointment_time=start + timedelta(minutes=30)
+            patient_id=other_patient.id,
+            appointment_time=start + timedelta(minutes=30),
         )
         self._make_appointment(
             patient_id=other_patient.id,
@@ -71,7 +72,7 @@ class TestAppointment(HospitalCommon):
                 {
                     "appointment_id": appointment.id,
                     "medicine_id": self._medicine().id,
-                }
+                },
             )
 
     def test_bmi_and_blood_pressure(self):
@@ -82,10 +83,10 @@ class TestAppointment(HospitalCommon):
 
     def test_cancel_stores_reason_and_chatter_is_not_escaped(self):
         appointment = self._make_appointment(
-            appointment_time=fields.Datetime.now() + timedelta(days=4)
+            appointment_time=fields.Datetime.now() + timedelta(days=4),
         )
         wizard = self.env["cancel.appointment.wizard"].create(
-            {"appointment_id": appointment.id, "reason": "No Show"}
+            {"appointment_id": appointment.id, "reason": "No Show"},
         )
         wizard.action_cancel_appointment()
         self.assertEqual(appointment.state, "cancel")
@@ -96,10 +97,10 @@ class TestAppointment(HospitalCommon):
 
     def test_cannot_cancel_todays_appointment(self):
         appointment = self._make_appointment(
-            appointment_time=fields.Datetime.now() + timedelta(minutes=30)
+            appointment_time=fields.Datetime.now() + timedelta(minutes=30),
         )
         wizard = self.env["cancel.appointment.wizard"].create(
-            {"appointment_id": appointment.id, "reason": "Too late"}
+            {"appointment_id": appointment.id, "reason": "Too late"},
         )
         with self.assertRaises(UserError):
             wizard.action_cancel_appointment()
@@ -109,7 +110,8 @@ class TestAppointment(HospitalCommon):
         appointment.action_confirm()
         appointment.action_start_consultation()
         visit_day = fields.Datetime.context_timestamp(
-            appointment, appointment.appointment_time
+            appointment,
+            appointment.appointment_time,
         ).date()
         appointment.follow_up_date = visit_day + timedelta(days=7)
         appointment.action_schedule_follow_up()
@@ -117,17 +119,18 @@ class TestAppointment(HospitalCommon):
         self.assertEqual(follow_up.state, "draft")
         self.assertEqual(follow_up.doctor_id, appointment.doctor_id)
         self.assertEqual(
-            follow_up.appointment_time - appointment.appointment_time, timedelta(days=7)
+            follow_up.appointment_time - appointment.appointment_time,
+            timedelta(days=7),
         )
 
     def test_past_visits_list_completed_visits_only(self):
         old = self._complete_appointment(
             self._make_appointment(
-                appointment_time=fields.Datetime.now() + timedelta(days=2)
-            )
+                appointment_time=fields.Datetime.now() + timedelta(days=2),
+            ),
         )
         upcoming = self._make_appointment(
-            appointment_time=fields.Datetime.now() + timedelta(days=9)
+            appointment_time=fields.Datetime.now() + timedelta(days=9),
         )
         self.assertEqual(upcoming.previous_appointment_ids, old)
 
@@ -138,7 +141,7 @@ class TestAppointment(HospitalCommon):
                 "type": "consu",
                 "is_medicine": True,
                 "list_price": 100,
-            }
+            },
         )
 
     def test_dashboard_counts_follow_period_and_state(self):
@@ -146,7 +149,7 @@ class TestAppointment(HospitalCommon):
         before = model.get_dashboard_data("today")
         self._make_appointment(appointment_time=fields.Datetime.now())
         self._make_appointment(
-            appointment_time=fields.Datetime.now() + timedelta(days=40)
+            appointment_time=fields.Datetime.now() + timedelta(days=40),
         )
         after = model.get_dashboard_data("today")
         self.assertEqual(after["counts"]["draft"], before["counts"]["draft"] + 1)

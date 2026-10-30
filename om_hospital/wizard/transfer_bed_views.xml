@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="view_transfer_bed_form" model="ir.ui.view">
-        <field name="name">transfer.bed.wizard.form</field>
-        <field name="model">transfer.bed.wizard</field>
-        <field name="arch" type="xml">
-            <form string="Transfer Bed">
-                <sheet>
-                    <group>
-                        <field name="admission_id" options="{'no_create': True}"/>
-                        <field name="current_bed_id"/>
-                        <field name="new_bed_id" options="{'no_create': True}"/>
-                        <field name="reason" placeholder="Why is the patient being moved?"/>
-                    </group>
-                </sheet>
-                <footer>
-                    <button name="action_transfer" type="object" string="Transfer" class="btn-primary" data-hotkey="q"/>
-                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="z"/>
-                </footer>
-            </form>
-        </field>
-    </record>
+  <record id="view_transfer_bed_form" model="ir.ui.view">
+    <field name="name">transfer.bed.wizard.form</field>
+    <field name="model">transfer.bed.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Transfer Bed">
+        <sheet>
+          <group>
+            <field name="admission_id" options="{'no_create': True}" />
+            <field name="current_bed_id" />
+            <field name="new_bed_id" options="{'no_create': True}" />
+            <field name="reason" placeholder="Why is the patient being moved?" />
+          </group>
+        </sheet>
+        <footer>
+          <button name="action_transfer" type="object" string="Transfer" class="btn-primary"
+            data-hotkey="q" />
+          <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="z" />
+        </footer>
+      </form>
+    </field>
+  </record>
 
 </odoo>

@@ -1,117 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- List View -->
-    <record id="view_hospital_contract_list" model="ir.ui.view">
-        <field name="name">hospital.contract.list</field>
-        <field name="model">hospital.contract</field>
-        <field name="arch" type="xml">
-            <list string="Company Contracts" decoration-success="state == 'active'" decoration-muted="state == 'cancel'">
-                <field name="name"/>
-                <field name="partner_id"/>
-                <field name="date_start"/>
-                <field name="date_end"/>
-                <field name="default_discount"/>
-                <field name="company_share"/>
-                <field name="state" widget="badge" decoration-success="state == 'active'" decoration-info="state == 'draft'" decoration-danger="state == 'cancel'"/>
-            </list>
-        </field>
-    </record>
+  <!-- List View -->
+  <record id="view_hospital_contract_list" model="ir.ui.view">
+    <field name="name">hospital.contract.list</field>
+    <field name="model">hospital.contract</field>
+    <field name="arch" type="xml">
+      <list string="Company Contracts" decoration-success="state == 'active'"
+        decoration-muted="state == 'cancel'">
+        <field name="name" />
+        <field name="partner_id" />
+        <field name="date_start" />
+        <field name="date_end" />
+        <field name="default_discount" />
+        <field name="company_share" />
+        <field name="state" widget="badge" decoration-success="state == 'active'"
+          decoration-info="state == 'draft'" decoration-danger="state == 'cancel'" />
+      </list>
+    </field>
+  </record>
 
-    <!-- Form View -->
-    <record id="view_hospital_contract_form" model="ir.ui.view">
-        <field name="name">hospital.contract.form</field>
-        <field name="model">hospital.contract</field>
-        <field name="arch" type="xml">
-            <form string="Company Contract">
-                <header>
-                    <button name="action_activate" string="Activate" type="object" class="oe_highlight" invisible="state != 'draft'"/>
-                    <button name="action_cancel" string="Cancel" type="object" invisible="state not in ('draft', 'active')"/>
-                    <button name="action_draft" string="Reset to Draft" type="object" invisible="state != 'cancel'"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,active"/>
-                </header>
-                <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_view_patients" type="object" class="oe_stat_button" icon="group">
-                            <div class="o_field_widget o_stat_info">
-                                <span class="o_stat_value">
-                                    <field name="patient_count"/>
-                                </span>
-                                <span class="o_stat_text">Patients</span>
-                            </div>
-                        </button>
-                        <button name="action_view_orders" type="object" class="oe_stat_button" icon="receipt_long">
-                            <div class="o_field_widget o_stat_info">
-                                <span class="o_stat_value">
-                                    <field name="order_count"/>
-                                </span>
-                                <span class="o_stat_text">Orders</span>
-                            </div>
-                        </button>
-                    </div>
-                    <widget name="web_ribbon" title="Cancelled" bg_color="bg-danger" invisible="state != 'cancel'"/>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name"/>
-                        </h1>
-                    </div>
-                    <group>
-                        <group string="Contract">
-                            <field name="partner_id" options="{'no_create': True}" readonly="state != 'draft'"/>
-                            <field name="date_start"/>
-                            <field name="date_end"/>
-                        </group>
-                        <group string="Terms">
-                            <field name="default_discount"/>
-                            <field name="company_share"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Category Discounts" name="category_discounts">
-                            <field name="line_ids">
-                                <list editable="bottom" string="Category Discounts">
-                                    <field name="category_id" options="{'no_create': True}"/>
-                                    <field name="discount"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-                <chatter/>
-            </form>
-        </field>
-    </record>
+  <!-- Form View -->
+  <record id="view_hospital_contract_form" model="ir.ui.view">
+    <field name="name">hospital.contract.form</field>
+    <field name="model">hospital.contract</field>
+    <field name="arch" type="xml">
+      <form string="Company Contract">
+        <header>
+          <button name="action_activate" string="Activate" type="object" class="oe_highlight"
+            invisible="state != 'draft'" />
+          <button name="action_cancel" string="Cancel" type="object"
+            invisible="state not in ('draft', 'active')" />
+          <button name="action_draft" string="Reset to Draft" type="object"
+            invisible="state != 'cancel'" />
+          <field name="state" widget="statusbar" statusbar_visible="draft,active" />
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_patients" type="object" class="oe_stat_button" icon="group">
+              <div class="o_field_widget o_stat_info">
+                <span class="o_stat_value">
+                  <field name="patient_count" />
+                </span>
+                <span class="o_stat_text">Patients</span>
+              </div>
+            </button>
+            <button name="action_view_orders" type="object" class="oe_stat_button"
+              icon="receipt_long">
+              <div class="o_field_widget o_stat_info">
+                <span class="o_stat_value">
+                  <field name="order_count" />
+                </span>
+                <span class="o_stat_text">Orders</span>
+              </div>
+            </button>
+          </div>
+          <widget name="web_ribbon" title="Cancelled" bg_color="bg-danger"
+            invisible="state != 'cancel'" />
+          <div class="oe_title">
+            <h1>
+              <field name="name" />
+            </h1>
+          </div>
+          <group>
+            <group string="Contract">
+              <field name="partner_id" options="{'no_create': True}" readonly="state != 'draft'" />
+              <field name="date_start" />
+              <field name="date_end" />
+            </group>
+            <group string="Terms">
+              <field name="default_discount" />
+              <field name="company_share" />
+            </group>
+          </group>
+          <notebook>
+            <page string="Category Discounts" name="category_discounts">
+              <field name="line_ids">
+                <list editable="bottom" string="Category Discounts">
+                  <field name="category_id" options="{'no_create': True}" />
+                  <field name="discount" />
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <chatter />
+      </form>
+    </field>
+  </record>
 
-    <!-- Search View -->
-    <record id="view_hospital_contract_search" model="ir.ui.view">
-        <field name="name">hospital.contract.search</field>
-        <field name="model">hospital.contract</field>
-        <field name="arch" type="xml">
-            <search string="Contract Search">
-                <field name="name" string="Contract / Company" filter_domain="['|', ('name', 'ilike', self), ('partner_id.name', 'ilike', self)]"/>
-                <filter string="Active" name="filter_active" domain="[('state', '=', 'active')]"/>
-                <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]"/>
-                <separator/>
-                <filter string="Company" name="group_company" context="{'group_by': 'partner_id'}"/>
-                <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
-            </search>
-        </field>
-    </record>
+  <!-- Search View -->
+  <record id="view_hospital_contract_search" model="ir.ui.view">
+    <field name="name">hospital.contract.search</field>
+    <field name="model">hospital.contract</field>
+    <field name="arch" type="xml">
+      <search string="Contract Search">
+        <field name="name" string="Contract / Company"
+          filter_domain="['|', ('name', 'ilike', self), ('partner_id.name', 'ilike', self)]" />
+        <filter string="Active" name="filter_active" domain="[('state', '=', 'active')]" />
+        <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]" />
+        <separator />
+        <filter string="Company" name="group_company" context="{'group_by': 'partner_id'}" />
+        <filter string="Status" name="group_state" context="{'group_by': 'state'}" />
+      </search>
+    </field>
+  </record>
 
-    <!-- Window Action -->
-    <record id="action_hospital_contract" model="ir.actions.act_window">
-        <field name="name">Company Contracts</field>
-        <field name="res_model">hospital.contract</field>
-        <field name="view_mode">list,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create your first company contract!
-            </p>
-            <p>
-                A contract gives the patients of a company a discount per service category
-                and splits the bill between the company and the patient.
-            </p>
-        </field>
-    </record>
+  <!-- Window Action -->
+  <record id="action_hospital_contract" model="ir.actions.act_window">
+    <field name="name">Company Contracts</field>
+    <field name="res_model">hospital.contract</field>
+    <field name="view_mode">list,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Create your first company contract!
+      </p>
+      <p>
+        A contract gives the patients of a company a discount per service category
+        and splits the bill between the company and the patient.
+      </p>
+    </field>
+  </record>
 
 </odoo>

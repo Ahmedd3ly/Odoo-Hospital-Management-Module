@@ -1,20 +1,22 @@
-from . import specialty
-from . import tag
-from . import product_template
-from . import patient
-from . import patient_condition
-from . import emergency_contact
-from . import appointment
-from . import prescription_line
-from . import ward
-from . import bed
-from . import admission
-from . import admission_transfer
-from . import contract
-from . import contract_line
-from . import sale_order
-from . import sale_order_line
-from . import hr_employee
-from . import res_partner
-from . import clinic
-from . import res_config_settings
+from . import (
+    admission,
+    admission_transfer,
+    appointment,
+    bed,
+    clinic,
+    contract,
+    contract_line,
+    emergency_contact,
+    hr_employee,
+    patient,
+    patient_condition,
+    prescription_line,
+    product_template,
+    res_config_settings,
+    res_partner,
+    sale_order,
+    sale_order_line,
+    specialty,
+    tag,
+    ward,
+)

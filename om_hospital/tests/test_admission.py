@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from odoo import Command, fields
+from odoo import fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import tagged
 
@@ -14,12 +14,19 @@ class TestAdmission(HospitalCommon):
         super().setUpClass()
         cls.ward = cls.env["hospital.ward"].create({"name": "Test Ward", "code": "tw"})
         cls.bed1, cls.bed2 = cls.env["hospital.bed"].create(
-            [{"name": "B-1", "ward_id": cls.ward.id}, {"name": "B-2", "ward_id": cls.ward.id}]
+            [
+                {"name": "B-1", "ward_id": cls.ward.id},
+                {"name": "B-2", "ward_id": cls.ward.id},
+            ],
         )
 
     def _admit(self, patient=None, bed=None, **kwargs):
         admission = self.env["hospital.admission"].create(
-            {"patient_id": (patient or self.patient).id, "bed_id": (bed or self.bed1).id, **kwargs}
+            {
+                "patient_id": (patient or self.patient).id,
+                "bed_id": (bed or self.bed1).id,
+                **kwargs,
+            },
         )
         admission.action_admit()
         return admission
@@ -29,7 +36,10 @@ class TestAdmission(HospitalCommon):
         admission = self._admit()
         self.assertTrue(self.bed1.is_occupied)
         self.assertEqual(self.bed1.current_admission_id, admission)
-        self.assertIn(self.bed1, self.env["hospital.bed"].search([("is_occupied", "=", True)]))
+        self.assertIn(
+            self.bed1,
+            self.env["hospital.bed"].search([("is_occupied", "=", True)]),
+        )
         admission.action_discharge()
         self.assertFalse(self.bed1.is_occupied)
 
@@ -45,7 +55,9 @@ class TestAdmission(HospitalCommon):
             self._admit(bed=self.bed2)
 
     def test_admit_needs_a_bed(self):
-        admission = self.env["hospital.admission"].create({"patient_id": self.patient.id})
+        admission = self.env["hospital.admission"].create(
+            {"patient_id": self.patient.id},
+        )
         with self.assertRaises(UserError):
             admission.action_admit()
 
@@ -55,13 +67,19 @@ class TestAdmission(HospitalCommon):
         self.assertEqual(admission.nights, 1)
 
     def test_nights_are_counted_per_midnight(self):
-        admission = self._admit(admission_date=fields.Datetime.now() - timedelta(days=3))
+        admission = self._admit(
+            admission_date=fields.Datetime.now() - timedelta(days=3),
+        )
         self.assertEqual(admission.nights, 3)
 
     def test_transfer_moves_patient_and_logs_it(self):
         admission = self._admit()
         wizard = self.env["transfer.bed.wizard"].create(
-            {"admission_id": admission.id, "new_bed_id": self.bed2.id, "reason": "More space"}
+            {
+                "admission_id": admission.id,
+                "new_bed_id": self.bed2.id,
+                "reason": "More space",
+            },
         )
         wizard.action_transfer()
         self.assertEqual(admission.bed_id, self.bed2)
@@ -88,7 +106,9 @@ class TestAdmission(HospitalCommon):
             self.ward.active = False
 
     def test_stay_is_billed_per_night(self):
-        admission = self._admit(admission_date=fields.Datetime.now() - timedelta(days=2))
+        admission = self._admit(
+            admission_date=fields.Datetime.now() - timedelta(days=2),
+        )
         with self.assertRaises(UserError):
             admission.action_create_quotation()  # not discharged yet
         admission.action_discharge()

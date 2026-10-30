@@ -16,7 +16,6 @@ class HospitalWard(models.Model):
         help="Name of the ward, for example General Ward or ICU.",
     )
     code = fields.Char(
-        string="Code",
         required=True,
         copy=False,
         help="Short uppercase code, for example GEN. Must be unique.",
@@ -33,24 +32,31 @@ class HospitalWard(models.Model):
         required=True,
         default="general",
     )
-    location = fields.Char(string="Location", help="For example Building A, 4th floor.")
+    location = fields.Char(help="For example Building A, 4th floor.")
     bed_ids = fields.One2many("hospital.bed", "ward_id", string="Beds")
-    bed_count = fields.Integer(string="Bed Count", compute="_compute_bed_counts")
+    bed_count = fields.Integer(compute="_compute_bed_counts")
     occupied_count = fields.Integer(string="Occupied", compute="_compute_bed_counts")
     available_count = fields.Integer(string="Available", compute="_compute_bed_counts")
     active = fields.Boolean(
-        string="Active",
         default=True,
         help="Uncheck to archive the ward. A ward with patients in it cannot be archived.",
     )
 
-    _name_uniq = models.Constraint("UNIQUE(name)", "A ward with this name already exists.")
-    _code_uniq = models.Constraint("UNIQUE(code)", "A ward with this code already exists.")
+    _name_uniq = models.Constraint(
+        "UNIQUE(name)",
+        "A ward with this name already exists.",
+    )
+    _code_uniq = models.Constraint(
+        "UNIQUE(code)",
+        "A ward with this code already exists.",
+    )
     _name_not_blank = models.Constraint(
-        "CHECK(TRIM(name) <> '')", "The ward name cannot be blank."
+        "CHECK(TRIM(name) <> '')",
+        "The ward name cannot be blank.",
     )
     _code_not_blank = models.Constraint(
-        "CHECK(TRIM(code) <> '')", "The ward code cannot be blank."
+        "CHECK(TRIM(code) <> '')",
+        "The ward code cannot be blank.",
     )
 
     @api.depends("bed_ids", "bed_ids.is_occupied")
@@ -70,7 +76,7 @@ class HospitalWard(models.Model):
                     self.env._(
                         "%(ward)s still has admitted patients and cannot be archived.",
                         ward=rec.name,
-                    )
+                    ),
                 )
 
     @api.model_create_multi

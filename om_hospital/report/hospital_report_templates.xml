@@ -1,172 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================ Prescription slip ============================ -->
-    <template id="report_prescription">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-                    <div class="page">
-                        <h2>Prescription</h2>
-                        <div class="row mt-3 mb-3">
-                            <div class="col-6">
-                                <strong>Patient:</strong> <span t-field="o.patient_id.name"/><br/>
-                                <strong>Patient Reference:</strong> <span t-field="o.patient_id.reference"/><br/>
-                                <strong>Age:</strong> <span t-field="o.patient_id.age"/>
-                            </div>
-                            <div class="col-6">
-                                <strong>Appointment:</strong> <span t-field="o.name"/><br/>
-                                <strong>Date:</strong> <span t-field="o.appointment_time" t-options="{'widget': 'datetime'}"/><br/>
-                                <strong>Doctor:</strong> <span t-field="o.doctor_id.name"/>
-                                <t t-if="o.doctor_id.hospital_specialty_id">
-                                    (<span t-field="o.doctor_id.hospital_specialty_id.name"/>)
-                                </t>
-                            </div>
-                        </div>
-                        <t t-if="o.prescription_line_ids">
-                            <table class="table table-sm table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Medicine</th>
-                                        <th>Dosage</th>
-                                        <th>Frequency</th>
-                                        <th class="text-end">Days</th>
-                                        <th class="text-end">Quantity</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <t t-foreach="o.prescription_line_ids" t-as="line">
-                                        <tr>
-                                            <td><span t-field="line.medicine_id.name"/></td>
-                                            <td><span t-field="line.dose"/></td>
-                                            <td><span t-field="line.frequency"/></td>
-                                            <td class="text-end"><span t-field="line.duration_days"/></td>
-                                            <td class="text-end"><span t-field="line.quantity"/></td>
-                                        </tr>
-                                        <tr t-if="line.instructions">
-                                            <td colspan="5" class="text-muted">
-                                                <span t-field="line.instructions"/>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                </tbody>
-                            </table>
-                        </t>
-                        <p t-else="" class="text-muted">No medicines were prescribed.</p>
-                        <div class="mt-5">
-                            <p>Doctor's signature: ______________________________</p>
-                            <p t-if="o.doctor_id.hospital_license_number" class="text-muted">
-                                License No. <span t-field="o.doctor_id.hospital_license_number"/>
-                            </p>
-                        </div>
-                    </div>
-                </t>
+  <!-- ============================ Prescription slip ============================ -->
+  <template id="report_prescription">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-call="web.external_layout">
+          <div class="page">
+            <h2>Prescription</h2>
+            <div class="row mt-3 mb-3">
+              <div class="col-6">
+                <strong>Patient:</strong>
+                <span t-field="o.patient_id.name" />
+                <br />
+                <strong>Patient Reference:</strong>
+                <span t-field="o.patient_id.reference" />
+                <br />
+                <strong>Age:</strong>
+                <span t-field="o.patient_id.age" />
+              </div>
+              <div class="col-6">
+                <strong>Appointment:</strong>
+                <span t-field="o.name" />
+                <br />
+                <strong>Date:</strong>
+                <span t-field="o.appointment_time" t-options="{'widget': 'datetime'}" />
+                <br />
+                <strong>Doctor:</strong>
+                <span t-field="o.doctor_id.name" />
+                <t t-if="o.doctor_id.hospital_specialty_id"> (<span
+                    t-field="o.doctor_id.hospital_specialty_id.name" />) </t>
+              </div>
+            </div>
+            <t t-if="o.prescription_line_ids">
+              <table class="table table-sm table-bordered">
+                <thead>
+                  <tr>
+                    <th>Medicine</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th class="text-end">Days</th>
+                    <th class="text-end">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <t t-foreach="o.prescription_line_ids" t-as="line">
+                    <tr>
+                      <td>
+                        <span t-field="line.medicine_id.name" />
+                      </td>
+                      <td>
+                        <span t-field="line.dose" />
+                      </td>
+                      <td>
+                        <span t-field="line.frequency" />
+                      </td>
+                      <td class="text-end">
+                        <span t-field="line.duration_days" />
+                      </td>
+                      <td class="text-end">
+                        <span t-field="line.quantity" />
+                      </td>
+                    </tr>
+                    <tr t-if="line.instructions">
+                      <td colspan="5" class="text-muted">
+                        <span t-field="line.instructions" />
+                      </td>
+                    </tr>
+                  </t>
+                </tbody>
+              </table>
             </t>
+            <p t-else="" class="text-muted">No medicines were prescribed.</p>
+            <div class="mt-5">
+              <p>Doctor's signature: ______________________________</p>
+              <p t-if="o.doctor_id.hospital_license_number" class="text-muted"> License No. <span
+                  t-field="o.doctor_id.hospital_license_number" />
+              </p>
+            </div>
+          </div>
         </t>
-    </template>
+      </t>
+    </t>
+  </template>
 
-    <!-- ============================ Appointment slip ============================ -->
-    <template id="report_appointment_slip">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-                    <div class="page">
-                        <h2>Appointment Slip</h2>
-                        <p class="text-muted"><span t-field="o.name"/></p>
-                        <table class="table table-sm">
-                            <tbody>
-                                <tr>
-                                    <th style="width: 30%;">Patient</th>
-                                    <td><span t-field="o.patient_id.name"/> (<span t-field="o.patient_id.reference"/>)</td>
-                                </tr>
-                                <tr>
-                                    <th>Date &amp; Time</th>
-                                    <td><span t-field="o.appointment_time" t-options="{'widget': 'datetime'}"/></td>
-                                </tr>
-                                <tr t-if="o.doctor_id">
-                                    <th>Doctor</th>
-                                    <td><span t-field="o.doctor_id.name"/></td>
-                                </tr>
-                                <tr t-if="o.clinic_id">
-                                    <th>Clinic</th>
-                                    <td>
-                                        <span t-field="o.clinic_id.name"/>
-                                        <t t-if="o.clinic_id.location"> &#8211; <span t-field="o.clinic_id.location"/></t>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Status</th>
-                                    <td><span t-field="o.state"/></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p class="mt-4">Please arrive 15 minutes before your appointment and bring this slip and your ID.</p>
-                    </div>
-                </t>
-            </t>
+  <!-- ============================ Appointment slip ============================ -->
+  <template id="report_appointment_slip">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-call="web.external_layout">
+          <div class="page">
+            <h2>Appointment Slip</h2>
+            <p class="text-muted">
+              <span t-field="o.name" />
+            </p>
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <th style="width: 30%;">Patient</th>
+                  <td><span t-field="o.patient_id.name" /> (<span t-field="o.patient_id.reference" />
+                    )</td>
+                </tr>
+                <tr>
+                  <th>Date &amp; Time</th>
+                  <td>
+                    <span t-field="o.appointment_time" t-options="{'widget': 'datetime'}" />
+                  </td>
+                </tr>
+                <tr t-if="o.doctor_id">
+                  <th>Doctor</th>
+                  <td>
+                    <span t-field="o.doctor_id.name" />
+                  </td>
+                </tr>
+                <tr t-if="o.clinic_id">
+                  <th>Clinic</th>
+                  <td>
+                    <span t-field="o.clinic_id.name" />
+                    <t t-if="o.clinic_id.location"> &#8211; <span t-field="o.clinic_id.location" /></t>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Status</th>
+                  <td>
+                    <span t-field="o.state" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="mt-4">Please arrive 15 minutes before your appointment and bring this slip and
+              your ID.</p>
+          </div>
         </t>
-    </template>
+      </t>
+    </t>
+  </template>
 
-    <!-- ============================ Discharge summary ============================ -->
-    <template id="report_discharge_summary">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-                    <div class="page">
-                        <h2>Discharge Summary</h2>
-                        <p class="text-muted"><span t-field="o.name"/></p>
-                        <div class="row mt-3 mb-3">
-                            <div class="col-6">
-                                <strong>Patient:</strong> <span t-field="o.patient_id.name"/><br/>
-                                <strong>Patient Reference:</strong> <span t-field="o.patient_id.reference"/><br/>
-                                <strong>Age:</strong> <span t-field="o.patient_id.age"/>
-                            </div>
-                            <div class="col-6">
-                                <strong>Admitted:</strong> <span t-field="o.admission_date" t-options="{'widget': 'datetime'}"/><br/>
-                                <strong>Discharged:</strong> <span t-field="o.discharge_date" t-options="{'widget': 'datetime'}"/><br/>
-                                <strong>Nights:</strong> <span t-field="o.nights"/>
-                            </div>
-                        </div>
-                        <p>
-                            <strong>Ward / Bed:</strong> <span t-field="o.ward_id.name"/> / <span t-field="o.bed_id.name"/><br/>
-                            <strong>Admitting Doctor:</strong> <span t-field="o.admitting_doctor_id.name"/>
-                        </p>
-                        <t t-if="o.reason">
-                            <h5>Reason for Admission</h5>
-                            <p><span t-field="o.reason"/></p>
-                        </t>
-                        <t t-if="o.discharge_notes">
-                            <h5>Discharge Notes</h5>
-                            <p><span t-field="o.discharge_notes"/></p>
-                        </t>
-                        <t t-if="o.transfer_ids">
-                            <h5>Bed Transfers</h5>
-                            <table class="table table-sm table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>From</th>
-                                        <th>To</th>
-                                        <th>Reason</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr t-foreach="o.transfer_ids.sorted('transfer_date')" t-as="transfer">
-                                        <td><span t-field="transfer.transfer_date" t-options="{'widget': 'datetime'}"/></td>
-                                        <td><span t-field="transfer.from_bed_id.display_name"/></td>
-                                        <td><span t-field="transfer.to_bed_id.display_name"/></td>
-                                        <td><span t-field="transfer.reason"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </t>
-                        <div class="mt-5">
-                            <p>Doctor's signature: ______________________________</p>
-                        </div>
-                    </div>
-                </t>
+  <!-- ============================ Discharge summary ============================ -->
+  <template id="report_discharge_summary">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="o">
+        <t t-call="web.external_layout">
+          <div class="page">
+            <h2>Discharge Summary</h2>
+            <p class="text-muted">
+              <span t-field="o.name" />
+            </p>
+            <div class="row mt-3 mb-3">
+              <div class="col-6">
+                <strong>Patient:</strong>
+                <span t-field="o.patient_id.name" />
+                <br />
+                <strong>Patient Reference:</strong>
+                <span t-field="o.patient_id.reference" />
+                <br />
+                <strong>Age:</strong>
+                <span t-field="o.patient_id.age" />
+              </div>
+              <div class="col-6">
+                <strong>Admitted:</strong>
+                <span t-field="o.admission_date" t-options="{'widget': 'datetime'}" />
+                <br />
+                <strong>Discharged:</strong>
+                <span t-field="o.discharge_date" t-options="{'widget': 'datetime'}" />
+                <br />
+                <strong>Nights:</strong>
+                <span t-field="o.nights" />
+              </div>
+            </div>
+            <p>
+              <strong>Ward / Bed:</strong> <span t-field="o.ward_id.name" /> / <span
+                t-field="o.bed_id.name" /><br />
+                            <strong>Admitting Doctor:</strong> <span
+                t-field="o.admitting_doctor_id.name" />
+            </p>
+            <t t-if="o.reason">
+              <h5>Reason for Admission</h5>
+              <p>
+                <span t-field="o.reason" />
+              </p>
             </t>
+            <t t-if="o.discharge_notes">
+              <h5>Discharge Notes</h5>
+              <p>
+                <span t-field="o.discharge_notes" />
+              </p>
+            </t>
+            <t t-if="o.transfer_ids">
+              <h5>Bed Transfers</h5>
+              <table class="table table-sm table-bordered">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Reason</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr t-foreach="o.transfer_ids.sorted('transfer_date')" t-as="transfer">
+                    <td>
+                      <span t-field="transfer.transfer_date" t-options="{'widget': 'datetime'}" />
+                    </td>
+                    <td>
+                      <span t-field="transfer.from_bed_id.display_name" />
+                    </td>
+                    <td>
+                      <span t-field="transfer.to_bed_id.display_name" />
+                    </td>
+                    <td>
+                      <span t-field="transfer.reason" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </t>
+            <div class="mt-5">
+              <p>Doctor's signature: ______________________________</p>
+            </div>
+          </div>
         </t>
-    </template>
+      </t>
+    </t>
+  </template>
 
 </odoo>

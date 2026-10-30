@@ -17,7 +17,6 @@ class HospitalBed(models.Model):
     )
     ward_id = fields.Many2one(
         "hospital.ward",
-        string="Ward",
         required=True,
         index=True,
         ondelete="restrict",
@@ -35,11 +34,9 @@ class HospitalBed(models.Model):
     )
     current_admission_id = fields.Many2one(
         "hospital.admission",
-        string="Current Admission",
         compute="_compute_occupancy",
     )
     active = fields.Boolean(
-        string="Active",
         default=True,
         help="Uncheck to take the bed out of service. An occupied bed cannot be archived.",
     )
@@ -49,18 +46,21 @@ class HospitalBed(models.Model):
         "This bed already exists in the ward.",
     )
     _name_not_blank = models.Constraint(
-        "CHECK(TRIM(name) <> '')", "The bed name cannot be blank."
+        "CHECK(TRIM(name) <> '')",
+        "The bed name cannot be blank.",
     )
 
     @api.depends("name", "ward_id.name")
     def _compute_display_name(self):
         for rec in self:
-            rec.display_name = f"{rec.ward_id.name} / {rec.name}" if rec.ward_id else rec.name or ""
+            rec.display_name = (
+                f"{rec.ward_id.name} / {rec.name}" if rec.ward_id else rec.name or ""
+            )
 
     @api.depends("admission_ids.state")
     def _compute_occupancy(self):
         admissions = self.env["hospital.admission"].search(
-            [("bed_id", "in", self.ids), ("state", "=", "admitted")]
+            [("bed_id", "in", self.ids), ("state", "=", "admitted")],
         )
         by_bed = {admission.bed_id.id: admission for admission in admissions}
         for rec in self:
@@ -69,7 +69,11 @@ class HospitalBed(models.Model):
             rec.is_occupied = bool(admission)
 
     def _search_is_occupied(self, operator, value):
-        occupied_ids = self.env["hospital.admission"].search([("state", "=", "admitted")]).bed_id.ids
+        occupied_ids = (
+            self.env["hospital.admission"]
+            .search([("state", "=", "admitted")])
+            .bed_id.ids
+        )
         return boolean_search_domain(
             operator,
             value,
@@ -83,6 +87,7 @@ class HospitalBed(models.Model):
             if rec.is_occupied:
                 raise ValidationError(
                     self.env._(
-                        "Bed %(bed)s is occupied and cannot be archived.", bed=rec.display_name
-                    )
+                        "Bed %(bed)s is occupied and cannot be archived.",
+                        bed=rec.display_name,
+                    ),
                 )

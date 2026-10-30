@@ -11,8 +11,14 @@ class SaleOrderLine(models.Model):
         super()._compute_discount()
         for line in self:
             contract = line.order_id.hospital_contract_id
-            if not contract or not line.product_id or line.display_type or line.combo_item_id:
+            if (
+                not contract
+                or not line.product_id
+                or line.display_type
+                or line.combo_item_id
+            ):
                 continue
             line.discount = contract._get_line_discount(
-                line.product_id, line.order_id.hospital_payer
+                line.product_id,
+                line.order_id.hospital_payer,
             )

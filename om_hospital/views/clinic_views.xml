@@ -1,107 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- List View -->
-    <record id="view_hospital_clinic_list" model="ir.ui.view">
-        <field name="name">hospital.clinic.list</field>
-        <field name="model">hospital.clinic</field>
-        <field name="arch" type="xml">
-            <list string="Clinics">
-                <field name="name"/>
-                <field name="code"/>
-                <field name="specialty_id"/>
-                <field name="location"/>
-                <field name="head_id"/>
-                <field name="active" column_invisible="True"/>
-            </list>
-        </field>
-    </record>
+  <!-- List View -->
+  <record id="view_hospital_clinic_list" model="ir.ui.view">
+    <field name="name">hospital.clinic.list</field>
+    <field name="model">hospital.clinic</field>
+    <field name="arch" type="xml">
+      <list string="Clinics">
+        <field name="name" />
+        <field name="code" />
+        <field name="specialty_id" />
+        <field name="location" />
+        <field name="head_id" />
+        <field name="active" column_invisible="True" />
+      </list>
+    </field>
+  </record>
 
-    <!-- Form View -->
-    <record id="view_hospital_clinic_form" model="ir.ui.view">
-        <field name="name">hospital.clinic.form</field>
-        <field name="model">hospital.clinic</field>
-        <field name="arch" type="xml">
-            <form string="Clinic Form">
-                <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_open_appointments" type="object"
-                                class="oe_stat_button" icon="calendar_today">
-                            <div class="o_field_widget o_stat_info">
-                                <span class="o_stat_value">
-                                    <field name="appointment_count"/>
-                                </span>
-                                <span class="o_stat_text">Appointments</span>
-                            </div>
-                        </button>
-                    </div>
-                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
-                            invisible="active"/>
-                    <div class="oe_title">
-                        <label for="name"/>
-                        <h1>
-                            <field name="name" placeholder="e.g. Eye Care Clinic"/>
-                        </h1>
-                    </div>
-                    <group>
-                        <group string="Clinic Details">
-                            <field name="code" placeholder="e.g. EYE"/>
-                            <field name="specialty_id"/>
-                            <field name="location"/>
-                            <field name="active" invisible="1"/>
-                        </group>
-                        <group string="Management">
-                            <field name="head_id" options="{'no_create': True}"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Clinicians" name="clinicians">
-                            <field name="clinician_ids" options="{'no_create': True}">
-                                <list string="Clinicians">
-                                    <field name="name"/>
-                                    <field name="clinician_role"/>
-                                    <field name="hospital_specialty_id"/>
-                                    <field name="hospital_license_number"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-                <chatter/>
-            </form>
-        </field>
-    </record>
+  <!-- Form View -->
+  <record id="view_hospital_clinic_form" model="ir.ui.view">
+    <field name="name">hospital.clinic.form</field>
+    <field name="model">hospital.clinic</field>
+    <field name="arch" type="xml">
+      <form string="Clinic Form">
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="action_open_appointments" type="object"
+              class="oe_stat_button" icon="calendar_today">
+              <div class="o_field_widget o_stat_info">
+                <span class="o_stat_value">
+                  <field name="appointment_count" />
+                </span>
+                <span class="o_stat_text">Appointments</span>
+              </div>
+            </button>
+          </div>
+          <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+            invisible="active" />
+          <div class="oe_title">
+            <label for="name" />
+            <h1>
+              <field name="name" placeholder="e.g. Eye Care Clinic" />
+            </h1>
+          </div>
+          <group>
+            <group string="Clinic Details">
+              <field name="code" placeholder="e.g. EYE" />
+              <field name="specialty_id" />
+              <field name="location" />
+              <field name="active" invisible="1" />
+            </group>
+            <group string="Management">
+              <field name="head_id" options="{'no_create': True}" />
+            </group>
+          </group>
+          <notebook>
+            <page string="Clinicians" name="clinicians">
+              <field name="clinician_ids" options="{'no_create': True}">
+                <list string="Clinicians">
+                  <field name="name" />
+                  <field name="clinician_role" />
+                  <field name="hospital_specialty_id" />
+                  <field name="hospital_license_number" />
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <chatter />
+      </form>
+    </field>
+  </record>
 
-    <!-- Search View -->
-    <record id="view_hospital_clinic_search" model="ir.ui.view">
-        <field name="name">hospital.clinic.search</field>
-        <field name="model">hospital.clinic</field>
-        <field name="arch" type="xml">
-            <search string="Clinic Search">
-                <field name="name"/>
-                <field name="code"/>
-                <field name="specialty_id"/>
-                <filter string="Archived" name="filter_archived" domain="[('active', '=', False)]"/>
-                <separator/>
-                <filter string="Specialty" name="group_specialty" context="{'group_by': 'specialty_id'}"/>
-            </search>
-        </field>
-    </record>
+  <!-- Search View -->
+  <record id="view_hospital_clinic_search" model="ir.ui.view">
+    <field name="name">hospital.clinic.search</field>
+    <field name="model">hospital.clinic</field>
+    <field name="arch" type="xml">
+      <search string="Clinic Search">
+        <field name="name" />
+        <field name="code" />
+        <field name="specialty_id" />
+        <filter string="Archived" name="filter_archived" domain="[('active', '=', False)]" />
+        <separator />
+        <filter string="Specialty" name="group_specialty" context="{'group_by': 'specialty_id'}" />
+      </search>
+    </field>
+  </record>
 
-    <!-- Window Action -->
-    <record id="action_hospital_clinic" model="ir.actions.act_window">
-        <field name="name">Clinics</field>
-        <field name="res_model">hospital.clinic</field>
-        <field name="view_mode">list,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create your first clinic!
-            </p>
-            <p>
-                A clinic groups clinicians around one specialty, for example an Eye Care Clinic.
-                Appointments are booked in a clinic with one of its doctors.
-            </p>
-        </field>
-    </record>
+  <!-- Window Action -->
+  <record id="action_hospital_clinic" model="ir.actions.act_window">
+    <field name="name">Clinics</field>
+    <field name="res_model">hospital.clinic</field>
+    <field name="view_mode">list,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Create your first clinic!
+      </p>
+      <p>
+        A clinic groups clinicians around one specialty, for example an Eye Care Clinic.
+        Appointments are booked in a clinic with one of its doctors.
+      </p>
+    </field>
+  </record>
 
 </odoo>

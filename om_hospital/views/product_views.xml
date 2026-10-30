@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Product form: flag a product as a prescribable medicine -->
-    <record id="view_product_template_form_inherit_hospital" model="ir.ui.view">
-        <field name="name">product.template.form.inherit.hospital</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@name='options']" position="inside">
-                <span class="d-inline-flex">
-                    <field name="is_medicine"/>
-                    <label for="is_medicine"/>
-                </span>
-            </xpath>
-        </field>
-    </record>
+  <!-- Product form: flag a product as a prescribable medicine -->
+  <record id="view_product_template_form_inherit_hospital" model="ir.ui.view">
+    <field name="name">product.template.form.inherit.hospital</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_form_view" />
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='options']" position="inside">
+        <span class="d-inline-flex">
+          <field name="is_medicine" />
+          <label for="is_medicine" />
+        </span>
+      </xpath>
+    </field>
+  </record>
 
-    <!-- Medicines = products flagged as medicine -->
-    <record id="action_hospital_medicine" model="ir.actions.act_window">
-        <field name="name">Medicines</field>
-        <field name="res_model">product.template</field>
-        <field name="view_mode">kanban,list,form</field>
-        <field name="domain">[('is_medicine', '=', True)]</field>
-        <field name="context" eval="{'default_is_medicine': True, 'default_sale_ok': True, 'default_categ_id': ref('product_category_medicine')}"/>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Add your first medicine!
-            </p>
-            <p>
-                Medicines are regular products flagged as prescribable, so prescriptions
-                can later be billed and dispensed through Sales.
-            </p>
-        </field>
-    </record>
+  <!-- Medicines = products flagged as medicine -->
+  <record id="action_hospital_medicine" model="ir.actions.act_window">
+    <field name="name">Medicines</field>
+    <field name="res_model">product.template</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('is_medicine', '=', True)]</field>
+    <field name="context"
+      eval="{'default_is_medicine': True, 'default_sale_ok': True, 'default_categ_id': ref('product_category_medicine')}" />
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Add your first medicine!
+      </p>
+      <p>
+        Medicines are regular products flagged as prescribable, so prescriptions
+        can later be billed and dispensed through Sales.
+      </p>
+    </field>
+  </record>
 
 </odoo>

@@ -1,5 +1,1 @@
-from . import test_patient
-from . import test_appointment
-from . import test_billing
-from . import test_admission
-from . import test_reports
+from . import test_admission, test_appointment, test_billing, test_patient, test_reports

@@ -1,7 +1,6 @@
 {
     "name": "Hospital Management System",
     "summary": "Manage hospital operations, patients, clinicians, clinics and appointments",
-    "description": "A comprehensive hospital management system to manage patients, clinicians, clinics, appointments, and medical records.",
     "author": "Ahmed Khatib",
     "category": "Healthcare",
     "version": "20.0.1.8.0",
@@ -46,6 +45,5 @@
         "demo/demo.xml",
     ],
     "application": True,
-    "installable": True,
     "license": "LGPL-3",
 }

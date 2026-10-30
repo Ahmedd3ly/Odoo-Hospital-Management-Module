@@ -8,7 +8,6 @@ class HospitalContractLine(models.Model):
 
     contract_id = fields.Many2one(
         "hospital.contract",
-        string="Contract",
         required=True,
         index=True,
         ondelete="cascade",

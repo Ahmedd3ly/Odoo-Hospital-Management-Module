@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from psycopg2 import IntegrityError
 
-from odoo import Command, fields
+from odoo import fields
 from odoo.exceptions import ValidationError
 from odoo.tests.common import tagged
 from odoo.tools import mute_logger
@@ -20,10 +20,17 @@ class TestPatient(HospitalCommon):
     def test_minor_needs_guardian(self):
         child_dob = fields.Date.today() - timedelta(days=365 * 8)
         with self.assertRaises(ValidationError):
-            self._make_patient("Little One", "little@example.com", date_of_birth=child_dob)
+            self._make_patient(
+                "Little One",
+                "little@example.com",
+                date_of_birth=child_dob,
+            )
         guardian = self.env["res.partner"].create({"name": "Parent Person"})
         child = self._make_patient(
-            "Little One", "little@example.com", date_of_birth=child_dob, guardian_id=guardian.id
+            "Little One",
+            "little@example.com",
+            date_of_birth=child_dob,
+            guardian_id=guardian.id,
         )
         self.assertTrue(child.is_minor)
 
@@ -36,12 +43,17 @@ class TestPatient(HospitalCommon):
         self.assertNotIn(non_patient, patients)
         self.assertIn(non_patient, others)
         self.assertNotIn(self.patient.partner_id, others)
-        self.assertIn(self.patient.partner_id, partners.search([("is_patient", "!=", False)]))
+        self.assertIn(
+            self.patient.partner_id,
+            partners.search([("is_patient", "!=", False)]),
+        )
 
     def test_future_birth_date_rejected(self):
         with self.assertRaises(ValidationError):
             self._make_patient(
-                "Future", "future@example.com", date_of_birth=fields.Date.today() + timedelta(days=2)
+                "Future",
+                "future@example.com",
+                date_of_birth=fields.Date.today() + timedelta(days=2),
             )
 
     def test_phone_format_validated(self):
@@ -65,27 +77,47 @@ class TestPatient(HospitalCommon):
     def test_condition_lines_keep_tags_in_sync(self):
         allergic = self.env.ref("om_hospital.tag_allergic")
         condition = self.env["hospital.patient.condition"].create(
-            {"patient_id": self.patient.id, "condition_type": "allergy", "name": "Penicillin"}
+            {
+                "patient_id": self.patient.id,
+                "condition_type": "allergy",
+                "name": "Penicillin",
+            },
         )
         self.assertIn(allergic, self.patient.tag_ids)
         condition.unlink()
         self.assertNotIn(allergic, self.patient.tag_ids)
 
     def test_single_primary_emergency_contact(self):
-        partners = self.env["res.partner"].create([{"name": "Contact A"}, {"name": "Contact B"}])
+        partners = self.env["res.partner"].create(
+            [{"name": "Contact A"}, {"name": "Contact B"}],
+        )
         contacts = self.env["hospital.emergency.contact"]
         contacts.create(
-            {"patient_id": self.patient.id, "partner_id": partners[0].id, "relationship": "parent", "is_primary": True}
+            {
+                "patient_id": self.patient.id,
+                "partner_id": partners[0].id,
+                "relationship": "parent",
+                "is_primary": True,
+            },
         )
         with self.assertRaises(ValidationError):
             contacts.create(
-                {"patient_id": self.patient.id, "partner_id": partners[1].id, "relationship": "friend", "is_primary": True}
+                {
+                    "patient_id": self.patient.id,
+                    "partner_id": partners[1].id,
+                    "relationship": "friend",
+                    "is_primary": True,
+                },
             )
 
     def test_patient_cannot_be_own_emergency_contact(self):
         with self.assertRaises(ValidationError):
             self.env["hospital.emergency.contact"].create(
-                {"patient_id": self.patient.id, "partner_id": self.patient.partner_id.id, "relationship": "other"}
+                {
+                    "patient_id": self.patient.id,
+                    "partner_id": self.patient.partner_id.id,
+                    "relationship": "other",
+                },
             )
 
     def test_deceased_patient_gets_no_appointment(self):

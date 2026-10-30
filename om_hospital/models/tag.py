@@ -8,7 +8,8 @@ class HospitalTag(models.Model):
 
     name = fields.Char(string="Tag Name", required=True, help="Name of the tag.")
     color = fields.Integer(
-        string="Color Index", help="Custom color selector for the tag badge in Odoo."
+        string="Color Index",
+        help="Custom color selector for the tag badge in Odoo.",
     )
 
     _name_uniq = models.Constraint(

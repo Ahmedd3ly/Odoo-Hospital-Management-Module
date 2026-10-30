@@ -1,6 +1,6 @@
 import re
-from urllib.parse import quote
 from datetime import datetime, time, timedelta
+from urllib.parse import quote
 
 import pytz
 from markupsafe import Markup
@@ -51,7 +51,6 @@ class HospitalAppointment(models.Model):
     # Patient
     patient_id = fields.Many2one(
         "hospital.patient",
-        string="Patient",
         required=True,
         index=True,
         ondelete="restrict",
@@ -70,13 +69,11 @@ class HospitalAppointment(models.Model):
 
     # Scheduling
     booking_date = fields.Date(
-        string="Booking Date",
         default=fields.Date.today,
         tracking=True,
         help="Date when the appointment booking was registered.",
     )
     appointment_time = fields.Datetime(
-        string="Appointment Time",
         default=fields.Datetime.now,
         required=True,
         index=True,
@@ -84,7 +81,6 @@ class HospitalAppointment(models.Model):
         help="Scheduled date and time for the doctor consultation.",
     )
     duration = fields.Float(
-        string="Duration",
         default=0.5,
         help="Expected length of the consultation in hours (0.5 = 30 minutes). "
         "Used to prevent overlapping bookings for the same doctor.",
@@ -98,7 +94,6 @@ class HospitalAppointment(models.Model):
     )
     clinic_id = fields.Many2one(
         "hospital.clinic",
-        string="Clinic",
         index=True,
         ondelete="restrict",
         tracking=True,
@@ -111,7 +106,6 @@ class HospitalAppointment(models.Model):
     )
     doctor_id = fields.Many2one(
         "hr.employee",
-        string="Doctor",
         domain="[('is_clinician', '=', True), ('clinician_role', '=', 'doctor'), ('id', 'in', clinic_clinician_ids)]",
         index=True,
         ondelete="restrict",
@@ -120,7 +114,6 @@ class HospitalAppointment(models.Model):
     )
     priority = fields.Selection(
         [("0", "Low"), ("1", "Normal"), ("2", "High"), ("3", "Very High")],
-        string="Priority",
         default="1",
         tracking=True,
         help="Indicates the clinical priority level or urgency of the case.",
@@ -143,7 +136,6 @@ class HospitalAppointment(models.Model):
     )
     confirmed_by = fields.Many2one(
         "res.users",
-        string="Confirmed By",
         readonly=True,
         copy=False,
         tracking=True,
@@ -169,7 +161,6 @@ class HospitalAppointment(models.Model):
     )
     cancelled_by = fields.Many2one(
         "res.users",
-        string="Cancelled By",
         readonly=True,
         copy=False,
         tracking=True,
@@ -182,7 +173,6 @@ class HospitalAppointment(models.Model):
         help="Date and time the appointment was cancelled.",
     )
     cancellation_reason = fields.Text(
-        string="Cancellation Reason",
         readonly=True,
         copy=False,
         help="Reason given when the appointment was cancelled.",
@@ -194,11 +184,9 @@ class HospitalAppointment(models.Model):
         help="Record clinical observations, diagnoses, or comments during the consultation.",
     )
     chief_complaint = fields.Text(
-        string="Chief Complaint",
         help="Main reason the patient came in, in the patient's own words.",
     )
     diagnosis = fields.Text(
-        string="Diagnosis",
         help="Doctor's diagnosis. Required before the consultation can be completed.",
     )
     weight = fields.Float(
@@ -265,7 +253,6 @@ class HospitalAppointment(models.Model):
         help="Inpatient admissions that started from this appointment.",
     )
     admission_count = fields.Integer(
-        string="Admission Count",
         compute="_compute_admission_count",
     )
     sale_order_count = fields.Integer(
@@ -283,7 +270,7 @@ class HospitalAppointment(models.Model):
         "The appointment reference must be unique.",
     )
     _doctor_window_idx = models.Index(
-        "(doctor_id, appointment_time, appointment_end) WHERE state != 'cancel'"
+        "(doctor_id, appointment_time, appointment_end) WHERE state != 'cancel'",
     )
     _vitals_not_negative = models.Constraint(
         "CHECK(weight >= 0 AND height >= 0 AND systolic_bp >= 0 AND diastolic_bp >= 0)",
@@ -382,18 +369,19 @@ class HospitalAppointment(models.Model):
                     ("state", "!=", "cancel"),
                     ("appointment_time", "<", end),
                     ("appointment_end", ">", rec.appointment_time),
-                ]
+                ],
             )
             if clash:
                 local_time = fields.Datetime.context_timestamp(
-                    rec, rec.appointment_time
+                    rec,
+                    rec.appointment_time,
                 )
                 raise ValidationError(
                     self.env._(
                         "%(doctor)s already has an appointment overlapping %(time)s.",
                         doctor=rec.doctor_id.display_name,
                         time=local_time.strftime("%Y-%m-%d %H:%M"),
-                    )
+                    ),
                 )
 
     @api.constrains("systolic_bp", "diastolic_bp")
@@ -406,8 +394,8 @@ class HospitalAppointment(models.Model):
             ):
                 raise ValidationError(
                     self.env._(
-                        "Systolic pressure must be higher than diastolic pressure."
-                    )
+                        "Systolic pressure must be higher than diastolic pressure.",
+                    ),
                 )
 
     @api.constrains("follow_up_date", "appointment_time")
@@ -416,11 +404,14 @@ class HospitalAppointment(models.Model):
             if not (rec.follow_up_date and rec.appointment_time):
                 continue
             visit_day = fields.Datetime.context_timestamp(
-                rec, rec.appointment_time
+                rec,
+                rec.appointment_time,
             ).date()
             if rec.follow_up_date <= visit_day:
                 raise ValidationError(
-                    self.env._("The follow-up date must be after the appointment date.")
+                    self.env._(
+                        "The follow-up date must be after the appointment date.",
+                    ),
                 )
 
     @api.constrains("patient_id")
@@ -432,7 +423,7 @@ class HospitalAppointment(models.Model):
                     self.env._(
                         "%(patient)s is marked as deceased and cannot be given an appointment.",
                         patient=rec.patient_id.display_name,
-                    )
+                    ),
                 )
 
     @api.constrains("clinic_id", "doctor_id")
@@ -449,7 +440,7 @@ class HospitalAppointment(models.Model):
                         "%(doctor)s does not work in %(clinic)s.",
                         doctor=rec.doctor_id.display_name,
                         clinic=rec.clinic_id.name,
-                    )
+                    ),
                 )
 
     @api.onchange("clinic_id")
@@ -475,7 +466,7 @@ class HospitalAppointment(models.Model):
     def write(self, vals):
         if LOCKED_WHEN_DONE & vals.keys() and any(rec.state == "done" for rec in self):
             raise UserError(
-                self.env._("The medical record of a completed appointment is locked.")
+                self.env._("The medical record of a completed appointment is locked."),
             )
         return super().write(vals)
 
@@ -483,7 +474,7 @@ class HospitalAppointment(models.Model):
     def _unlink_except_active_appointment(self):
         if any(rec.state not in ("draft", "cancel") for rec in self):
             raise UserError(
-                self.env._("Only draft or cancelled appointments can be deleted.")
+                self.env._("Only draft or cancelled appointments can be deleted."),
             )
 
     # ------------------------------------------------------------------
@@ -521,10 +512,8 @@ class HospitalAppointment(models.Model):
         self.ensure_one()
         patient_name = self.patient_id.name or self.env._("Patient")
         appt_num = self.name or "No."
-        doctor_name = (
-            getattr(self, "doctor_id", False)
-            and self.doctor_id.name
-            or self.env._("our doctor")
+        doctor_name = getattr(self, "doctor_id", False) and (
+            self.doctor_id.name or self.env._("our doctor")
         )
         appointment_time_str = self._get_formatted_appointment_time()
 
@@ -548,7 +537,7 @@ class HospitalAppointment(models.Model):
         body_html = Markup(
             f"<p>Dear <strong>{patient_partner.name}</strong>,</p>"
             f"<p>{raw_msg.replace(chr(10), '<br/>')}</p>"
-            f"<p>Thank you for choosing our clinic!</p>"
+            f"<p>Thank you for choosing our clinic!</p>",
         )
 
         self.message_post(
@@ -561,7 +550,8 @@ class HospitalAppointment(models.Model):
 
     def action_confirm(self):
         self._ensure_state(
-            ("draft",), self.env._("Only draft appointments can be confirmed.")
+            ("draft",),
+            self.env._("Only draft appointments can be confirmed."),
         )
         for rec in self:
             if not rec.clinic_id:
@@ -569,27 +559,27 @@ class HospitalAppointment(models.Model):
                     self.env._(
                         "Assign a clinic to %(appointment)s before confirming it.",
                         appointment=rec.name,
-                    )
+                    ),
                 )
             if not rec.doctor_id:
                 raise UserError(
                     self.env._(
                         "Assign a doctor to %(appointment)s before confirming it.",
                         appointment=rec.name,
-                    )
+                    ),
                 )
             rec.write(
                 {
                     "state": "confirmed",
                     "confirmed_by": self.env.user.id,
                     "confirmation_date": fields.Datetime.now(),
-                }
+                },
             )
             rec.message_post(
                 body=self.env._(
                     "Appointment for %(patient)s has been confirmed.",
                     patient=rec.patient_id.name,
-                )
+                ),
             )
             # Send Email Confirmation
             rec._send_confirmation_email()
@@ -604,13 +594,13 @@ class HospitalAppointment(models.Model):
                 {
                     "state": "ongoing",
                     "consultation_start": fields.Datetime.now(),
-                }
+                },
             )
             rec.message_post(
                 body=self.env._(
                     "Consultation for %(patient)s has started.",
                     patient=rec.patient_id.name,
-                )
+                ),
             )
 
     def action_done(self):
@@ -624,19 +614,19 @@ class HospitalAppointment(models.Model):
                     self.env._(
                         "Enter a diagnosis for %(appointment)s before completing it.",
                         appointment=rec.name,
-                    )
+                    ),
                 )
             rec.write(
                 {
                     "state": "done",
                     "consultation_end": fields.Datetime.now(),
-                }
+                },
             )
             rec.message_post(
                 body=self.env._(
                     "Appointment for %(patient)s has been marked as done.",
                     patient=rec.patient_id.name,
-                )
+                ),
             )
 
     def action_cancel(self):
@@ -661,8 +651,8 @@ class HospitalAppointment(models.Model):
         if not phone:
             raise UserError(
                 self.env._(
-                    "This patient does not have a phone/mobile number configured."
-                )
+                    "This patient does not have a phone/mobile number configured.",
+                ),
             )
 
         clean_phone = re.sub(r"\D", "", phone)
@@ -684,15 +674,16 @@ class HospitalAppointment(models.Model):
         if self.state not in ("ongoing", "done"):
             raise UserError(
                 self.env._(
-                    "Follow-ups can only be scheduled during or after the consultation."
-                )
+                    "Follow-ups can only be scheduled during or after the consultation.",
+                ),
             )
         if not self.follow_up_date:
             raise UserError(self.env._("Set a follow-up date first."))
         if self.follow_up_appointment_id:
             raise UserError(self.env._("A follow-up appointment already exists."))
         visit_day = fields.Datetime.context_timestamp(
-            self, self.appointment_time
+            self,
+            self.appointment_time,
         ).date()
         follow_up = self.create(
             {
@@ -704,7 +695,7 @@ class HospitalAppointment(models.Model):
                 # Same time of day, on the follow-up date.
                 "appointment_time": self.appointment_time
                 + (self.follow_up_date - visit_day),
-            }
+            },
         )
         self.follow_up_appointment_id = follow_up
         self.message_post(
@@ -712,7 +703,7 @@ class HospitalAppointment(models.Model):
                 "Follow-up appointment %(reference)s scheduled for %(date)s.",
                 reference=follow_up.name,
                 date=self.follow_up_date,
-            )
+            ),
         )
         return {
             "type": "ir.actions.act_window",
@@ -729,18 +720,18 @@ class HospitalAppointment(models.Model):
         self.ensure_one()
         if self.state != "done":
             raise UserError(
-                self.env._("Complete the appointment before creating a quotation.")
+                self.env._("Complete the appointment before creating a quotation."),
             )
         if self.sale_order_ids.filtered(lambda order: order.state != "cancel"):
             raise UserError(
-                self.env._("This appointment already has a quotation or sales order.")
+                self.env._("This appointment already has a quotation or sales order."),
             )
         orders = self.env["sale.order"]._create_appointment_quotations(self)
         self.message_post(
             body=self.env._(
                 "Quotation(s) created: %(orders)s.",
                 orders=", ".join(orders.mapped("name")),
-            )
+            ),
         )
         return self.action_view_sales_orders()
 
@@ -757,7 +748,7 @@ class HospitalAppointment(models.Model):
                     "cancelled_by": self.env.user.id,
                     "cancellation_date": fields.Datetime.now(),
                     "cancellation_reason": reason,
-                }
+                },
             )
             rec.message_post(
                 body=Markup("<br/>").join(
@@ -768,8 +759,8 @@ class HospitalAppointment(models.Model):
                             user=self.env.user.name,
                         ),
                         self.env._("Reason: %(reason)s", reason=reason),
-                    ]
-                )
+                    ],
+                ),
             )
 
     def action_draft(self):
@@ -788,13 +779,13 @@ class HospitalAppointment(models.Model):
                     "cancelled_by": False,
                     "cancellation_date": False,
                     "cancellation_reason": False,
-                }
+                },
             )
             rec.message_post(
                 body=self.env._(
                     "Appointment for %(patient)s has been reset to draft.",
                     patient=rec.patient_id.name,
-                )
+                ),
             )
 
     # ------------------------------------------------------------------
@@ -848,7 +839,7 @@ class HospitalAppointment(models.Model):
             ("priority", "in", URGENT_PRIORITIES),
         ]
         by_state = dict(
-            self._read_group(domain, groupby=["state"], aggregates=["__count"])
+            self._read_group(domain, groupby=["state"], aggregates=["__count"]),
         )
         counts = {
             state: by_state.get(state, 0)

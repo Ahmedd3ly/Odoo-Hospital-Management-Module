@@ -18,7 +18,7 @@ class HospitalCommon(TransactionCase):
                 "is_clinician": True,
                 "clinician_role": "doctor",
                 "hospital_consultation_fee": 500,
-            }
+            },
         )
         cls.doctor2 = employees.create(
             {
@@ -26,14 +26,14 @@ class HospitalCommon(TransactionCase):
                 "is_clinician": True,
                 "clinician_role": "doctor",
                 "hospital_consultation_fee": 300,
-            }
+            },
         )
         cls.clinic = cls.env["hospital.clinic"].create(
             {
                 "name": "Test Clinic",
                 "code": "tst",
                 "clinician_ids": [Command.set((cls.doctor | cls.doctor2).ids)],
-            }
+            },
         )
         cls.patient = cls._make_patient("Test Patient", "test.patient@example.com")
 

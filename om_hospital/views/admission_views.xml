@@ -1,123 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- List View -->
-    <record id="view_hospital_admission_list" model="ir.ui.view">
-        <field name="name">hospital.admission.list</field>
-        <field name="model">hospital.admission</field>
-        <field name="arch" type="xml">
-            <list string="Admissions" decoration-info="state == 'draft'" decoration-warning="state == 'admitted'" decoration-muted="state == 'cancel'" sample="1">
-                <field name="name"/>
-                <field name="patient_id"/>
-                <field name="ward_id"/>
-                <field name="bed_id"/>
-                <field name="admission_date"/>
-                <field name="discharge_date" optional="show"/>
-                <field name="nights"/>
-                <field name="admitting_doctor_id" optional="hide"/>
-                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'admitted'" decoration-success="state == 'discharged'" decoration-danger="state == 'cancel'"/>
-            </list>
-        </field>
-    </record>
+  <!-- List View -->
+  <record id="view_hospital_admission_list" model="ir.ui.view">
+    <field name="name">hospital.admission.list</field>
+    <field name="model">hospital.admission</field>
+    <field name="arch" type="xml">
+      <list string="Admissions" decoration-info="state == 'draft'"
+        decoration-warning="state == 'admitted'" decoration-muted="state == 'cancel'" sample="1">
+        <field name="name" />
+        <field name="patient_id" />
+        <field name="ward_id" />
+        <field name="bed_id" />
+        <field name="admission_date" />
+        <field name="discharge_date" optional="show" />
+        <field name="nights" />
+        <field name="admitting_doctor_id" optional="hide" />
+        <field name="state" widget="badge" decoration-info="state == 'draft'"
+          decoration-warning="state == 'admitted'" decoration-success="state == 'discharged'"
+          decoration-danger="state == 'cancel'" />
+      </list>
+    </field>
+  </record>
 
-    <!-- Form View -->
-    <record id="view_hospital_admission_form" model="ir.ui.view">
-        <field name="name">hospital.admission.form</field>
-        <field name="model">hospital.admission</field>
-        <field name="arch" type="xml">
-            <form string="Admission">
-                <header>
-                    <button name="action_admit" string="Admit" type="object" class="oe_highlight" invisible="state != 'draft'"/>
-                    <button name="action_transfer_bed" string="Transfer Bed" type="object" invisible="state != 'admitted'"/>
-                    <button name="action_discharge" string="Discharge" type="object" class="oe_highlight" invisible="state != 'admitted'" title="Discharge the patient and close the stay."/>
-                    <button name="action_create_quotation" string="Create Quotation" type="object" class="btn-secondary" invisible="state != 'discharged' or sale_order_count &gt; 0" title="Bill the stay (split between patient and company when a contract applies)."/>
-                    <button name="action_cancel" string="Cancel" type="object" invisible="state != 'draft'"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,admitted,discharged"/>
-                </header>
-                <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_view_sales_orders" type="object" class="oe_stat_button" icon="receipt_long" invisible="sale_order_count == 0">
-                            <field name="sale_order_count" widget="statinfo" string="Sales Orders"/>
-                        </button>
-                    </div>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name"/>
-                        </h1>
-                    </div>
-                    <group>
-                        <group>
-                            <field name="patient_id" options="{'no_create': True}" readonly="state != 'draft'"/>
-                            <field name="appointment_id" options="{'no_create': True}" readonly="state != 'draft'"/>
-                            <field name="admitting_doctor_id" options="{'no_create': True}" readonly="state in ('discharged', 'cancel')"/>
-                        </group>
-                        <group>
-                            <field name="bed_id" options="{'no_create': True}" readonly="state != 'draft'"/>
-                            <field name="ward_id"/>
-                            <field name="admission_date" readonly="state != 'draft'"/>
-                            <field name="discharge_date" invisible="not discharge_date"/>
-                            <field name="nights" invisible="state in ('draft', 'cancel')"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Clinical" name="clinical">
-                            <group>
-                                <field name="reason" readonly="state in ('discharged', 'cancel')" placeholder="Why is the patient being admitted?"/>
-                                <field name="discharge_notes" invisible="state not in ('admitted', 'discharged')" readonly="state == 'discharged'" placeholder="Condition at discharge, follow-up instructions..."/>
-                            </group>
-                        </page>
-                        <page string="Bed Transfers" name="transfers" invisible="not transfer_ids">
-                            <field name="transfer_ids" readonly="1">
-                                <list string="Bed Transfers">
-                                    <field name="transfer_date"/>
-                                    <field name="from_bed_id"/>
-                                    <field name="to_bed_id"/>
-                                    <field name="reason"/>
-                                    <field name="user_id"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-                <chatter/>
-            </form>
-        </field>
-    </record>
+  <!-- Form View -->
+  <record id="view_hospital_admission_form" model="ir.ui.view">
+    <field name="name">hospital.admission.form</field>
+    <field name="model">hospital.admission</field>
+    <field name="arch" type="xml">
+      <form string="Admission">
+        <header>
+          <button name="action_admit" string="Admit" type="object" class="oe_highlight"
+            invisible="state != 'draft'" />
+          <button name="action_transfer_bed" string="Transfer Bed" type="object"
+            invisible="state != 'admitted'" />
+          <button name="action_discharge" string="Discharge" type="object" class="oe_highlight"
+            invisible="state != 'admitted'" title="Discharge the patient and close the stay." />
+          <button name="action_create_quotation" string="Create Quotation" type="object"
+            class="btn-secondary" invisible="state != 'discharged' or sale_order_count &gt; 0"
+            title="Bill the stay (split between patient and company when a contract applies)." />
+          <button name="action_cancel" string="Cancel" type="object" invisible="state != 'draft'" />
+          <field name="state" widget="statusbar" statusbar_visible="draft,admitted,discharged" />
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_sales_orders" type="object" class="oe_stat_button"
+              icon="receipt_long" invisible="sale_order_count == 0">
+              <field name="sale_order_count" widget="statinfo" string="Sales Orders" />
+            </button>
+          </div>
+          <div class="oe_title">
+            <h1>
+              <field name="name" />
+            </h1>
+          </div>
+          <group>
+            <group>
+              <field name="patient_id" options="{'no_create': True}" readonly="state != 'draft'" />
+              <field name="appointment_id" options="{'no_create': True}" readonly="state != 'draft'" />
+              <field name="admitting_doctor_id" options="{'no_create': True}"
+                readonly="state in ('discharged', 'cancel')" />
+            </group>
+            <group>
+              <field name="bed_id" options="{'no_create': True}" readonly="state != 'draft'" />
+              <field name="ward_id" />
+              <field name="admission_date" readonly="state != 'draft'" />
+              <field name="discharge_date" invisible="not discharge_date" />
+              <field name="nights" invisible="state in ('draft', 'cancel')" />
+            </group>
+          </group>
+          <notebook>
+            <page string="Clinical" name="clinical">
+              <group>
+                <field name="reason" readonly="state in ('discharged', 'cancel')"
+                  placeholder="Why is the patient being admitted?" />
+                <field name="discharge_notes" invisible="state not in ('admitted', 'discharged')"
+                  readonly="state == 'discharged'"
+                  placeholder="Condition at discharge, follow-up instructions..." />
+              </group>
+            </page>
+            <page string="Bed Transfers" name="transfers" invisible="not transfer_ids">
+              <field name="transfer_ids" readonly="1">
+                <list string="Bed Transfers">
+                  <field name="transfer_date" />
+                  <field name="from_bed_id" />
+                  <field name="to_bed_id" />
+                  <field name="reason" />
+                  <field name="user_id" />
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <chatter />
+      </form>
+    </field>
+  </record>
 
-    <!-- Search View -->
-    <record id="view_hospital_admission_search" model="ir.ui.view">
-        <field name="name">hospital.admission.search</field>
-        <field name="model">hospital.admission</field>
-        <field name="arch" type="xml">
-            <search string="Admission Search">
-                <field name="name" string="Admission / Patient" filter_domain="['|', '|', ('name', 'ilike', self), ('patient_id.name', 'ilike', self), ('patient_id.reference', 'ilike', self)]"/>
-                <field name="bed_id"/>
-                <filter string="Currently Admitted" name="filter_admitted" domain="[('state', '=', 'admitted')]"/>
-                <filter string="Discharged" name="filter_discharged" domain="[('state', '=', 'discharged')]"/>
-                <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]"/>
-                <separator/>
-                <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
-                <filter string="Ward" name="group_ward" context="{'group_by': 'ward_id'}"/>
-                <filter string="Patient" name="group_patient" context="{'group_by': 'patient_id'}"/>
-            </search>
-        </field>
-    </record>
+  <!-- Search View -->
+  <record id="view_hospital_admission_search" model="ir.ui.view">
+    <field name="name">hospital.admission.search</field>
+    <field name="model">hospital.admission</field>
+    <field name="arch" type="xml">
+      <search string="Admission Search">
+        <field name="name" string="Admission / Patient"
+          filter_domain="['|', '|', ('name', 'ilike', self), ('patient_id.name', 'ilike', self), ('patient_id.reference', 'ilike', self)]" />
+        <field name="bed_id" />
+        <filter string="Currently Admitted" name="filter_admitted"
+          domain="[('state', '=', 'admitted')]" />
+        <filter string="Discharged" name="filter_discharged" domain="[('state', '=', 'discharged')]" />
+        <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]" />
+        <separator />
+        <filter string="Status" name="group_state" context="{'group_by': 'state'}" />
+        <filter string="Ward" name="group_ward" context="{'group_by': 'ward_id'}" />
+        <filter string="Patient" name="group_patient" context="{'group_by': 'patient_id'}" />
+      </search>
+    </field>
+  </record>
 
-    <!-- Window Action -->
-    <record id="action_hospital_admission" model="ir.actions.act_window">
-        <field name="name">Admissions</field>
-        <field name="res_model">hospital.admission</field>
-        <field name="view_mode">list,form</field>
-        <field name="context">{'search_default_filter_admitted': 1}</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Admit your first patient!
-            </p>
-            <p>
-                An admission places a patient in a bed. When the patient is discharged, the
-                stay is billed per night at the standard bed-day price.
-            </p>
-        </field>
-    </record>
+  <!-- Window Action -->
+  <record id="action_hospital_admission" model="ir.actions.act_window">
+    <field name="name">Admissions</field>
+    <field name="res_model">hospital.admission</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{'search_default_filter_admitted': 1}</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Admit your first patient!
+      </p>
+      <p>
+        An admission places a patient in a bed. When the patient is discharged, the
+        stay is billed per night at the standard bed-day price.
+      </p>
+    </field>
+  </record>
 
 </odoo>

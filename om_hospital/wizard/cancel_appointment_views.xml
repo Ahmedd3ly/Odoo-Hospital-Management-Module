@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-    <!-- Form View -->
-    <record id="view_cancel_appointment_form" model="ir.ui.view">
-        <field name="name">cancel.appointment.wizard.form</field>
-        <field name="model">cancel.appointment.wizard</field>
-        <field name="arch" type="xml">
-            <form string="Cancel Appointment">
-                <sheet>
-                    <group>
-                        <field name="appointment_id" options="{'no_create': True}" readonly="1"/>
-                        <field name="reason" placeholder="Enter the reason for cancelling this appointment..."/>
-                    </group>
-                </sheet>
-                <footer>
-                    <button name="action_cancel_appointment" type="object" string="Cancel Appointment" class="btn-primary" data-hotkey="q"/>
-                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="z"/>
-                </footer>
-            </form>
-        </field>
-    </record>
+
+  <!-- Form View -->
+  <record id="view_cancel_appointment_form" model="ir.ui.view">
+    <field name="name">cancel.appointment.wizard.form</field>
+    <field name="model">cancel.appointment.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Cancel Appointment">
+        <sheet>
+          <group>
+            <field name="appointment_id" options="{'no_create': True}" readonly="1" />
+            <field name="reason" placeholder="Enter the reason for cancelling this appointment..." />
+          </group>
+        </sheet>
+        <footer>
+          <button name="action_cancel_appointment" type="object" string="Cancel Appointment"
+            class="btn-primary" data-hotkey="q" />
+          <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="z" />
+        </footer>
+      </form>
+    </field>
+  </record>
 
 </odoo>

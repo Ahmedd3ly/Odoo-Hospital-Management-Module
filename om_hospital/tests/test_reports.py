@@ -13,10 +13,14 @@ class TestReports(HospitalCommon):
     def test_prescription_slip_lists_medicines(self):
         appointment = self._make_appointment()
         medicine = self.env["product.product"].create(
-            {"name": "Report Medicine", "type": "consu", "is_medicine": True}
+            {"name": "Report Medicine", "type": "consu", "is_medicine": True},
         )
         self.env["hospital.prescription.line"].create(
-            {"appointment_id": appointment.id, "medicine_id": medicine.id, "dose": "500mg"}
+            {
+                "appointment_id": appointment.id,
+                "medicine_id": medicine.id,
+                "dose": "500mg",
+            },
         )
         html = self._html("om_hospital.action_report_prescription", appointment)
         self.assertIn("Report Medicine", html)
@@ -33,7 +37,7 @@ class TestReports(HospitalCommon):
         ward = self.env["hospital.ward"].create({"name": "Report Ward", "code": "rw"})
         bed = self.env["hospital.bed"].create({"name": "R-1", "ward_id": ward.id})
         admission = self.env["hospital.admission"].create(
-            {"patient_id": self.patient.id, "bed_id": bed.id, "reason": "Observation"}
+            {"patient_id": self.patient.id, "bed_id": bed.id, "reason": "Observation"},
         )
         admission.action_admit()
         admission.action_discharge()

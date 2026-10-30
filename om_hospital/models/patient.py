@@ -48,13 +48,11 @@ class HospitalPatient(models.Model):
         help="Patient's date of birth used to compute their age automatically.",
     )
     age = fields.Integer(
-        string="Age",
         compute="_compute_age",
         help="Computed age of the patient calculated from their date of birth.",
     )
     gender = fields.Selection(
         [("male", "Male"), ("female", "Female")],
-        string="Gender",
         required=True,
         tracking=True,
         help="Biological gender of the patient.",
@@ -70,13 +68,11 @@ class HospitalPatient(models.Model):
             ("O+", "O+"),
             ("O-", "O-"),
         ],
-        string="Blood Group",
         required=True,
         tracking=True,
         help="Patient's blood group and Rhesus factor classification.",
     )
     deceased = fields.Boolean(
-        string="Deceased",
         tracking=True,
         help="Indicates if the patient is deceased.",
     )
@@ -98,7 +94,6 @@ class HospitalPatient(models.Model):
     )
     guardian_id = fields.Many2one(
         "res.partner",
-        string="Guardian",
         ondelete="restrict",
         domain="[('is_company', '=', False)]",
         help="Parent or legal guardian. Required while the patient is under 18.",
@@ -110,12 +105,10 @@ class HospitalPatient(models.Model):
         help="Active contract of the company this patient belongs to, if any.",
     )
     is_birthday = fields.Boolean(
-        string="Is Birthday",
         compute="_compute_is_birthday",
         help="True on the patient's birthday, used to show a greeting banner on the form.",
     )
     is_minor = fields.Boolean(
-        string="Is Minor",
         compute="_compute_is_minor",
         help="True while the patient is under 18.",
     )
@@ -150,14 +143,12 @@ class HospitalPatient(models.Model):
         help="List of all scheduled or completed appointments linked to this patient.",
     )
     appointment_count = fields.Integer(
-        string="Appointment Count",
         compute="_compute_appointment_count",
         help="Total number of appointments recorded for this patient.",
     )
 
     # Status
     active = fields.Boolean(
-        string="Active",
         default=True,
         help="Uncheck to archive this patient record without deleting historical data.",
     )
@@ -260,7 +251,7 @@ class HospitalPatient(models.Model):
         for rec in self:
             if rec.date_of_birth and rec.date_of_birth >= today:
                 raise ValidationError(
-                    self.env._("Date of Birth cannot be today or in the future.")
+                    self.env._("Date of Birth cannot be today or in the future."),
                 )
 
     @api.constrains("date_of_birth", "guardian_id")
@@ -271,11 +262,11 @@ class HospitalPatient(models.Model):
                     self.env._(
                         "%(patient)s is under 18 and needs a guardian.",
                         patient=rec.name,
-                    )
+                    ),
                 )
             if rec.guardian_id and rec.guardian_id == rec.partner_id:
                 raise ValidationError(
-                    self.env._("A patient cannot be their own guardian.")
+                    self.env._("A patient cannot be their own guardian."),
                 )
 
     @api.constrains("partner_id", "name", "email", "phone")
@@ -286,14 +277,14 @@ class HospitalPatient(models.Model):
                 raise ValidationError(self.env._("The patient name cannot be blank."))
             if not (rec.email or "").strip():
                 raise ValidationError(
-                    self.env._("An email address is required for every patient.")
+                    self.env._("An email address is required for every patient."),
                 )
             if not PHONE_PATTERN.match(rec.phone or ""):
                 raise ValidationError(
                     self.env._(
                         "The phone number may only contain digits, spaces, brackets, "
-                        "dashes and an optional leading + (6 to 20 characters)."
-                    )
+                        "dashes and an optional leading + (6 to 20 characters).",
+                    ),
                 )
 
     @api.onchange("name", "date_of_birth")
@@ -318,7 +309,7 @@ class HospitalPatient(models.Model):
                     "Make sure this is a different person before saving.",
                     patient=duplicate.display_name,
                 ),
-            }
+            },
         }
 
     # ------------------------------------------------------------------
@@ -342,10 +333,12 @@ class HospitalPatient(models.Model):
         """Tick the Allergic / Chronic quick-filter tags from the structured lines."""
         tag_by_type = {
             "allergy": self.env.ref(
-                "om_hospital.tag_allergic", raise_if_not_found=False
+                "om_hospital.tag_allergic",
+                raise_if_not_found=False,
             ),
             "chronic": self.env.ref(
-                "om_hospital.tag_chronic", raise_if_not_found=False
+                "om_hospital.tag_chronic",
+                raise_if_not_found=False,
             ),
         }
         for patient in self:
@@ -357,7 +350,7 @@ class HospitalPatient(models.Model):
                     for line in patient.condition_ids
                 )
                 patient.tag_ids = [
-                    Command.link(tag.id) if has_lines else Command.unlink(tag.id)
+                    Command.link(tag.id) if has_lines else Command.unlink(tag.id),
                 ]
 
     def action_open_appointments(self):
@@ -377,8 +370,8 @@ class HospitalPatient(models.Model):
         if not phone:
             raise UserError(
                 self.env._(
-                    "This patient does not have a phone/mobile number configured."
-                )
+                    "This patient does not have a phone/mobile number configured.",
+                ),
             )
 
         # Clean non-digit characters for WhatsApp URL

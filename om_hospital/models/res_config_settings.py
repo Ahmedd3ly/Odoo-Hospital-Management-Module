@@ -24,5 +24,5 @@ class ResConfigSettings(models.TransientModel):
         for rec in self:
             if rec.hospital_cancel_days < 0:
                 raise ValidationError(
-                    self.env._("The cancellation notice cannot be negative.")
+                    self.env._("The cancellation notice cannot be negative."),
                 )

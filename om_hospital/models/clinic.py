@@ -21,7 +21,6 @@ class HospitalClinic(models.Model):
         help="Name of the clinic, for example Eye Care Clinic.",
     )
     code = fields.Char(
-        string="Code",
         required=True,
         copy=False,
         tracking=True,
@@ -29,13 +28,11 @@ class HospitalClinic(models.Model):
     )
     specialty_id = fields.Many2one(
         "hospital.specialty",
-        string="Specialty",
         ondelete="restrict",
         tracking=True,
         help="Medical specialty practised in this clinic.",
     )
     location = fields.Char(
-        string="Location",
         help="Where the clinic is found inside the hospital, for example Building B, 2nd floor.",
     )
 
@@ -66,14 +63,12 @@ class HospitalClinic(models.Model):
         help="Appointments booked in this clinic.",
     )
     appointment_count = fields.Integer(
-        string="Appointment Count",
         compute="_compute_appointment_count",
         help="Total number of appointments booked in this clinic.",
     )
 
     # Status
     active = fields.Boolean(
-        string="Active",
         default=True,
         help="Uncheck to archive this clinic without deleting past appointments.",
     )
@@ -129,7 +124,7 @@ class HospitalClinic(models.Model):
                         "%(head)s must be one of the clinicians of %(clinic)s to head it.",
                         head=rec.head_id.name,
                         clinic=rec.name,
-                    )
+                    ),
                 )
 
     @api.constrains("active")
@@ -139,14 +134,14 @@ class HospitalClinic(models.Model):
             if rec.active:
                 continue
             open_appointments = rec.appointment_ids.filtered(
-                lambda a: a.state in ("draft", "confirmed", "ongoing")
+                lambda a: a.state in ("draft", "confirmed", "ongoing"),
             )
             if open_appointments:
                 raise ValidationError(
                     self.env._(
                         "%(clinic)s still has open appointments and cannot be archived.",
                         clinic=rec.name,
-                    )
+                    ),
                 )
 
     # ------------------------------------------------------------------
